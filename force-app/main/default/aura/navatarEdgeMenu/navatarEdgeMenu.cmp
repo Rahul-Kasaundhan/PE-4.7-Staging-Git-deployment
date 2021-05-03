@@ -12,8 +12,8 @@ Description     :   Lightning component for utility bar edge menu Navigation
     <aura:attribute name="supportsPopOut" type="Boolean" default="false" />
 	<aura:attribute name="flagCheck" type="Boolean" default="false"/>
     <aura:attribute name="cmpGlobalId" type="String" default="1"/><!--added by Aditya PEv4.7 on 20 April 2021-->
-    <aura:attribute name="expandNavigationView" type="String" default="True"/><!--added by Aditya PEv4.7 27 April 2021-->
-    <aura:attribute name="navigationType" type="String"/><!--added by Aditya PEv4.7 on 19 April 2021-->
+    <aura:attribute name="expandNavigationView" type="String" default="True" access="global"/><!--added by Aditya PEv4.7 27 April 2021-->
+    <aura:attribute name="navigationType" type="String" access="global"/><!--added by Aditya PEv4.7 on 19 April 2021-->
     
  
     <lightning:utilityBarAPI aura:id="utilitybar"/>    

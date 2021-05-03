@@ -3,16 +3,16 @@
     <aura:attribute type="list" name="RelatedList" />
     <aura:attribute type="list" name="fullRelatedList" />
     <aura:attribute type="String" name="relatedObjName" default="Account" />
-    <aura:attribute type="String" name="ObjectQuery" default="" />
-    <aura:attribute type="String" name="RelatedlistTitle" default="" />
+    <aura:attribute type="String" name="ObjectQuery" default="" access="global" />
+    <aura:attribute type="String" name="RelatedlistTitle" default=""  access="global"/>
     
     <aura:attribute type="String" name="HeaderIcon"/>
-    <aura:attribute type="Boolean" name="showList" default="true" />
+    <aura:attribute type="Boolean" name="showList" default="true" access="global" />
     <aura:attribute type="Boolean" name="loaded" default="false" />
     <aura:attribute type="Boolean" name="showIcon" default="true" />
     <aura:attribute type="Boolean" name="isIcon" default="true" />
-    <aura:attribute type="String" name="imageUrl" default="" />
-    <aura:attribute name="listOffset" type="Integer" default="9" />
+    <aura:attribute type="String" name="imageUrl" default="" access="global"/>
+    <aura:attribute name="listOffset" type="Integer" default="9" access="global"/>
     <aura:attribute name="isNavigated" type="Boolean" default="false" />
     <aura:attribute name="currentLoadCount" type="Integer" default="0" />
     <aura:attribute name="currentPage" type="Integer" default="1" />
@@ -25,8 +25,8 @@
     <aura:attribute type="String" name="sObjectName" />
     
     
-    <aura:attribute type="String" name="sdgRedirectName" default="" />
-    <aura:attribute type="String" name="sdgTitleName" default="" />
+    <aura:attribute type="String" name="sdgRedirectName" default="" access="global" />
+    <aura:attribute type="String" name="sdgTitleName" default=""  access="global"/>
     <aura:attribute type="Boolean" name="divided" default="false" />
     <aura:attribute type="Boolean" name="showSdg" default="false" />
     <aura:attribute type="Boolean" name="isSdgMode" default="false" />

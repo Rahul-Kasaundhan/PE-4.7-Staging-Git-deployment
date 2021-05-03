@@ -1,4 +1,4 @@
-<aura:component controller="sdgObjectEventHandler"   >
+<aura:component controller="sdgObjectEventHandler" access="global"   >
 
     <aura:method name="doMethod" action="{!c.handleevtObjectManager}" > 
         <aura:attribute name="Payload" type="Object"/>

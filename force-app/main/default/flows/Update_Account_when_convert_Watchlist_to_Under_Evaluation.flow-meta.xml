@@ -36,7 +36,7 @@
                 <stringValue>TODAY()</stringValue>
             </value>
         </processMetadataValues>
-        <name>formula_2_myRule_1_A1_9769815585</name>
+        <name>formula_2_myRule_1_A1_1515562577</name>
         <dataType>Date</dataType>
         <expression>TODAY()</expression>
     </formulas>
@@ -45,8 +45,8 @@
             <name>originalFormula</name>
             <value>
                 <stringValue>AND (
-    ISPICKVAL([Account].pem_dev__Status__c, &apos;Under Evaluation&apos;),
-    ISPICKVAL(PRIORVALUE([Account].pem_dev__Status__c), &apos;Watchlist&apos;)
+    ISPICKVAL([Account].navpeII__Status__c, &apos;Under Evaluation&apos;),
+    ISPICKVAL(PRIORVALUE([Account].navpeII__Status__c), &apos;Watchlist&apos;)
 )</stringValue>
             </value>
         </processMetadataValues>
@@ -57,7 +57,7 @@
     ISPICKVAL(PRIORVALUE({!myVariable_current.Status__c}), &apos;Watchlist&apos;)
 )</expression>
     </formulas>
-    <interviewLabel>Update_Account_when_convert_Watchlist_to_Under_Evaluation-3_InterviewLabel</interviewLabel>
+    <interviewLabel>navpeII__Update_Account_when_convert_Watchlist_to_Under_Evaluation-1_InterviewLabel</interviewLabel>
     <label>Update Account when convert Watchlist to Under Evaluation</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -159,7 +159,7 @@
             </processMetadataValues>
             <field>Conversion_Date__c</field>
             <value>
-                <elementReference>formula_2_myRule_1_A1_9769815585</elementReference>
+                <elementReference>formula_2_myRule_1_A1_1515562577</elementReference>
             </value>
         </inputAssignments>
         <object>Account</object>

@@ -94,7 +94,7 @@
     <!-- END -->
     
     <!-- Einstein themes-->
-    <aura:attribute name="EinsteinTheme" type="String"/>
+    <aura:attribute name="EinsteinTheme" type="String" access="global"/>
     
     <lightning:flexipageRegionInfo width="{!v.width}" />
     
@@ -122,7 +122,7 @@
     <aura:attribute name="AlternateRow" type="String" default=""/>
     <!-- End-->
     <!-- START changes for toggle functionality-->
-    <aura:attribute name="enableToggle" type="Boolean" default="false" />
+    <aura:attribute name="enableToggle" type="Boolean" default="false" access="global" />
     <aura:attribute name="hideSdgInToggle" type="Boolean" default="false" />
     <aura:handler event="c:toggleSdgEvt" action="{!c.handleSdgToggle}" />
     <!-- END-->

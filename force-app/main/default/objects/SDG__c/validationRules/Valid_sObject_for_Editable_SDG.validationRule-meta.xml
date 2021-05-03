@@ -5,7 +5,7 @@
     <errorConditionFormula>AND (
     Enable_Inline_Edit__c,
     CONTAINS(
-        LOWER($Label.pem_dev__invalid_sobject_for_editable_sdg),
+        LOWER($Label.navpeii__invalid_sobject_for_editable_sdg),
         LOWER(sObjectName__c)
     )
 )</errorConditionFormula>

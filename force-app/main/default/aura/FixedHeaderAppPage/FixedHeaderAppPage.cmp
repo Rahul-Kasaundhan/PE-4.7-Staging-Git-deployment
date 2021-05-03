@@ -1,11 +1,11 @@
-<aura:component implements="lightning:appHomeTemplate" description="A main Header region with custom highlighted region and a footer region.">
-    <aura:attribute name="top" type="Aura.Component[]" />
-    <aura:attribute name="bottom" type="Aura.Component[]" />
-    <aura:attribute name="midFooter" type="Aura.Component[]" />
-    <aura:attribute name="leftBottom" type="Aura.Component[]" />
-    <aura:attribute name="rightBottom" type="Aura.Component[]" />
+<aura:component implements="lightning:appHomeTemplate" access="global" description="A main Header region with custom highlighted region and a footer region.">
+    <aura:attribute name="top" type="Aura.Component[]" access="global"/>
+    <aura:attribute name="bottom" type="Aura.Component[]" access="global"/>
+    <aura:attribute name="midFooter" type="Aura.Component[]" access="global" />
+    <aura:attribute name="leftBottom" type="Aura.Component[]" access="global" />
+    <aura:attribute name="rightBottom" type="Aura.Component[]" access="global" />
     
-    <aura:attribute name="header" type="Aura.Component[]" />
+    <aura:attribute name="header" type="Aura.Component[]" access="global" />
     <aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>
     
     <div id="headerDiv">

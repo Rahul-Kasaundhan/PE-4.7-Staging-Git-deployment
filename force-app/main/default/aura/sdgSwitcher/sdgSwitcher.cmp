@@ -1,7 +1,7 @@
 <aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
-    <aura:attribute name="sdgConfigs" type="String"/>
+    <aura:attribute name="sdgConfigs" type="String" access="global" />
     <aura:attribute name="sdgWrapper" type="List" />
-    <aura:attribute name="defaultSdg" type="string"/>
+    <aura:attribute name="defaultSdg" type="string" access="global" />
     <aura:attribute name="currentSdg" type="String" default=""/>
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>

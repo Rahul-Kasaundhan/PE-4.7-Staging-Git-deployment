@@ -5,7 +5,7 @@ Project         :   Navigation & SDG
 Date            :   28-11-2019
 Description     :   Lightning component for show relatedAssociation in Model popup.
 -->
-<aura:component controller="ViewRelatedAssociationsCtrl">
+<aura:component controller="ViewRelatedAssociationsCtrl" access="global">
     
     <aura:attribute name="relatedAssociations" type="sobject"/>
     <aura:attribute name="showPopup" type="Boolean"/> 

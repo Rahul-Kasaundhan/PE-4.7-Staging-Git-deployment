@@ -1,12 +1,12 @@
-<aura:component controller="DisplayFieldSetCtrl" implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+<aura:component controller="DisplayFieldSetCtrl" implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global">
     <aura:attribute name="sObjectName" type="string" />
     <aura:attribute name="imageUrl" type="string" />
     <aura:attribute name="newImageUrl" type="string" default="" />
     <aura:attribute name="imageMode" type="string" default="none" />
-    <aura:attribute name="fieldSetName" type="string" />
+    <aura:attribute name="fieldSetName" type="string" access="global" />
     <aura:attribute name="imageIconUrl" type="string" />
     <aura:attribute name="updateInProgress" type="Boolean" default="false" />
-    <aura:attribute name="Imagefield" type="string" />
+    <aura:attribute name="Imagefield" type="string"  access="global"/>
     <aura:attribute name="imagesizeClass" type="string" />
     <aura:attribute name="imageHeight" type="Integer" />
     <aura:attribute name="iconsizeClass" type="string" default="objectIconfor8" />

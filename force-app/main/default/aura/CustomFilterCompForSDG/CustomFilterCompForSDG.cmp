@@ -11,17 +11,17 @@
     <aura:attribute name="picklist3" type="List" />
     <aura:attribute name="picklist4" type="List" />
     
-    <aura:attribute name="query1" type="String" default=""/>
-    <aura:attribute name="query2" type="String" default=""/>
-    <aura:attribute name="query3" type="String" default=""/>
-    <aura:attribute name="query4" type="String" default=""/>
+    <aura:attribute name="query1" type="String" default="" access="global"/>
+    <aura:attribute name="query2" type="String" default="" access="global"/>
+    <aura:attribute name="query3" type="String" default="" access="global"/>
+    <aura:attribute name="query4" type="String" default="" access="global"/>
 
-    <aura:attribute name="label1" type="String" default=""/>
-    <aura:attribute name="label2" type="String" default=""/>
-    <aura:attribute name="label3" type="String" default=""/>
-    <aura:attribute name="label4" type="String" default=""/>   
+    <aura:attribute name="label1" type="String" default="" access="global"/>
+    <aura:attribute name="label2" type="String" default="" access="global"/>
+    <aura:attribute name="label3" type="String" default="" access="global"/>
+    <aura:attribute name="label4" type="String" default="" access="global"/>   
     
-    <aura:attribute name="showMyRecords" type="Boolean" default="true"/>
+    <aura:attribute name="showMyRecords" type="Boolean" default="true" access="global"/>
     
     <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
     <aura:registerEvent name="sdgFilterEvent" type="c.EventPassValueToSDG"/>
