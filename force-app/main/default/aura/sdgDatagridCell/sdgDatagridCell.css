@@ -1,0 +1,217 @@
+.THIS.pullup{
+    vertical-align: middle;  /* Issue-00029283 updated to vertical-align: middle from vertical-align: top  by Anirudh Raturi on 14-10-2020  */
+}
+
+.THIS.selected {
+    background-color: var(--lwc-colorBackgroundSelection,rgb(216, 237, 255)) !important;
+}
+
+.THIS.updated {
+    background-color: var(--lwc-colorBackgroundHighlight,rgb(250, 255, 189)) !important;
+}
+
+.THIS.blurCell {
+    filter: blur(6px);
+}
+
+.THIS .linkbutton {
+    line-height:1em;
+}
+.THIS .summary {
+    font-weight: bold;
+}
+
+.THIS .cls_des {
+    max-height: 54px !important;
+    display: inline-flex;       /*    Issue-00029287, Updated css from display:block!important to display:inline-flex;  by Anirudh Raturi on 15-10-2020 */
+    white-space: normal !important;
+    position: relative !important;  
+}
+
+.THIS .cls_des::after {
+    content: "";
+    position: absolute;
+    top: 2.25rem;
+    bottom: 0;
+    right: 0;
+    width: 25%;
+    background: linear-gradient(to right, rgba(255,255,255,0.4) 0%,rgba(255,255,255,1) 69%);
+   
+ /*  	background:-webkit-gradient(linear, 80% 20%, 10% 21%, from(#ffffff), to(transparent));
+    background: -moz-linear-gradient(linear, 80% 20%, 10% 21%, from(#ffffff), to(transparent));   
+    background: linear-gradient(linear, 80% 20%, 10% 21%, from(#ffffff), to(transparent));   */
+}
+
+.THIS.selected .cls_des::after, .THIS.updated .cls_des::after {
+    background: transparent;
+}
+
+/* Phase3 CR CSS */
+.THIS .linkCss {
+    border: 0 !important;
+    line-height: 0 !important;
+    color: #0000ff !important;
+    padding-left:10px;
+}
+.THIS .buttonCss {
+    border: 0 !important;
+    line-height: 0 !important;
+    color: #006dcc !important;
+    padding-left: 0px;
+    bottom: 1px !important;
+}
+.THIS .buttonCss:hover {
+    text-decoration: underline;
+}
+
+.THIS .uiOutputCheckbox img {
+    padding-right: 19px;
+}
+
+.THIS span.action_icons {
+    min-width: 16px;
+}
+
+.THIS span.action_icons button {
+    display: none;
+}
+
+.THIS span.action_icons .slds-spinner {
+    left: auto;
+    right: 0;
+    width: 13px;
+}
+
+.THIS:hover span.action_icons button {
+    display: inline-block;
+}
+
+.THIS .updateFormSection {
+    position: absolute;
+    top: 0;
+    z-index: -99;
+    min-width: 0;
+    max-width: 0;
+    background-color: #FFF;
+    border-radius: var(--lwc-borderRadiusMedium,0.25rem);
+    box-shadow: var(--lwc-shadowDropDown,0 2px 3px 0 rgba(0, 0, 0, 0.16));
+    border: var(--lwc-borderWidthThin,1px) solid var(--lwc-colorBorder,rgb(221, 219, 218));
+}
+
+.THIS .updateFormSection.showForm {
+    z-index: 99;
+    min-width: 250px !important;
+    max-width: var(--lwc-maxWidthActionOverflowMenu,512px);
+}
+
+/* .THIS .updateFormSection.showTop {
+    top : auto;
+    bottom : 0;
+} */
+
+.THIS .updateFormSection.showLeft {
+    left : auto;
+    right : 0;
+}
+
+.THIS .updateFormSection .slds-popover__body {
+    padding: 4px;
+}
+
+/* Added to resolve Bug: 00028508, 00028500 */
+.THIS .updateFormSection lightning-calendar>div[lightning-calendar_calendar] {
+    max-width: max-content !important;
+}
+
+.THIS .updateFormSection lightning-calendar>div[lightning-calendar_calendar] table thead th {
+    background: none !important;
+    padding: .4rem .7rem!important;
+}
+
+.THIS .updateFormSection lightning-calendar>div[lightning-calendar_calendar] table tbody td {
+    padding: .25rem .1rem !important;
+}
+
+/* Added to resolve the Bug: 00028508 on March 25, 2020 */
+.THIS .updateFormSection lightning-timepicker div[lightning-basecombobox_basecombobox][role="listbox"] {
+    min-width: inherit !important;
+    left: 0 !important;
+}
+
+/* Added to resolve the Bug: 00028441 */
+.THIS .updateFormSection.requiredField .slds-popover__body form {
+    padding-left: 14px;
+}
+
+/* Added to resolve the Bug: 00028441 */
+.THIS .updateFormSection.requiredField .slds-popover__body form::before {
+    content: '*';
+    color: var(--lwc-colorBorderError,rgb(194, 57, 52));
+    font-size: 1.2rem;
+    position: absolute;
+    left: 6px;
+}
+
+.THIS .updateFormSection .slds-popover__footer {
+    padding: 12px;
+}
+
+.THIS .highlightCheckbox {
+    margin: 10px 0;
+}
+                                                    
+                                                    
+
+/* Added to resolve the Bug: 00028481 */
+.THIS .highlightCheckbox .slds-checkbox .slds-checkbox__label .slds-form-element__label {
+    display: inline !important;
+}
+
+.THIS lightning-calendar table {
+    background-color: #FFF !important;
+}
+
+.THIS a.lookupFieldAnchor lightning-formatted-text {
+    color: var(--lwc-brandTextLink,rgb(0, 109, 204));
+}
+
+.THIS a.lookupFieldAnchor:hover lightning-formatted-text {
+    text-decoration: underline;
+}
+/*Add clsdes class for Drak mode for bugfixing() in Einstein Code v1 */                                                            
+.THIS .cls_desDark {
+    max-height: 54px !important;
+    display: block !important;    
+    white-space: normal !important;
+    position: relative !important;  
+}
+
+.THIS .cls_desDark::after {
+    content: "";
+    position: absolute;
+    top: 2.25rem;
+    bottom: 0;
+    right: 0;
+    width: 25%;
+    background: linear-gradient(to right, rgba(22,50,92,0.4) 0%,rgba(22,50,92,1) 69%);
+ }
+.THIS.darkThemeEditCell{
+    background: darkgrey !important;
+}
+                                                            
+.THIS .highlightCheckbox .slds-checkbox {position: relative!important; left: 1px !important;}
+                                                            
+                                                            .THIS .imageContainer{
+                                                                border-radius: 50%;   
+                                                                height:30px;
+                                                                width: 30px;
+                                                            }
+                                                            .THIS .photoText{                                                    
+                                                                padding-left: 10px;
+                                                            }
+                                                            .THIS .imageContainerbg{
+                                                                border-radius: 50%;   
+                                                                height:30px;
+                                                                width: 30px;
+                                                                background:rgba(128, 128, 128, 0.3411764705882353);
+                                                            }

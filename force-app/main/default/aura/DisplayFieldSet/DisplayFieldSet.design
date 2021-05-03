@@ -1,0 +1,4 @@
+<design:component label="Navatar Fieldset">
+    <design:attribute name="fieldSetName" label="Field Set Name" description="Enter the Fieldset API Name" required="true" />
+    <design:attribute name="Imagefield" label="Image Field  Name" description="Enter the image field API Name." />
+</design:component>

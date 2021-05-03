@@ -1,0 +1,4 @@
+<design:component label="Navatar SDG Toggles">
+    <design:attribute  name="sdgConfigs" Label="SDG Config Data Provider" description="Use this field to map SDG with the toggle button. Use syntax - Tab 1 Name:SDG 1 Tag, Tab 2 Name:SDG 2 Tag, …"  required="true" />  
+    <design:attribute  name="defaultSdg" Label="Default SDG Toggle" description="Use this field to setup the default tab. Pass the associated SDG Tag to set as default ."/>  
+</design:component>

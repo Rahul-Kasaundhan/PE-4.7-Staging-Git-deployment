@@ -1,0 +1,5 @@
+<aura:event type="APPLICATION" description="Event template" >
+    <aura:attribute name="sdgConfiguration" type="string" />
+    <aura:attribute name="inActiveSdgConfiguration" type="List" />
+    
+</aura:event>

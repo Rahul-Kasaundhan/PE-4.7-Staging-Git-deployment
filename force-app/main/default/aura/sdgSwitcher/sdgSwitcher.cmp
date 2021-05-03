@@ -1,0 +1,20 @@
+<aura:component implements="flexipage:availableForAllPageTypes,force:hasRecordId" access="global" >
+    <aura:attribute name="sdgConfigs" type="String"/>
+    <aura:attribute name="sdgWrapper" type="List" />
+    <aura:attribute name="defaultSdg" type="string"/>
+    <aura:attribute name="currentSdg" type="String" default=""/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}"/>
+    <!-- removed marging-bottom and added margin-top to manage top and bottom gap for toggle buttons. by aditya sharma -->
+    <!-- added overflow:auto so that it automatically add scrolling when required by Anirudh Raturi -->
+    <div class="slds-grid slds-wrap" style="margin-top: 30px;overflow:auto;">
+        <div class="slds-col slds-size_7-of-8 cls_customnowrap"><!-- cls_customnowrap added for issue - 00029238 by Aditya -->
+            <lightning:buttonGroup>
+                <aura:iteration items="{!v.sdgWrapper}" var="item">
+                    <!--Issue-00029262,00029263,00029264 added attribute name(i.e.name="{!item.sdgconfig}") and updated title attribute to title="{!item.title}" in lightning:button by Anirudh Raturi on 09-10-2020 -->
+                    <lightning:button label="{!item.title}"  title="{!item.title}" name="{!item.sdgconfig}" variant="{!v.currentSdg == item.sdgconfig? 'brand':'Neutral'}" onclick="{!c.updateCurrentTitle}" />
+                </aura:iteration>
+            </lightning:buttonGroup>
+        </div>
+    </div>
+</aura:component>

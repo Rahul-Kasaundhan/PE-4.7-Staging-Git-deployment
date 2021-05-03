@@ -1,0 +1,87 @@
+<aura:component controller="NewRecordPopupCtrlSdg" implements="force:appHostable,flexipage:availableForAllPageTypes,flexipage:availableForRecordHome,force:hasRecordId,forceCommunity:availableForAllPageTypes,force:lightningQuickAction" access="global" >
+    <!--START changes to add recordtype popup-->
+    <aura:attribute name="showRecordTypePopup" type="Boolean" default="false"/>
+    <aura:attribute name="objectApi" type="String" />
+    <aura:attribute name="applyCSSFlg" type="Boolean" default="false"/>
+    <aura:attribute name="objectName" type="String" />
+    <aura:attribute name="recordTypeList" type="String[]" />
+    <aura:attribute name="recordTypeId" type="String" />
+    <aura:attribute name="eventParameters" type="Object"/>
+    <aura:attribute name="panelHeight" type="Integer" />
+    <!--END changes to add recordtype popup-->
+    <!--aura:handler event="c:OpenNewRecordPopup" action="{!c.openPopupOnCall}"/-->
+
+    <aura:method name="openNewRecordPopup" action="{!c.openPopupOnCall}" > 
+        <aura:attribute name="payloadobj" type="Object"/>
+        <aura:attribute name="applyCSSFlag" type="boolean" />
+        <aura:attribute name="panelHeight" type="Integer" />
+    </aura:method>
+    <!--Start: fix for issue - 00029285 by Aditya -->
+    <aura:attribute name="domCounter" type="Integer" default="1"/>
+    <aura:method name="updateDOM" action="{!c.updateDOM}" > 
+    </aura:method>
+    <aura:if isTrue="{!v.domCounter >(v.domCounter -1)}">
+    </aura:if>
+    <!--End: fix for issue - 00029285 -->
+    
+     <aura:html tag="style"> 
+         @supports (-ms-ime-align:auto)
+         and (-webkit-text-stroke:initial) {
+         .scroll_Class { max-height: 500px !important; } 
+         }
+    </aura:html>
+    
+    <aura:if isTrue="{!v.showRecordTypePopup}">	     
+        <div class="DESKTOP open active" style="display: block; z-index: 1;" id="idToSearchOn">
+        <div class="{!v.applyCSSFlg ? 'modal-glass slds-backdrop fadein slds-backdrop--open slds-backdrop_open applyCSS1' : 'modal-glass slds-backdrop fadein slds-backdrop--open slds-backdrop_open'}" tabindex="-1" style="opacity: 0.8;" />
+        <div class="{!v.applyCSSFlg ? 'panel slds-modal slds-fade-in-open applyCSS2': 'panel slds-modal slds-fade-in-open'}" tabindex="-1" role="dialog" style="opacity: 1;">
+            
+                <div id="ContainerID" class="{!v.applyCSSFlg ? 'applyCSS3':'modal-container slds-modal__container'}">
+                    <div class="outPopupBox">
+                    <div class="modal-header slds-modal__header cls_headCustom">
+                        <h2 class="title slds-text-heading--medium title slds-text-heading_medium">New {!v.objectName}</h2>
+                        <button class="slds-button slds-modal__close slds-button--icon-inverse slds-button_icon-inverse" title="Close this window" onclick="{! c.closeModel }">
+                            <lightning:buttonIcon iconName="utility:close" variant="bare-inverse" size="large"  alternativeText="Close this window" />
+                        </button>
+                    </div>
+                    <div id="containerBodyID" class="modal-body scrollable slds-modal__content scroll_Class" data-scoped-scroll="true">
+                        <fieldset class="slds-form-element slds-p-around--medium slds-p-around_medium" style="padding: 0em;">
+                            <div class="slds-grid" style="padding-top:2em;">
+                                <div class="slds-col--padded slds-col_padded slds-size_1-of-3 slds-size--1-of-3 slds-text-align--right slds-text-align_right">
+                                    <!-- slds-form-element__legend -->
+                                    <legend class="slds-form-element__label">Select a record type</legend>
+                                </div>
+                                <div class="slds-form-element__control slds-col slds-size--2-of-3 slds-size_2-of-3" style="padding-top:2em;">
+                                    <aura:iteration items="{!v.recordTypeList}" var="recordType" indexVar="counter">
+                                        <label class="slds-radio uiLabel" for="{!'recordType'+counter}">
+                                            <input type="radio" value="{!recordType.id}" name="recordButton" id="{!'recordType'+counter}" class="uiInput uiInputRadio uiInput--default uiInput_default uiInput_radio uiInput--radio changeRecordTypeOptionLeftColumn" onclick="{!c.setRecordTypeId}" checked="{!if(counter == 0,'checked','')}"/>
+                                            <span class="slds-radio--faux slds-radio_faux slds-m-right_x-small slds-m-right_x-small" />
+                                            <span class="slds-form-element__label changeRecordTypeOptionRightColumn slds-m-left_x-large" >
+                                                {!recordType.name}
+                                                
+                                                <div class="desc_Class">
+                                                    {!if(recordType.desc != 'null',recordType.desc,'')}
+                                                </div>
+                                            </span>
+                                        </label>
+                                        
+                                    </aura:iteration>
+                                </div>
+                            </div>
+                        </fieldset>
+                    </div>
+                        <div class="slds-modal__footer">
+                            <button class="slds-button slds-button--neutral slds-button_neutral uiButton" type="button" onclick="{!c.closeModel}">
+                                <span class=" label bBody truncate" dir="ltr">Cancel</span>
+                            </button>
+                            <button class="slds-button slds-button--neutral slds-button_neutral slds-button--brand slds-button_brand uiButton" type="button" id="selectStatusSave" onclick="{!c.openNewRecord}">
+                                <span class=" label bBody truncate" dir="ltr">Next</span>                            
+                            </button>
+                        </div>
+            		</div>
+                </div>
+            </div>    
+        </div>
+        
+    </aura:if>   
+</aura:component>

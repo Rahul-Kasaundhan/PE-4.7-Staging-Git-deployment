@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Sponsorship_Type__c</fullName>
+    <externalId>false</externalId>
+    <label>Sponsorship Type</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Type__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Table</fullName>
+                <default>false</default>
+                <label>Table</label>
+            </value>
+            <value>
+                <fullName>Goodies</fullName>
+                <default>false</default>
+                <label>Goodies</label>
+            </value>
+            <value>
+                <fullName>Other</fullName>
+                <default>false</default>
+                <label>Other</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Sponsored - Other</controllingFieldValue>
+            <valueName>Table</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sponsored - Other</controllingFieldValue>
+            <valueName>Goodies</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Sponsored - Other</controllingFieldValue>
+            <valueName>Other</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>MyRecords__c</fullName>
+    <description>Use this field to specify the condition to display the records where logged-in user is associated with the record. E.g.: If there is a Contact’s SDG and the logged in user wants to view the contacts where he/she is the Owner along with all the contacts where he/she is the Account Owner, then write query as “(Owner.ID = &lt;&lt;User.Id&gt;&gt; OR Account.OwnerId= &lt;&lt;User.Id&gt;&gt;)”.
+This will be further used by Universal Filter to display the desired filtered result.</description>
+    <externalId>false</externalId>
+    <label>My Records</label>
+    <length>4000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>2</visibleLines>
+</CustomField>

@@ -1,0 +1,18 @@
+<design:component>
+    <design:attribute  name="RelatedlistTitle" label="Title" />
+    <design:attribute  name="ObjectQuery" Label="Query" />  
+    <design:attribute  name="imageUrl" label="Image Field API Name" />
+    <design:attribute  name="showList" Label="Expanded" />
+    <!--design:attribute name="isNewAllowed" Label="Enable New Button"/-->
+    <design:attribute name="listOffset" Label="Number of Records to Display" min="1" max="30" />
+    <design:attribute name="sdgRedirectName" Label="SDG Name"/>  
+    <!-- Issue: 00029195, Updated by Hemendra on October 1, 2020 -->
+    <design:attribute name="sdgTitleName" Label="Popup Title" description="Mention the popup title."/> 
+    <!--design:attribute name="reportingField" Label="Reporting Field" description="Field API Name on which Report needs to be opened"/>
+    <design:attribute name="reportId" Label="Report Id" description="mention complete URl like . https://DomianName.lightning.force.com/lightning/r/Report/ReportId"/>
+   
+    
+    <design:attribute name="NewbuttonObj" Label="Object API Name for New Button"/>
+    <design:attribute name="NewButtonFieldApi" Label="Field API Name to pass Current Record Id on "/-->
+    
+</design:component>

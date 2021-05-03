@@ -1,0 +1,175 @@
+<aura:component controller="sdgDesigner" implements="lightning:isUrlAddressable,force:hasRecordId">
+	<aura:attribute name="rootObjectType" type="string" />
+	<aura:attribute name="recordId" type="Id" />
+	<!-- to be changed-->
+	<aura:attribute name="showClear" type="Boolean" default="false" />
+	<aura:attribute name="ShowFieldSelector" type="Boolean" default="true" />
+
+	<aura:attribute name="nodes" type="string[]" default="" />
+	<aura:attribute name="sObjectFields" type="object" default="" />
+	<aura:attribute name="selectedPath" type="String" default="" />
+	<aura:attribute name="fields" type="object[]" default="" />
+	<aura:attribute name="selectedFieldId" type="String" />
+	<aura:attribute name="fieldIdsToRemove" type="String[]" />
+
+	<aura:attribute name="errorMessage" type="String" default="" />
+
+	<aura:registerEvent name="refreshSdgColumns" type="c:reloadSdg" />
+	<!--create a component attributs -->
+	<aura:attribute name="Spinner" type="boolean" default="false" />
+	<aura:attribute name="sdgFieldPermission" type="Boolean" default="false" />
+	<aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+	<!-- create 2 aura handler with waiting and donewaiting events-->
+	<aura:handler event="aura:waiting" action="{!c.showSpinner}" />
+	<aura:handler event="aura:doneWaiting" action="{!c.hideSpinner}" />
+
+	<!--loading spinner start... style=Brand Medium (blue dots)-->
+	<aura:if isTrue="{!v.Spinner}">
+		<div aura:id="spinnerId" class="slds-spinner_container">
+			<div class="slds-spinner--brand  slds-spinner slds-spinner--large slds-is-relative" role="alert">
+				<span class="slds-assistive-text">Loading</span>
+				<div class="slds-spinner__dot-a"></div>
+				<div class="slds-spinner__dot-b"></div>
+			</div>
+		</div>
+	</aura:if>
+	<!-- Loading spinner end-->
+	<!---Start-->
+	<section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_medium">
+		<div class="slds-modal__container">
+			<!--Start Header-->
+			<header class="slds-modal__header">
+				<button class="slds-button slds-button_icon slds-modal__close slds-button_icon-inverse" title="Close">
+					<lightning:icon iconName="utility:close" size="small" variant="inverse" alternativeText="Close"
+						onclick="{!c.closeComponent}" />
+					<span class="slds-assistive-text">Close</span>
+				</button>
+				<h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Select Fields to Display </h2>
+			</header>
+			<!--End Header-->
+			<!--Start Content-->
+			<div class="slds-modal__content slds-p-around_small">
+				<div class="{!if(v.errorMessage,'','slds-hide')}">
+					<div class="slds-grid slds-wrap">
+						<div class="slds-col slds-size_1-of-1 slds-large-size_1-of-1 slds-p-around_x-small cls_error">
+							<div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-text-align_left"
+								style="border-radius: .25rem;">
+								<span class="slds-assistive-text">error</span>
+								<span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small"
+									title="Description of icon when needed">
+									<lightning:icon iconName="utility:error" alternativeText="Error!" variant="inverse"
+										size="x-small" />
+								</span>
+								<h2>{!v.errorMessage}</h2>
+							</div>
+						</div>
+					</div>
+				</div>
+				<!--Start Grid-->
+				<div class="slds-grid slds-wrap slds-p-around_medium">
+					<!--Start Section left-->
+					<div class="slds-col slds-medium-size_5-of-12 slds-large-size_5-of-12 slds-p-right_small">
+						<span class="slds-form-element__label">
+							Field Finder
+						</span>
+
+						<div class="cls_box">
+							<div class="slds-grid slds-wrap">
+								<div
+									class="slds-col slds-size_1-of-1 slds-p-top_medium slds-p-left_medium slds-p-right_medium">
+									<div class="{!'cls_breadCurmBox '+if(v.nodes.length != 0,'','slds-hide')}">
+										<ol class="slds-breadcrumb slds-list_horizontal slds-wrap">
+											<aura:iteration items="{!v.nodes}" var="item" indexVar="index">
+												<li class="slds-breadcrumb__item  fieldchosen">
+													<a href="javascript:void(0);">{!item}
+														<aura:if isTrue="{!index == (v.nodes.length-1)}">
+															<span class="slds-m-left_xx-small">
+																<lightning:buttonIcon alternativetext="Remove"
+																	iconName="utility:clear" variant="bare"
+																	onclick="{!c.clearSelection}"
+																	disabled="{!!v.showClear}" />
+															</span>
+														</aura:if>
+													</a>
+												</li>
+											</aura:iteration>
+
+										</ol>
+									</div>
+								</div>
+
+								<div class="slds-col slds-size_1-of-1 slds-p-horizontal_medium slds-text-align_center">
+									<c:SDGFieldChooser aura:id="picker" selectedPath="{!v.selectedPath}"
+										recordId="{!v.recordId}" isValid="true" rootObjectType="{!v.rootObjectType}"
+										calledFromSdg="true" labelNodes="{!v.nodes}" showClear="{!v.showClear}"
+										pickerHidden="{!v.ShowFieldSelector}" sObjectFields="{!v.sObjectFields}" />
+
+									<lightning:button variant="brand" label="Add" title="Add"
+										class="slds-m-vertical_large" onclick="{!c.addField}"
+										disabled="{!!v.ShowFieldSelector}" />
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End Section left-->
+
+					<!--Start Section right-->
+					<div class="slds-col slds-medium-size_7-of-12 slds-large-size_7-of-12 slds-p-left_small">
+						<span class="slds-form-element__label">
+							Visible Fields
+						</span>
+						<div class="slds-grid slds-wrap">
+							<div class="slds-col slds-size_11-of-12 slds-medium-size_11-of-12 slds-large-size_11-of-12">
+								<ul class="cls_Listbox" style="height: 244px; overflow-y: auto;" id="allFields">
+									<aura:iteration var="field" items="{!v.fields}">
+										<aura:if isTrue="{!!field.isHidden}">
+											<li class="{!'slds-p-horizontal_small slds-p-vertical_x-small '+if(v.selectedFieldId==field.ID,'fieldSelected','')}"
+												id="{!field.ID}" onclick="{!c.selectField}">{!field.Label}
+												<lightning:buttonicon iconName="utility:clear" alternativeText="Remove"
+													size="medium" class="slds-float_right" value="{!field.ID}"
+													onclick="{! c.removeField }"
+													variant="{!if(v.selectedFieldId==field.ID,'bare-inverse','bare')}"
+													disabled="{!v.fields.length lt 2}" />
+											</li>
+										</aura:if>
+									</aura:iteration>
+								</ul>
+							</div>
+							<div
+								class="slds-col slds-size_1-of-12 slds-medium-size_1-of-12 slds-large-size_1-of-12 slds-text-align_center">
+								<div class="cls_breadCrumbArrow">
+									<div class="slds-p-vertical_small">
+										<lightning:buttonIcon iconName="utility:up" size="medium"
+											onclick="{! c.moveField }" alternativeText="Move up" variant="bare"
+											name="up" />
+									</div>
+									<div class="slds-p-vertical_small">
+										<lightning:buttonIcon iconName="utility:down" size="medium"
+											onclick="{! c.moveField }" alternativeText="Move down" variant="bare"
+											name="down" />
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<!--End Section right-->
+				</div>
+				<!--End Grid-->
+			</div>
+			<!--End Content-->
+
+			<!--Start Footer-->
+
+			<footer class="slds-modal__footer">
+				<lightning:button label="Cancel" title="Cancel" class="slds-m-vertical_xx-small"
+					onclick="{!c.closeComponent}" />
+				<lightning:button variant="brand" label="Save" title="Save" class="slds-m-vertical_xx-small"
+					onclick="{!c.updateFields}" />
+			</footer>
+			<!--End Footer-->
+		</div>
+	</section>
+	<!---End-->
+
+	<div class="slds-backdrop slds-backdrop_open"></div>
+</aura:component>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Attendee_Check</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK(Attendee_Staff__c))  &amp;&amp;  NOT(ISBLANK( Attendee_Name__c ))</errorConditionFormula>
+    <errorMessage>You cannot choose staff and contact at same time.</errorMessage>
+</ValidationRule>

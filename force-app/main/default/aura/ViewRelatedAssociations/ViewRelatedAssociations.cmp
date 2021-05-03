@@ -1,0 +1,75 @@
+<!--
+New Implimentation:
+Developer       :   Akash Punera
+Project         :   Navigation & SDG 
+Date            :   28-11-2019
+Description     :   Lightning component for show relatedAssociation in Model popup.
+-->
+<aura:component controller="ViewRelatedAssociationsCtrl">
+    
+    <aura:attribute name="relatedAssociations" type="sobject"/>
+    <aura:attribute name="showPopup" type="Boolean"/> 
+    <aura:attribute name="showSpinner" type="Boolean" default="true"/> 
+    <aura:method name="getRelatedAssociations" action="{!c.getData}" description="Method to get all related associations for the given task"> 
+        <aura:attribute name="taskId" type="String"/>
+    </aura:method>
+    
+    
+    <aura:if isTrue="{!v.showPopup}">
+        <div class="DESKTOP uiModal open active" style="display:block; z-index: 1;" >
+            <div class="modal-glass slds-backdrop fadein slds-backdrop--open slds-backdrop_open" tabindex="-1" style="opacity: 0.8;" />
+            <div class="panel slds-modal slds-fade-in-open" tabindex="-1" role="dialog" style="opacity: 1;">
+                <div class="modal-container slds-modal__container" style="width: 500px;">
+                    <div class="modal-header slds-modal__header">
+                        <h2 class="title slds-text-heading--medium title slds-text-heading_medium">Related Associations</h2>
+                        <button class="slds-button slds-modal__close slds-button--icon-inverse slds-button_icon-inverse" title="Close this window" onclick="{! c.closeModal }">
+                            <lightning:buttonIcon iconName="utility:close" variant="bare-inverse" size="large"  alternativeText="Close this window" />
+                        </button>
+                    </div>
+                    <div class="modal-body scrollable slds-modal__content" data-scoped-scroll="true">
+                        <div class="slds-grid">
+                            <div class="slds-form-element__control slds-col" >
+                                <div class="slds-m-around--medium">
+                                    <div class="slds-container--medium">
+                                        <div class="slds-form--stacked">
+                                            <div class="slds-form-element">
+                                                
+                                                <aura:if isTrue="{!!v.showSpinner}">
+                                                    <aura:iteration items="{!v.relatedAssociations}" var="relatedAssociation">
+                                                        <div style="margin-bottom: 5px !important; padding-right:5px; white-space:nowrap" >
+                                                            <lightning:icon iconName="{!relatedAssociation.objIcon}" size="small"/>
+                                                            <span class="slds-m-left_xx-small slds-truncate">
+                                                                <lightning:formattedUrl value="{!'/'+relatedAssociation.recId}" label="{!relatedAssociation.recName}" target="_blank" class="relatedLinkStyle"/>
+                                                            </span>
+                                                        </div>
+                                                    </aura:iteration>
+                                                    <aura:set attribute="else">
+                                                        <div class="divHolder">
+                                                            <lightning:spinner alternativeText="Loading" size="medium" />
+                                                        </div>
+                                                    </aura:set>
+                                                    
+                                                </aura:if>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="slds-modal__footer">
+                            <button class="slds-button slds-button--neutral slds-button_neutral slds-button--brand slds-button_brand uiButton" type="button" onclick="{!c.closeModal}">
+                                <span class=" label bBody truncate" dir="ltr">Ok</span>                            
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        
+    </aura:if>
+    
+    
+    
+    
+</aura:component>

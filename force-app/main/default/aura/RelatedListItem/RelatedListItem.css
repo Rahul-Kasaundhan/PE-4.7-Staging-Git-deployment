@@ -1,0 +1,12 @@
+.THIS .buttonIconCorner .slds-dropdown_left{
+    left: auto;
+    right: 0;
+    transform: translateX(0);
+}
+.THIS .buttonIconCorner .slds-truncate{
+    color:#006DCC;
+}
+.THIS .objectIcon .slds-icon_small{
+    height:35px;
+    width:35px;
+}

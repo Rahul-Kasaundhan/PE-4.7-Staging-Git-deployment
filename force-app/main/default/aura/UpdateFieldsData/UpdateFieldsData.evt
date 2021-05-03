@@ -1,0 +1,4 @@
+<aura:event type="APPLICATION" description="This event will be handled in sdgDatagridCell cmp.">
+    <aura:attribute name="operation" type="String" default="" />
+    <aura:attribute name="parameters" type="Object" />
+</aura:event>

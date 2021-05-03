@@ -1,0 +1,46 @@
+.THIS .twoColumnCustom{
+    width: 75%;
+    padding: 4px 6px 6px 4px;
+}
+.THIS .twoColumnCustomRight{
+    width: 25%;
+    padding: 4px 4px 6px 5px;
+}
+.THIS .oneColumnCustom{
+    width: 100%;
+    padding: 0px 5px 5px 5px;
+    /*padding-top:10px;
+    padding-bottom:10px;*/
+}
+.THIS .oneColumnHighlightCustom{
+    padding: 5px;
+}
+
+/*START: CSS to show sticky header like salesforce shows standard highlight section*/
+.THIS .stickySection {
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    -webkit-transition: margin-left 0.1s; /* For Safari 3.1 to 6.0 */
+    transition: margin-left 0.1s;
+    margin: -20px 0px 0px -12px !important;
+}
+.THIS .stickySection .slds-form_stacked {
+    display:none;
+}
+.THIS .stickySection .flexipageComponent .forceHighlightsPanel .slds-page-header {
+    height:auto !important;
+}
+.THIS .stickySection .oneColumnCustom{
+    padding: 0px !important;
+}
+/*END*/
+
+.THIS .twoColumnCustomEqualRight{
+    width: 50%;
+    padding: 4px 4px 6px 5px;
+}
+.THIS .twoColumnCustomEqual	{
+    width: 50%;
+    padding: 4px 4px 6px 5px;
+}

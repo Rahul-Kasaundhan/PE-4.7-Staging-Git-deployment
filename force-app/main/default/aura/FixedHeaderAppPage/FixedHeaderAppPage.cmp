@@ -1,0 +1,53 @@
+<aura:component implements="lightning:appHomeTemplate" description="A main Header region with custom highlighted region and a footer region.">
+    <aura:attribute name="top" type="Aura.Component[]" />
+    <aura:attribute name="bottom" type="Aura.Component[]" />
+    <aura:attribute name="midFooter" type="Aura.Component[]" />
+    <aura:attribute name="leftBottom" type="Aura.Component[]" />
+    <aura:attribute name="rightBottom" type="Aura.Component[]" />
+    
+    <aura:attribute name="header" type="Aura.Component[]" />
+    <aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>
+    
+    <div id="headerDiv">
+        <lightning:layout aura:id="stickySection">
+            <lightning:layoutItem flexibility="grow" class="oneColumnCustom" >
+                {!v.header}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>  
+        <div Style="margin-bottom:100px; display:none" id="hidediv"></div>   
+    <div>
+        <lightning:layout>
+            <lightning:layoutItem flexibility="grow" class="oneColumnCustom">
+                {!v.top}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    
+    
+    <div>
+        <lightning:layout>
+            <lightning:layoutItem flexibility="grow" class="oneColumnCustom">
+                {!v.midFooter}
+            </lightning:layoutItem>            
+        </lightning:layout>
+        <lightning:layout>
+            <lightning:layoutItem flexibility="grow" class="twoColumnCustom">
+                {!v.leftBottom}
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" class="twoColumnCustomRight">
+                {!v.rightBottom}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    
+    
+    <div>
+        <lightning:layout>
+            <lightning:layoutItem flexibility="grow" class="oneColumnCustom">
+                {!v.bottom}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+   
+</aura:component>

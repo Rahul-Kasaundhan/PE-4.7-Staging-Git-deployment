@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>My_Teams_Records__c</fullName>
+    <description>Use this field to specify the condition to display the records where logged-in user&apos;s team is associated with the record. E.g.: If there is a Contact’s SDG and the logged-in user wants to view the contacts where all his/her team members are the owners then write query as “(Owner.Id IN (SELECT Id FROM User WHERE Team__c = &apos;&lt;&lt;Team__c&gt;&gt;&apos;))”.
+This will be further used by Universal Filter to display the desired filtered result.</description>
+    <externalId>false</externalId>
+    <label>My Teams Records</label>
+    <length>4000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>3</visibleLines>
+</CustomField>

@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>ListViewName_Check</fullName>
+    <active>true</active>
+    <errorConditionFormula>NOT(ISBLANK(List_View_Name__c)) &amp;&amp; NOT(ISBLANK( Filter__c ))</errorConditionFormula>
+    <errorMessage>You can either fill &apos;Filter&apos; or &apos;List View Name&apos; to save the record.</errorMessage>
+</ValidationRule>

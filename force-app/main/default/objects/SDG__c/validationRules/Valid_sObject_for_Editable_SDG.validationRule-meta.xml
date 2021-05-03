@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ValidationRule xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Valid_sObject_for_Editable_SDG</fullName>
+    <active>true</active>
+    <errorConditionFormula>AND (
+    Enable_Inline_Edit__c,
+    CONTAINS(
+        LOWER($Label.pem_dev__invalid_sobject_for_editable_sdg),
+        LOWER(sObjectName__c)
+    )
+)</errorConditionFormula>
+    <errorDisplayField>Enable_Inline_Edit__c</errorDisplayField>
+    <errorMessage>Inline editing is restricted for this object.</errorMessage>
+</ValidationRule>

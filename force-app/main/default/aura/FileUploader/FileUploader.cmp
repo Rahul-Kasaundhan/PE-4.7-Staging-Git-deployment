@@ -1,0 +1,87 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global" controller="FileUploaderCtrl">
+    <aura:attribute name="filetype" type="List" default="['image/png', 'image/jpg', 'image/jpeg','image/gif']" />
+    <aura:attribute name="showPopup" type="Boolean" default="false" />
+    <aura:attribute name="imageUrl" type="String" />
+    <aura:attribute name="recordId" type="String" />
+    <aura:attribute name="uploadSuccess" type="Boolean" default="false" />
+    <aura:attribute name="imageField" type="String" />
+    <aura:attribute name="loaded" type="Boolean" default="false" />
+    <aura:attribute name="newImageUrl" type="String" />
+    <aura:attribute name="content" type="String" />
+    <aura:attribute name="ftype" type="String" />
+    <aura:attribute name="iconMode" type="Boolean" default="false" />
+    <aura:attribute name="iconName" type="String" />
+    
+    <aura:attribute name="fileToBeUploaded" type="Object[]" />
+    <aura:attribute name="errorMessage" type="String" />
+    
+    
+    <aura:if isTrue="{!v.showPopup}">
+        <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close" onclick="{! c.closePopup }" alternativeText="close"
+                                          variant="bare-inverse" size="large" class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-modal__title slds-hyphenate">Update Photo</h2>
+                </header>
+                
+                <div class="slds-modal__content slds-p-around_medium slds-is-relative">
+                    <aura:if isTrue="{! v.loaded }">
+                        <lightning:spinner alternativeText="Loading" />
+                    </aura:if>
+                    <canvas id="canvas" style="display:none;" ></canvas>
+                    {!v.body}
+                    <div class="{!if(v.errorMessage,'','slds-hide')}">
+                        <div class="forcePageError">
+                            <div class="genericNotification">
+                                <span class="genericError uiOutputText">Review the errors on this page.</span>
+                            </div>
+                            <p class="errorsList"> {!v.errorMessage} </p>
+                        </div>
+                    </div>
+                    <div class="slds-text-align--center">
+                        You can upload a JPG, JPEG, GIF or PNG file. Maximum file size is 16 MB.
+                    </div>
+                    <div class="slds-text-align--center">
+                        <lightning:input aura:id="file-input" type="file" files="{!v.fileToBeUploaded}"
+                                         onchange="{!c.handleUploadFinished}" accept="image/png,image/jpg,image/jpeg,image/gif"
+                                         label="" name="fileUploader" multiple="false">
+                        </lightning:input>
+                    </div>
+                    <div class="slds-align_absolute-center">
+                        <div class="forcePhotoCrop">
+                            Current Photo:
+                        </div>
+                    </div>
+                    <div class="slds-text-align--center">
+                        <aura:if isTrue="{!v.content}">
+                            <img src="{!'data:'+v.ftype+';base64,'+v.content}" style="width:auto;height:170px" />
+                            <aura:set attribute="else">
+                                <aura:if isTrue="{!!v.iconMode}">
+                                    <aura:if isTrue="{!v.imageUrl}">
+                                        <img src="{!v.imageUrl}" alt="Invalid Image"
+                                             style="width:auto;height:190px"></img>
+                                        <aura:set attribute="else">
+                                            <img src="/img/icon/t4v35/standard/user_120.png"
+                                                 style="background:#80808057;width:auto;height:170px;"
+                                                 alt="Profile Photo"></img>
+                                        </aura:set>
+                                    </aura:if>
+                                    <aura:set attribute="else">
+                                        <lightning:icon class="objectIconClass" iconName="{!v.iconName}" size="large" />
+                                    </aura:set>
+                                </aura:if>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                </div>
+                <footer class="slds-modal__footer">
+                    <button class="slds-button slds-button_neutral" onclick="{!c.closePopup}">Cancel</button>
+                    <button class="slds-button slds-button_brand" disabled="{!!v.uploadSuccess}"
+                            onclick="{!c.saveImage}">Save</button>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+    </aura:if>
+</aura:component>

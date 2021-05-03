@@ -1,0 +1,6 @@
+<aura:event type="APPLICATION" description="Event template" >
+	<aura:attribute name="value" type="String"/>
+    <aura:attribute name="fieldSequence" type="String"/>
+    <aura:attribute name="pageUrl" type="String"/>
+    <aura:attribute name="objectApiName" type="String"/>
+</aura:event>

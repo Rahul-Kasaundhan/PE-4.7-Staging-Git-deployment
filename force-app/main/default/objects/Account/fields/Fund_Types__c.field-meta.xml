@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Fund_Types__c</fullName>
+    <externalId>false</externalId>
+    <label>Fund Preferences</label>
+    <required>false</required>
+    <trackFeedHistory>false</trackFeedHistory>
+    <type>MultiselectPicklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Bridge Fund</fullName>
+                <default>false</default>
+                <label>Bridge Fund</label>
+            </value>
+            <value>
+                <fullName>Co-investment</fullName>
+                <default>false</default>
+                <label>Co-investment</label>
+            </value>
+            <value>
+                <fullName>Distressed Debt</fullName>
+                <default>false</default>
+                <label>Distressed Debt</label>
+            </value>
+            <value>
+                <fullName>Early Stage</fullName>
+                <default>false</default>
+                <label>Early Stage</label>
+            </value>
+            <value>
+                <fullName>Early Stage: Seed</fullName>
+                <default>false</default>
+                <label>Early Stage: Seed</label>
+            </value>
+            <value>
+                <fullName>Early Stage: Start-up</fullName>
+                <default>false</default>
+                <label>Early Stage: Start-up</label>
+            </value>
+            <value>
+                <fullName>Expansion / Late Stage</fullName>
+                <default>false</default>
+                <label>Expansion / Late Stage</label>
+            </value>
+            <value>
+                <fullName>Fund of Funds</fullName>
+                <default>false</default>
+                <label>Fund of Funds</label>
+            </value>
+            <value>
+                <fullName>Growth</fullName>
+                <default>false</default>
+                <label>Growth</label>
+            </value>
+            <value>
+                <fullName>Mezzanine</fullName>
+                <default>false</default>
+                <label>Mezzanine</label>
+            </value>
+            <value>
+                <fullName>Natural Resources</fullName>
+                <default>false</default>
+                <label>Natural Resources</label>
+            </value>
+            <value>
+                <fullName>Secondaries</fullName>
+                <default>false</default>
+                <label>Secondaries</label>
+            </value>
+            <value>
+                <fullName>Special Situations</fullName>
+                <default>false</default>
+                <label>Special Situations</label>
+            </value>
+            <value>
+                <fullName>Turnaround</fullName>
+                <default>false</default>
+                <label>Turnaround</label>
+            </value>
+            <value>
+                <fullName>Venture (General)</fullName>
+                <default>false</default>
+                <label>Venture (General)</label>
+            </value>
+            <value>
+                <fullName>Capital Call Fund</fullName>
+                <default>false</default>
+                <label>Capital Call Fund</label>
+            </value>
+            <value>
+                <fullName>Buyout</fullName>
+                <default>false</default>
+                <label>Buyout</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+    <visibleLines>6</visibleLines>
+</CustomField>

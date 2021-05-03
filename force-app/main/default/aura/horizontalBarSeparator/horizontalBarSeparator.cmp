@@ -1,0 +1,8 @@
+<aura:component implements="flexipage:availableForAllPageTypes" access="global">
+    <lightning:flexipageRegionInfo width="{!v.width}" />
+    <aura:attribute name="width" type="String" />
+
+    <div
+        style="{!('border-bottom:5px solid; border-color:rgb(176, 196, 223)'+ (v.width == 'MEDIUM'?';width:103.5%;margin-left:-17px ':';'))}">
+    </div>
+</aura:component>

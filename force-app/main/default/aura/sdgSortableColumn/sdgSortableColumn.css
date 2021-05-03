@@ -1,0 +1,25 @@
+@media screen and (max-width: 480px) {
+    
+    .THIS .sdgcol{
+        display:block;
+        padding:10px;
+    }
+}
+.THIS.slds-is-sortable
+{
+    cursor:pointer;
+}
+.THIS .sdgcolheader
+{
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+}
+/*CSS to Wrap headers*/
+.THIS .sdgcolheader .slds-truncate {
+    white-space: normal !important;
+}
+
+.THIS .slds-checkbox .slds-checkbox__label .slds-form-element__label {
+    display: flex !important;
+}

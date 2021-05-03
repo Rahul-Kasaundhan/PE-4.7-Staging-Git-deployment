@@ -1,0 +1,6 @@
+.THIS {
+    height:80px;    
+}
+.THIS .slds-combobox__input{
+    cursor: pointer;
+}

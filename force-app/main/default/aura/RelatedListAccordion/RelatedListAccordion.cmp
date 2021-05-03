@@ -1,0 +1,134 @@
+<aura:component implements="force:appHostable,flexipage:availableForAllPageTypes,force:hasSObjectName,force:hasRecordId"
+                access="global" controller="RelatedListController">
+    <aura:attribute type="list" name="RelatedList" />
+    <aura:attribute type="list" name="fullRelatedList" />
+    <aura:attribute type="String" name="relatedObjName" default="Account" />
+    <aura:attribute type="String" name="ObjectQuery" default="" />
+    <aura:attribute type="String" name="RelatedlistTitle" default="" />
+    
+    <aura:attribute type="String" name="HeaderIcon"/>
+    <aura:attribute type="Boolean" name="showList" default="true" />
+    <aura:attribute type="Boolean" name="loaded" default="false" />
+    <aura:attribute type="Boolean" name="showIcon" default="true" />
+    <aura:attribute type="Boolean" name="isIcon" default="true" />
+    <aura:attribute type="String" name="imageUrl" default="" />
+    <aura:attribute name="listOffset" type="Integer" default="9" />
+    <aura:attribute name="isNavigated" type="Boolean" default="false" />
+    <aura:attribute name="currentLoadCount" type="Integer" default="0" />
+    <aura:attribute name="currentPage" type="Integer" default="1" />
+    <aura:attribute name="totalPage" type="Integer" default="1" />
+    <!--aura:attribute type="String" name="NewbuttonObj" default="" />
+    <aura:attribute type="String" name="NewButtonFieldApi" /-->
+    <aura:attribute type="Boolean" name="isNewAllowed" default="true" />
+    <!--aura:attribute type="String" name="reportId" default="" />
+    <aura:attribute type="String" name="reportingField" default="" /-->
+    <aura:attribute type="String" name="sObjectName" />
+    
+    
+    <aura:attribute type="String" name="sdgRedirectName" default="" />
+    <aura:attribute type="String" name="sdgTitleName" default="" />
+    <aura:attribute type="Boolean" name="divided" default="false" />
+    <aura:attribute type="Boolean" name="showSdg" default="false" />
+    <aura:attribute type="Boolean" name="isSdgMode" default="false" />
+    
+    <aura:attribute name="width" type="String" />
+    <lightning:flexipageRegionInfo width="{!v.width}" />
+    
+    <aura:registerEvent name="relatedListcmp" type="c:RelatedListEvent" />
+    <aura:handler name="relatedListcmp" event="c:RelatedListEvent" action="{!c.handleUpdateEvent}" />
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    
+    <aura:if isTrue="{! v.loaded }">
+        <lightning:spinner alternativeText="Loading" />
+    </aura:if>
+    <div aura:id="measurement" />
+    <article class="" style="border:1px solid rgb(221,219,218) !important;border-radius:0.25rem;background-color:white">
+        <div class="slds-page__header forceRelatedListCardHeader cardheader slds-grid" onclick="{!c.toggle}">
+            <header class="slds-media slds-media_center slds-has-flexi-truncate"
+                    style="border: 0;
+                           box-shadow: none;border-bottom-left-radius: 0;
+                           border-bottom-right-radius: 0;">
+                <div class="slds-media__figure" style="margin-right: 6px;">
+                    <!--  <aura:if isTrue="{!v.showList}">			 			
+                        <lightning:icon iconName="utility:chevrondown"  class="cls_ArrowiconPosition" title="Collapse" onclick="{!c.toggle}" size="x-small" />
+                        <aura:set attribute="else">
+                            <lightning:icon iconName="utility:chevronright"  class="cls_ArrowiconPosition" title="Expand" onclick="{!c.toggle}" size="x-small" />
+                        </aura:set>	
+                    </aura:if> !-->
+                </div>
+                <div class="slds-media__body" style="font-weight: bold;font-size: medium;">
+                    <a aura:id="changeIt" onclick="{!c.openSDG}" class="headerTitle slds-card__footer-actiontion">
+                        {!v.RelatedlistTitle} 
+                    </a>
+                </div>
+                <!--aura:if isTrue="{!v.isNewAllowed}">
+                    <div class="sample">
+                        <aura:if isTrue="{!v.width!='SMALL'}">
+                            <div class="slds-no-flex">
+                                <lightning:button label="New" onclick="{!c.createRecord}" />
+                            </div>
+                            <aura:set attribute="else">
+                                <lightning:buttonGroup class="newButtonIcon">
+                                    <lightning:buttonMenu alternativeText="Show menu" class="slds-button_last"
+                                        iconSize="x-small" onopen="{!c.toggle}" onselect="{! c.createRecord}"
+                                        onblur="{!c.stopPropagate}">
+                                        <lightning:menuItem label="New" />
+                                    </lightning:buttonMenu>
+                                </lightning:buttonGroup>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                </aura:if-->
+            </header>
+        </div>
+        <aura:if isTrue="{!v.isSdgMode}">
+            <div class="{!v.showList == true ?'sdgInvoke':'slds-hide'}" style="border:1px solid rgb(243,242,242)">
+                <c:sdg SVGName="standard:account" HideOnError="true" PreventResponsiveness="true" UseCache="true"
+                       recordId="{!v.recordId}" SDGConfiguration="{!v.sdgRedirectName}" />
+            </div>
+            <aura:set attribute="else">
+                <aura:if isTrue="{!v.showList &amp;&amp; v.RelatedList.length>0}">
+                    <div class="slds-grid slds-wrap" style="margin:23px 0 0 0;">
+                        <aura:iteration items="{!v.RelatedList}" var="item" indexVar="index">
+                            <div
+                                 class="{!(v.width =='SMALL' || v.width == 'LARGE' || v.divided  == 'true')?'slds-media slds-col slds-size_12-of-12 slds-p-around_x-small':'slds-media slds-col slds-size_6-of-12 slds-p-around_x-small'}">
+                                <c:RelatedListItem record="{!item}" relatedObjName="{!v.relatedObjName}"
+                                                   isIcon="{!v.isIcon}" imageUrl="{!v.imageUrl}" showIcon="{!v.showIcon}"
+                                                   HeaderIcon="{!v.HeaderIcon}"
+                                                   ></c:RelatedListItem>
+                            </div>
+                        </aura:iteration>
+                    </div>
+                    <footer class="slds-card__footer">
+                        <div>
+                            <center>
+                                <a aura:id="changeIt" class="slds-card__footer-action" onclick="{!c.openSDG}">View
+                                    Details
+                                </a>
+                            </center>
+                        </div>
+                    </footer>
+                </aura:if>
+                <!--Start :- Add message when related list don't have any data. By Rahulk -->
+                <aura:if isTrue="{!v.showList &amp;&amp; v.RelatedList.length==0}">
+                    <tbody aura:id="tableBody">
+                        <tr class="slds-hint-parent">
+                            <td style="height:40px">
+                                <span class="slds-truncate" style="margin-left: 23px;">No data to display.</span>
+                            </td>
+                        </tr>
+                    </tbody>
+                </aura:if> 
+                <!-- End :- Add message when related list don't have any data. -->
+            </aura:set>
+        </aura:if>
+    </article>
+    <aura:if isTrue="{!v.showSdg}">
+        <!-- Issue: 00029195, Updated by Hemendra on October 1, 2020 -->
+        <c:SDGPopup SVGName="standard:account" HideOnError="true" Title="{!v.sdgTitleName}" PreventResponsiveness="true"
+                    UseCache="true" recordId="{!v.recordId}" SDGConfiguration="{!v.sdgRedirectName}"
+                    ModalTitle="{!v.sdgTitleName}" showModal="{!v.showSdg}" />
+    </aura:if>
+    
+    <c:OpenNewRecordPopupSDG aura:id="newRecordCmp" />
+</aura:component>

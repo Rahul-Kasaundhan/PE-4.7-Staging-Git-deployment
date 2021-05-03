@@ -1,0 +1,846 @@
+<!-- Copyright (c) 2018, salesforce.com, inc. 
+  * All rights reserved. 
+  * SPDX-License-Identifier: BSD-3-Clause 
+  * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause 
+ -->
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:hasRecordId,force:appHostable"
+                controller="sdgController" access="global" extends="c:sdgBase">
+    
+    
+    <!--Added for grouping ~Akash -->
+    <aura:attribute name="recordToGroupingDataMap" type="map"/>
+    
+    <aura:attribute name="recordId" type="String" access="global" />
+    <aura:attribute name="myRecordFilter" type="String" />
+    <aura:attribute name="myTeamFilter" type="String" />
+    
+    <aura:attribute name="SDGFields" type="List" access="global" />
+    <aura:attribute name="SDG" type="object" access="global" />
+    <aura:attribute name="SDGFilters" type="List" access="global" />
+    <aura:attribute name="SDGFiltersDefinition" type="List" access="global" />
+    <aura:attribute name="SDGActions" type="List" access="global" />
+    <aura:attribute name="hasListMenu" type="Boolean" default="false" access="private" />
+    <aura:attribute name="hasRowMenu" type="Boolean" default="false" access="private" />
+    <aura:attribute name="hasRowActions" type="Boolean" default="false" access="private" />
+    <aura:attribute name="hasFilters" type="Boolean" default="false" access="private" />
+    
+    <aura:attribute name="FullQueryCount" type="Integer" access="global" />
+    <aura:attribute name="ShowFilters" type="Boolean" default="false" access="global" />
+    <aura:attribute name="isPaging" type="Boolean" access="global" />
+    <aura:attribute name="isFiltered" type="Boolean" />
+    <aura:attribute name="PageID" type="String" access="global" />
+    <aura:attribute name="SortColumn" type="String" default="" access="global" />
+    <aura:attribute name="SortOrder" type="String" default="" access="global" />
+    
+    <aura:attribute name="SortOrderOnLoad" type="String" default="" access="global" />
+    <aura:attribute name="SortColumnOnLoad" type="String" default="" access="global" />
+    
+    <aura:attribute name="ShowSDGError" type="Boolean" default="false" access="global" />
+    
+    <aura:attribute name="processeddata" type="Object" access="global" />
+    <aura:attribute name="ErrorMessage" type="String" access="global" />
+    <aura:attribute name="TitleName" type="String" access="private" />
+    <aura:attribute name="Pages" type="List" access="global" default="" />
+    <aura:attribute name="reloadseed" type="String" access="global" default="" />
+    <aura:attribute name="ShowComponent" type="Boolean" default="true" />
+    <aura:attribute name="HideOnError" type="Boolean" default="true" access="global" />
+    <aura:attribute name="MultiSelectMode" type="Boolean" default="false" access="global" />
+    <aura:attribute name="CheckedRowIDs" type="List" default="[]" />
+    <aura:attribute name="tempCheckedRowIds" type="List" default="[]" />
+    <aura:attribute name="internalEvent" type="String" default="Internal" />
+    <aura:attribute name="ToggleFilterStyle" type="String" default="" />
+    <aura:attribute name="isLoaded" type="Boolean" default="false" access="global" />
+    <aura:attribute name="ShowDebug" type="Boolean" default="false" access="global" />
+    
+    <aura:attribute name="hasSummary" type="Boolean" default="false" />
+    <aura:attribute name="summarydata" type="List" access="global" />
+    <aura:attribute name="updatedData" type="Object" /><!--to store Update Value in Phase4(InlineEdit)-->
+    <aura:attribute name="showEditButtons" type="Boolean" default="false" /><!-- toggle buttons in Phase4(InlineEdit)-->
+    <aura:attribute name="clickedOutsideDefined" type="Boolean" default="false" />
+    
+    <!--Labels-->
+    <aura:attribute name="sdgAgo" type="String" access="public" default="{!$Label.c.sdgAgo}" />
+    <aura:attribute name="sdgIn" type="String" access="public" default="{!$Label.c.sdgIn}" />
+    <aura:attribute name="sdgFiltered" type="String" access="public" default="{!$Label.c.sdgFiltered}" />
+    <aura:attribute name="sdgFilteredOf" type="String" access="public" default="{!$Label.c.sdgFilteredOf}" />
+    <aura:attribute name="sdgNoData" type="String" access="public" default="{!$Label.c.sdgNoData}" />
+    <aura:attribute name="sdgPage" type="String" access="public" default="{!$Label.c.sdgPage}" />
+    <aura:attribute name="sdgPage_Size" type="String" access="public" default="{!$Label.c.sdgPage_Size}" />
+    
+    <!-- Design Attributes-->
+    <aura:attribute name="SDGConfiguration" type="String" access="global" />
+    <aura:attribute name="SVGName" type="String" access="global" default="standard:account" />
+    <aura:attribute name="Title" type="String" access="global" />
+    <aura:attribute name="UseCache" type="Boolean" default="true" access="global" />
+    <aura:attribute name="UseBackground" type="Boolean" default="false" access="global" />
+    <aura:attribute name="RelationshipName" type="String" access="global" />
+    <aura:attribute name="FieldSetName" type="String" access="global" />
+    <aura:attribute name="SDGTag" type="string" access="global" />
+    <aura:attribute name="DefaultPageSize" type="String" access="global" />
+    <aura:attribute name="PagerSizeValue" default="{!v.DefaultPageSize}" type="String" access="global" />
+    
+    <aura:attribute name="PreventResponsiveness" type="Boolean" default="false" access="global" />
+    
+    <aura:attribute name="FilterButtonClass" type="String" default="" />
+    <aura:attribute name="namespace" type="string" default="sortablegrid" />
+    
+    <aura:attribute name="width" type="String" />
+    <aura:attribute name="TargetSize" type="String" />
+    
+    <aura:attribute name="filtersize" type="String" />
+    <aura:attribute name="isGridExpanded" type="Boolean" default="true"/>
+    <!--START Added to show error in case of filter error-->
+    <aura:attribute name="QueryError" type="String" access="global"/>
+    <!-- END -->
+    
+    <!-- Einstein themes-->
+    <aura:attribute name="EinsteinTheme" type="String"/>
+    
+    <lightning:flexipageRegionInfo width="{!v.width}" />
+    
+    <!-- Events -->
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:handler name="render" value="{!this}" action="{!c.onRender}"/>
+    <aura:handler name="SDGFilterUpdate" event="c:sdgFilterUpdate" action="{!c.filterUpdated}" />
+    <aura:handler name="SDGSortableColumnSort" event="c:sdgSortableColumnSort" action="{!c.sort}" />
+    <aura:handler event="c:evtRefreshSDG" action="{!c.reload}" />
+    <aura:handler event="force:refreshView" action="{!c.reload}" />
+    <!-- Handling event from sdgDatagridCell cmp. in Phase3 CR by Akash(28-11-2019) --> 
+    <aura:handler name="relatedAssociationEvent" event="c:relatedAssociationEvent" action="{!c.openRelatedAssociationPopup}" />
+    
+    <!-- Start: Added by Jonson, Handling Application Event-->
+    <aura:attribute name="pageURL" type="String"/> 
+    <aura:handler event="c.EventPassValueToSDG" action="{!c.handleSDGfilterEvent}" />
+    <!-- End: Added by Jonson-->
+    
+    <aura:handler event="c:UpdateFieldsData" action="{!c.updateFieldsData}" /><!-- handling event fire by SdgDataGridCell to toggle save/cancel button in (InlineEdit)-->
+    
+    <!-- Start: dynamic colors-->
+    <aura:attribute name="BorderColor" type="String" />
+    <aura:attribute name="HeaderColor" type="String" />
+    <aura:attribute name="TableBorder" type="String" default="#bec7d0"/>
+    <aura:attribute name="AlternateRow" type="String" default=""/>
+    <!-- End-->
+    <!-- START changes for toggle functionality-->
+    <aura:attribute name="enableToggle" type="Boolean" default="false" />
+    <aura:attribute name="hideSdgInToggle" type="Boolean" default="false" />
+    <aura:handler event="c:toggleSdgEvt" action="{!c.handleSdgToggle}" />
+    <!-- END-->
+    <aura:attribute name="displayBlur" type="string" default="block"/>
+    <c:ObjectHelper aura:id="ObjectHelper" />
+    
+    <!-- Dynamic component creation  in Phase3 CR by Akash(28-11-2019) -->
+    <div aura:id="DynamicComponentModel" />
+    <!-- END -->
+    
+    <!--Start: Adding Done Rendering to remove timeout function for SortingIcon for bugfixing (00028496) in v1.3 Phase4 by Rahulk -->
+    <aura:handler event="aura:doneRendering" action="{!c.doneRendering}"/>
+    <aura:attribute name="isDoneRendering" type="Boolean" default="false"/>
+    <!-- END -->
+    
+    <aura:attribute name="applyInlineCss" type="String" default='sdgdatatablewrapper'/> <!--Added for 1reocrdInline bug(00029057) fixing in Einstein Code V1 by Rahulk-->
+    
+    <!--Start:  Added for reloading grid columns-->
+    <aura:handler name="refreshSdgColumns" event="c:reloadSdg" action="{!c.reloadColumns}" /> <!-- event Handle after reOrder SDG Coloum for Manage field-->
+    <aura:registerEvent name="updateFieldsData" type="c:UpdateFieldsData" />
+    <!-- END -->
+    
+    <style>
+        .SDGhidden {
+        display: none;
+        
+        visibility: hidden;
+        }
+        
+        
+        /*CSS FOR HIGHLIGHT SDG 05-08-2019 RAJU*/
+        .{!v.SDG.sdgId}cls_sdg_card {
+        background: {!v.HeaderColor} !important;
+        }
+        
+        table.{!v.SDG.sdgId}cls_sdg_tableBorder th {
+        background: {!v.HeaderColor} !important;
+        }
+        .{!v.SDG.sdgId}cls_sdg_tableBorder {
+        border-top: 1px solid #bec7d0 !important;
+        border-bottom: 1px solid #bec7d0 !important;
+        }
+        
+        table.{!v.SDG.sdgId}{!v.AlternateRow}cls_sdg_tableBorder tr:nth-child(even) {
+        background-color: #e4ecf7 !important;
+        border-top: 1px solid #d5dce6 !important;
+        }
+        .{!v.SDG.sdgId}cls_sdgMainBg {
+        padding: 5px !important;
+        border: 0 !important;
+        background: {!v.BorderColor} !important;
+        }
+        
+        table.{!v.SDG.sdgId}{!v.AlternateRow}cls_sdg_tableBorder tr:nth-child(even) .cls_des::after {
+        background: linear-gradient(to right, rgb(228, 236, 247, 0.4) 0%,rgb(228, 236, 247, 1) 69%);
+        }
+        
+        .slds-popover.slds-popover_tooltip.slds-nubbin_bottom-left {
+        background-color: var(--lwc-colorBackgroundToastError,rgb(194, 57, 52));
+        }
+        /*END*/
+        
+        <aura:if isTrue="{!(v.EinsteinTheme == 'Dark')}">
+            /*CSS START EINSTEIN BLUE THEME*/
+            .EinsteinTheme_Blue .{!v.SDG.sdgId}cls_sdg_card, .EinsteinTheme_Blue .slds-table {
+            background: #16325c !important;
+            color: #000 !important;
+            border-radius: 0 !important;
+            border: 0 !important;
+            }
+            
+            .EinsteinTheme_Blue .slds-card__header-link, .EinsteinTheme_Blue {
+            /*color: #b5b167 !important;*/
+            color: #fff !important;
+            }
+            
+            .EinsteinTheme_Blue .sdgcol {
+            background: #335779 !important;
+            color: #fff !important;
+            padding: 8px 8px !important;
+            font-size: 12px !important;
+            text-transform: capitalize;
+            font-weight: 700;
+            fill: #fff !important;
+            /*border-right: 1px solid #54698d !important;*/
+            }
+            
+            .EinsteinTheme_Blue table.{!v.SDG.sdgId}cls_sdg_tableBorder tr:nth-child(even) {
+            background-color: #16325c !important; 
+            font-size: 12px !important;
+            padding: 7px 7px !important;
+            border-top: 1px solid #54698d !important;
+            color: #fff !important;
+            }
+            .EinsteinTheme_Blue table.{!v.SDG.sdgId}cls_sdg_tableBorder tr:nth-child(odd) {
+            background-color: #16325c !important; 
+            font-size: 12px !important;
+            padding: 7px 7px !important;
+            border-top: 1px solid #54698d !important;
+            color: #fff !important;
+            }
+            .EinsteinTheme_Blue .slds-table a {
+            color: #fff !important
+            }
+           
+            .EinsteinTheme_Blue .slds-table_bordered tbody td {
+            border: 1px solid #54698d !important;
+            padding: 9px 6px 3px 18px !important;
+            color: #fff; /*Added by Lakshya on 20210426 [PE v4.7] Raju Sir text color fix*/
+            }
+            
+            .EinsteinTheme_Blue .{!v.SDG.sdgId}cls_sdg_tableBorder {
+            border-top: 1px solid #e0e5ee !important;
+            }
+            
+            .EinsteinTheme_Blue .slds-table thead tr th {
+            border-right: 1px solid #54698d !important;
+            border-bottom: 1px solid #54698d !important;
+            }
+            
+            .EinsteinTheme_Blue .slds-card__header {
+            height: 43px !important;
+            }
+            /*.EinsteinTheme_white .slds-card__header .slds-truncate  {
+            position: relative !important;
+            top: -5px !important;
+            }*/
+            
+            .EinsteinTheme_Blue .{!v.SDG.sdgId}cls_sdg_card .slds-dropdown-trigger {
+            position: relative !important;
+            top: 0px !important;
+            }
+            .cls_sdgMainOverride {
+            padding: 0px !important;
+            }
+            
+            .EinsteinTheme_Blue .rowbutton {
+            position: relative !important;
+            top: -3px !important;
+            left: -7px;
+            }
+            .EinsteinTheme_Blue .slds-icon-text-default, .EinsteinTheme_Blue .slds-button__icon {
+            fill: var(--lwc-colorTextIconDefault,rgb(112, 110, 107)) !important;
+            /*fill: #fff !important;*/
+            }
+            
+            .EinsteinTheme_Blue .slds-is-sortable .slds-icon-text-default, .EinsteinTheme_Blue .slds-is-sortable .slds-button__icon {
+            
+            fill: #fff !important;
+            }
+            
+            .EinsteinTheme_Blue .slds-button:active
+            .EinsteinTheme_Blue table.{!v.SDG.sdgId}cls_sdg_tableBorder th{
+            background-color: #16325c !important;
+            } 
+            /*Css added for header color of sdg grid in darkTheme for bug fixing(00029039) in Einstein code v1 By Rahul*/
+            .EinsteinTheme_Blue .slds-card {
+            	background: #16325c !important;
+            }
+             /*Add Css for bug fixing(00029060) in Einstein Code V1 by Rahulk*/
+            .EinsteinTheme_Blue .sdgheader{
+             padding-left: 11px !important;
+            }
+             /*Add Css for bug fixing(00029075) in Einstein Code V1 by Rahulk*/
+            .EinsteinTheme_Blue .errorPopover{
+                   position: absolute;
+    			   left: 0px !important;
+            }
+        </aura:if>
+        <aura:if isTrue="{!(v.EinsteinTheme == 'Light')}">
+             /*Add Css for bug fixing(00029060) in Einstein Code V1 by Rahulk*/
+            .EinsteinTheme_white .sdgheader{
+               padding-left: 11px !important;
+            }
+             /*Add Css for bug fixing(00029075) in Einstein Code V1 by Rahulk*/
+            .EinsteinTheme_white .errorPopover{
+                   position: absolute;
+    			   left: 0px !important;
+            }
+            
+            /*CSS START EINSTEIN WHITE THEME*/
+            .EinsteinTheme_white .{!v.SDG.sdgId}cls_sdg_card, .EinsteinTheme_white .slds-table {
+            background: #fff !important;
+            border-radius: 0 !important;
+            /*border: 0 !important;*/
+            }
+            
+            .EinsteinTheme_white .slds-card__header-link, .EinsteinTheme_white .slds-form-element__label {
+            /*color: #b5b167 !important;*/
+            color: #16325c !important;
+            }
+            
+            .EinsteinTheme_white .sdgcol {
+            background: rgb(244, 246, 249) !important;
+            color: #16325c !important;
+            padding: 8px 8px !important;
+            font-size: 12px !important;
+            text-transform: capitalize;
+            font-weight: 700;
+            fill: #16325c;
+            /*border-right: 1px solid #54698d !important;*/
+            }
+            
+            .EinsteinTheme_white table.{!v.SDG.sdgId}cls_sdg_tableBorder tr:nth-child(even) {
+            background-color: #fff !important; 
+            font-size: 12px !important;
+            padding: 7px 7px !important;
+            border-top: 1px solid #d5dce6 !important;
+            }
+            .EinsteinTheme_white table.{!v.SDG.sdgId}cls_sdg_tableBorder tr:nth-child(odd) {
+            background-color: #fff !important; 
+            font-size: 12px !important;
+            padding: 7px 7px !important;
+            border-top: 1px solid #d5dce6 !important;
+            }
+            .EinsteinTheme_white .slds-table a {
+            color: #16325c !important
+            }
+            .EinsteinTheme_white .slds-table_bordered tbody td {
+            border: 1px solid #e0e5ee !important;
+            padding: 9px 6px 3px 18px !important;
+            }
+            
+            .EinsteinTheme_white .{!v.SDG.sdgId}cls_sdg_tableBorder {
+            border-top: 1px solid #e0e5ee !important;
+            }
+            
+            .EinsteinTheme_white .slds-table thead tr th {
+            border-right: 1px solid #e0e5ee !important;
+            border-bottom: 1px solid #a8b7c7 !important;
+            }
+            
+            .EinsteinTheme_white .slds-card__header {
+            height: 43px !important;
+            }
+            .EinsteinTheme_white .{!v.SDG.sdgId}cls_sdg_card .slds-dropdown-trigger {
+            position: relative !important;
+            /*top: 6px !important;*/ /* raju 03-06-2020 */
+				top: 0px !important
+            }
+            .cls_sdgMainOverride {
+            padding: 0px !important;
+            }
+            
+            .EinsteinTheme_white .rowbutton {
+            position: relative !important;
+            top: -3px !important;
+            left: -7px;
+            }
+            .EinsteinTheme_Blue .slds-icon-text-default, .EinsteinTheme_Blue .slds-button__icon {
+            fill: #5c7a99 !important;
+            }
+            
+            .EinsteinTheme_white .{!v.SDG.sdgId}cls_sdg_card .slds-media__figure{
+            position: relative !important;
+            top: 2px !important;
+            }
+            
+        </aura:if>
+        
+        /*CSS DROPDOWN MENU 04-03-2020 */
+        .EinsteinTheme_Blue .dropdown__list .slds-truncate, .EinsteinTheme_white .dropdown__list .slds-truncate {position: relative !important; left: 30px !important; top: 1px;}
+        .EinsteinTheme_Blue .dropdown__list .slds-m-left_small, .EinsteinTheme_white .dropdown__list .slds-m-left_small {position: relative !important; left: -107px !important;}
+        .EinsteinTheme_Blue .slds-dropdown__item>a:hover, .EinsteinTheme_white .slds-dropdown__item>a:hover {background-color: #44a2f5 !important; color: #fff !important;}
+        .EinsteinTheme_Blue .slds-dropdown__item>a:hover .slds-icon-text-default, .EinsteinTheme_white .slds-dropdown__item>a:hover .slds-icon-text-default {fill: #fff !important}
+        /* Remove dropdown css becuase it's effecting for all dropdown. for bug fixing (00029049) 
+          .EinsteinTheme_Blue .slds-dropdown, .EinsteinTheme_white .slds-dropdown {width: 150px !important}   
+        */
+        /*Modified top : 6px to -1px and left : -3px to -5px by Lakshya on 20210420 to resolve button's alignment issue [PE v4.7]*/
+        .cls_posIconFilter {position: relative !important; top: -1px !important; left: -5px !important;}
+        /*Modified top : 6px to -1px and added left : -6px !important by Lakshya on 20210420 to resolve button's alignment issue  [PE v4.7]*/
+        .cls_btnMenu { position: relative; display: inline-block; top: -1px !important; left: -6px !important } /*Add css for Show btn Menu for bug fixing (00028983) in Einstein Code V1 */
+        .right_margin{margin-right: -21px;}/*Added by Lakshya on 20210426 [PE v4.7] demo feedback*/
+
+        /*Added below 6 lines by Lakshya on 20210426 [PE v4.7] Raju Sir checkbox fix*/
+        .sdgdatatablewrapper table th .slds-checkbox_faux {position: relative; top: 2px;}
+        .sdgdatatablewrapper table td .slds-checkbox_faux {position: relative; top: 1px;} 
+        .EinsteinTheme_Blue table th .slds-checkbox_faux, .EinsteinTheme_white table th  .slds-checkbox_faux{position: relative; left: 2px;}
+        .EinsteinTheme_Blue table th .slds-checkbox_faux {position: relative !important; top: 1px !important;}
+        .EinsteinTheme_white table th .slds-checkbox_faux {position: relative !important; top: 2px !important;}        
+        .EinsteinTheme_Blue table td .slds-checkbox_faux, .EinsteinTheme_white table td .slds-checkbox_faux {position: relative; top: -2px;}
+
+        /*Added by Lakshya on 20210426 [PE v4.7] Raju Sir right filter and dropdown icon position from top fix*/
+        /*.cls_posIconFilter, .cls_btnMenu {top: 0px !important;}*/ /*Not required*/
+
+        /*Added by Lakshya on 20210426 [PE v4.7] Raju Sir gradient background in the edit mode fix*/
+        .EinsteinTheme_Blue .darkThemeEditCell .cls_desDark:after {background: linear-gradient(to right, rgba(160,160,160,0.4) 0%,rgba(160,160,160,1) 69%);}}
+    </style>
+    <aura:if isTrue="{!v.ShowComponent}">
+        <div class="{!'sdgborder ' + v.SDG.sdgId+ '_grid ' +if(v.SDG.highlightString,v.SDG.sdgId+'cls_sdgMainBg','') + if(v.EinsteinTheme == 'Light',' EinsteinTheme_white cls_sdgMainOverride ','') + if(v.EinsteinTheme == 'Dark',' EinsteinTheme_Blue cls_sdgMainOverride ','') + if(v.hideSdgInToggle,' slds-hide ','')}">
+            <div aura:id="blurred" style="{!'position: absolute !important;display:'+v.displayBlur+';width: 100%;height:100%;vertical-align: middle;opacity: 0.7;z-index: 21;top: 0px;left: 0px;'}">
+                <div class="slds-spinner_container" style="background-color:#fff !important; opacity: 2.0 !important;position: absolute;top: 0;">
+                    <div role="status" class="slds-spinner slds-spinner_medium slds-spinner_brand">       
+                        <div class="slds-spinner__dot-a"></div>
+                        <div class="slds-spinner__dot-b"></div>
+                    </div>
+                </div>
+            </div>
+            <!--Bug Fixing - changed collapse and expand case and changed css in "cls_ArrowiconPosition"~Sameeksha Sahu-->
+            <aura:if isTrue="{!v.isGridExpanded}">			 			
+                <!--Added slds-p-left_x-small by Lakshya on 20210420 to resolve chevron's padding issue  [PE v4.7]-->
+                <lightning:icon iconName="utility:chevrondown" class="cls_ArrowiconPosition slds-p-left_x-small" title="Collapse" onclick="{!c.toggleExpand}" size="x-small" />
+                <aura:set attribute="else">
+                    <!--Added slds-p-left_x-small by Lakshya on 20210420 to resolve chevron's padding issue  [PE v4.7]-->
+                    <lightning:icon iconName="utility:chevronright" class="cls_ArrowiconPosition slds-p-left_x-small" title="Expand" onclick="{!c.toggleExpand}" size="x-small" />
+                </aura:set>	
+            </aura:if>
+            <!--Added slds-p-horizontal_small by Lakshya on 20210420 to resolve table's padding issue  [PE v4.7]-->
+            <lightning:card iconName="{!if(v.SDG.showIcon,v.SVGName,'')}" class="{!if(v.SDG.highlightString,v.SDG.sdgId+'cls_sdg_card','') + ' slds-p-horizontal_small'}">
+                <aura:set attribute="title">
+                    <a class="slds-card__header-link baseCard__header-title-container" onclick="{!c.ShowAll}">{!v.TitleName}</a>
+                </aura:set>
+                
+                <!--<div style="padding-bottom: 10px" class="{!if(v.QueryError,'','slds-hide')}">                  
+      <lightning:formattedText value="{!v.QueryError}" class="errorMessage"/>
+      <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error" role="alert">
+       <span class="slds-assistive-text">error</span>
+       <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+        {!v.QueryError}
+       </span>
+      </div>
+     </div>-->
+                
+                <div class="{!if(v.QueryError,'','slds-hide')}">
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-1 slds-p-around_x-small cls_error">
+                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-text-align_left" style="border-radius: .25rem;">
+                                <span class="slds-assistive-text">error</span>
+                                <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+                                    <lightning:icon iconName="utility:error" alternativeText="Error!" variant="inverse" size="x-small" />
+                                </span>
+                                <h2>{!v.QueryError}</h2>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <aura:set attribute="actions">
+                    <!--Moved code inside div & added margin-right class with if condition by Lakshya on 20210426 [PE v4.7] demo feedback-->
+                    <div class="{!if(v.EinsteinTheme, 'right_margin')}">
+                        <aura:if isTrue="{!and(v.EinsteinTheme != 'Standard',v.EinsteinTheme)}">
+                            <lightning:buttonGroup><!--Added by Lakshya on 20210420 to display buttons in a group [PE v4.7]-->
+                                <!--Added below code by Lakshya on 20210420 to display buttons upfront in light theme [PE v4.7]-->
+                                <!--Start-->
+                                <aura:if isTrue="{! v.EinsteinTheme == 'Light'}">
+                                    <aura:if isTrue="{!v.hasListMenu}">
+                                        <aura:iteration items="{!v.SDGActions}" var="action">
+                                            <aura:if isTrue="{!action.Type=='List'}">
+                                                <lightning:button disabled="{!v.CheckedRowIDs.length>0}" label="{!action.Label}" iconName="{!action.Icon}" value="{!action.Id}" onclick="{!c.RaiseListEventButton}"/>
+                                            </aura:if>
+                                        </aura:iteration>
+                                    </aura:if>
+                                
+                                    <aura:iteration items="{!v.SDGActions}" var="action">
+                                        <aura:if isTrue="{!action.Type=='List Multi'}">
+                                            <lightning:button disabled="{!v.CheckedRowIDs.length==0}" label="{!action.Label}" iconName="{!action.Icon}" value="{!action.Id}" onclick="{!c.RaiseListMultiEventButton}"/>
+                                        </aura:if>
+                                        <aura:if isTrue="{!action.Type=='List Button'}">
+                                            <lightning:button disabled="{!v.CheckedRowIDs.length>0}" label="{!action.Label}" iconName="{!action.Icon}" value="{!action.Id}" onclick="{! c.RaiseListEventButton}"/>
+                                        </aura:if>
+                                    </aura:iteration>
+                                </aura:if>
+                                <!--End-->
+                            </lightning:buttonGroup><!--Added by Lakshya on 20210420 to display buttons in a group [PE v4.7]-->
+                            
+                            <aura:renderIf isTrue="{!v.hasFilters}">
+                                <!--Changed iconSize from x-small to medium by Lakshya on 20210420 to match button's size [PE v4.7]-->    
+                                <lightning:buttonIcon iconName="utility:filterList" variant="border-filled" class="{!v.ToggleFilterStyle + ' cls_posIconFilter '}" onclick="{! c.ToggleFilters }"
+                                                    aura:id="FilterToggleButton" alternativeText="Toggle Filters." size="medium" />
+                            </aura:renderIf>
+                            <div id="mydiv" class="cls_btnMenu"> <!-- Add div for bug fixing (00028983) in Einstein Code V1 -->
+                                <!--Changed iconSize from x-small to medium by Lakshya on 20210420 to match button's size [PE v4.7]-->
+                                <lightning:buttonMenu alternativeText="Show menu" variant="border-filled" iconSize="medium" menuAlignment="auto" onselect="{! c.RaiseEventMenuItem }" >
+                                    <aura:if isTrue="{!v.SDG.sdgId}">
+                                        <!--20210225 1545 Modified below line by Lakshya to resolve manage fields button issue if Enable Manage Fields value is changed; enableManageField-->
+                                        <aura:if isTrue="{!and(v.SDG.enableManageField,v.SDG.isEnableManageField)}">
+                                        <lightning:menuItem label="Manage fields" iconName="utility:custom_apps"  value="openManageFieldPopup" />
+                                        </aura:if>
+                                        <!-- Tooltip add for Setup and Reload for bug fixing(00028979) in Einstein Code V1 By Rahulk 
+                                        Add Class(cstmdropdownMenu) with width for Bug fixing (00029049) in Einstein Code V1 by Rahulk
+                                        -->
+                                        <lightning:menuItem label="Setup" iconName="utility:setup" value="navigateToSdg" title="Open SDG record."  class="cstmdropdownMenu"/>
+                                    </aura:if>
+                                    <lightning:menuItem label="Reload" iconName="utility:refresh" value="reload" title="Reload" class="cstmdropdownMenu" />
+                                
+                                    <aura:if isTrue="{! v.EinsteinTheme == 'Dark'}">
+                                        <!--Added below code inside aura if by Lakshya on 20210420 to display list buttons inside dropdown for dark theme only [PE v4.7]-->
+                                        <aura:if isTrue="{!v.hasListMenu}">
+                                            <aura:iteration items="{!v.SDGActions}" var="action">
+                                                <aura:if isTrue="{!action.Type=='List'}">
+                                                    <lightning:menuItem disabled="{!v.CheckedRowIDs.length>0}" label="{!action.Label}" iconName="{!action.Icon}" value="{!action.Id}"/>
+                                                </aura:if>
+                                            </aura:iteration>
+                                        </aura:if>
+                                    
+                                        <aura:iteration items="{!v.SDGActions}" var="action">
+                                            <aura:if isTrue="{!action.Type=='List Multi'}">
+                                                <lightning:menuItem disabled="{!v.CheckedRowIDs.length==0}" label="{!action.Label}" iconName="{!action.Icon}" value="{!action.Id}"/>
+                                            </aura:if>
+                                            <aura:if isTrue="{!action.Type=='List Button'}">
+                                                <lightning:menuItem disabled="{!v.CheckedRowIDs.length>0}" label="{!action.Label}" iconName="{!action.Icon}" value="{!action.Id}"/>
+                                            </aura:if>
+                                        </aura:iteration>
+                                    </aura:if>
+                                    
+                                </lightning:buttonMenu>
+                            </div>
+                            
+                            <aura:set attribute="else">
+                                <lightning:buttonGroup>
+                                    <!--START: Added to show report url on SDG ~Akash-->
+                                    <aura:renderIf isTrue="{!v.SDG.reportId != null}">
+                                        <a href="{!v.SDG.reportId}" style="padding: 5px;" target="_blank">View Report</a>
+                                    </aura:renderIf>
+                                    <!-- END -->
+                                    
+                                    <aura:renderIf isTrue="{!v.TargetSize=='SMALL'}">
+                                        <lightning:buttonMenu iconName="utility:sort" onselect="{! c.handleSort}" menuAlignment="right">
+                                            
+                                            <aura:iteration items="{!v.SDG.SDGFields}" var="field">
+                                                <aura:renderIf isTrue="{!field.canSort}">
+                                                    <lightning:menuitem value="{!field.ID + ':A'}" checked="{!v.SortColumn + ':' + v.SortOrder == field.ID + ':A'}" label="{!field.Label}"
+                                                                        iconName="utility:arrowup" />
+                                                    <lightning:menuitem value="{!field.ID + ':D'}" checked="{!v.SortColumn + ':' + v.SortOrder == field.ID + ':D'}" label="{!field.Label}"
+                                                                        iconName="utility:arrowdown" />
+                                                </aura:renderIf>
+                                                
+                                            </aura:iteration>
+                                            
+                                        </lightning:buttonMenu>
+                                        
+                                    </aura:renderIf>
+                                    <!-- Change to show open sdg icon ~Akash-->
+                                    <aura:if isTrue="{!v.SDG.sdgId}">
+                                        <aura:if isTrue="{!and(v.SDG.enableManageField,v.SDG.isEnableManageField)}">
+                                            <lightning:buttonIcon iconName="utility:custom_apps" variant="border-filled"
+                                                onclick="{! c.openManageFieldPopup }" alternativeText="Manage field." />
+                                        </aura:if>
+                                        <lightning:buttonIcon iconName="utility:setup" variant="border-filled" onclick="{! c.navigateToSdg }"  alternativeText="Open SDG record."/>
+                                    </aura:if>
+                                    <!--End-->
+                                    <aura:renderIf isTrue="{!v.hasFilters}">
+                                        <lightning:buttonIcon iconName="utility:filterList" variant="border-filled" class="{!v.ToggleFilterStyle}" onclick="{! c.ToggleFilters }"
+                                                            aura:id="FilterToggleButton" alternativeText="Toggle Filters."  />
+                                    </aura:renderIf>
+                                    <lightning:buttonIcon iconName="utility:refresh" variant="border-filled" onclick="{! c.reload }" alternativeText="Reload"
+                                                        />
+                                    <aura:iteration items="{!v.SDGActions}" var="action">
+                                        <aura:if isTrue="{!action.Type=='List Multi'}">
+                                            <lightning:button disabled="{!v.CheckedRowIDs.length==0}" label="{!action.Label}" iconName="{!action.Icon}" value="{!action.Id}"
+                                                            onclick="{! c.RaiseListMultiEventButton }" />
+                                        </aura:if>
+                                    </aura:iteration>
+                                    
+                                    <aura:iteration items="{!v.SDGActions}" var="action">
+                                        <aura:if isTrue="{!action.Type=='List Button'}">
+                                            <lightning:button disabled="{!v.CheckedRowIDs.length>0}" label="{!action.Label}" iconName="{!action.Icon}" value="{!action.Id}"
+                                                            onclick="{! c.RaiseListEventButton }" />
+                                            
+                                        </aura:if>
+                                    </aura:iteration>
+                                    
+                                    <aura:if isTrue="{!v.hasListMenu}">
+                                        
+                                        <lightning:buttonMenu class="slds-button_last " menuAlignment="right" alternativeText="More options" onselect="{! c.RaiseListEventMenu }"
+                                                            variant="border-filled" iconSize="medium">
+                                            <aura:iteration items="{!v.SDGActions}" var="action">
+                                                <aura:if isTrue="{!action.Type=='List'}">
+                                                    <lightning:menuItem disabled="{!v.CheckedRowIDs.length>0}" label="{!action.Label}" iconName="{!action.Icon}" value="{!action.Id}"
+                                                                        />
+                                                </aura:if>
+                                            </aura:iteration>
+                                            
+                                        </lightning:buttonMenu>
+                                    </aura:if>
+                                </lightning:buttonGroup>
+                            </aura:set>
+                        </aura:if>
+                    </div>
+                    
+                </aura:set>
+                
+                <aura:renderIf isTrue="{!v.ShowFilters}">
+                    <div class="slds-p-bottom_small">
+                        <lightning:layout multipleRows="true">
+                            <aura:iteration items="{!v.SDGFiltersDefinition}" var="field">
+                                <!--Change to hide grouped fields ~Akash for grouping-->
+                                <!-- Add hide filter check for bug(00028543) fixing in sdg v1.3 Phase4 by RahulK -->
+                                <lightning:layoutItem flexibility="auto" size="{!v.filtersize}" class="{! if(field.groupingQuery,' SDGhidden ','') + if(field.canFilter,'',' hidefilter ')}" > 
+                                    <div class="{! 'filter ' + v.TargetSize}">
+                                        <c:sdgFilter aura:id="cmpFilter" SDGField="{!field}">
+                                            
+                                        </c:sdgFilter>
+                                    </div>
+                                </lightning:layoutItem>
+                            </aura:iteration>
+                            
+                        </lightning:layout>
+                    </div>
+                </aura:renderIf>
+                
+                <aura:renderIf isTrue="{!!v.isLoaded}">
+                    <div class="placeholder">
+                        <div class="inner">
+                            <div class="text-body">
+                                <div class="text text-medium"></div>
+                                <div class="text text-long"></div>
+                            </div>
+                        </div>
+                    </div>
+                </aura:renderIf>
+                <aura:renderIf isTrue="{!v.isLoaded}">
+                    <!-- using div as Aura if is throwing error in some sdg's as aura if doesn't load the component -->
+                    <div style="{!'display:'+if(v.isGridExpanded,'block','none') }">
+                        <div aura:id="datapanel">
+                            <div>
+                                <!-- <div class="cls_expandCollapse sdgdatatablewrapper" aura:id="sdgdatatablewrapper">-->
+                                        	<!--Added for 1reocrdInline bug(00029057) fixing in Einstein Code V1 by Rahulk-->
+                                <div class="{!v.applyInlineCss}" aura:id="sdgdatatablewrapper" Style="overflow-x: auto">
+                                       <table aura:id="resulttable" class="{! 'slds-table slds-table_bordered slds-no-row-hover slds-table_cell-buffer '+if(v.SDG.highlightString,v.SDG.sdgId+'cls_sdg_tableBorder',' ') + (v.TargetSize=='SMALL'?' narrow':'')}">
+                                        <thead>
+                                            <tr class="slds-text-title_caps">
+                                                <aura:if isTrue="{!v.MultiSelectMode || v.SDG.isEditableSDG}">  <!--check sdg is editable the we can check multiSelect in (InlineEdit) -->
+                                                    <!-- Add Sdgcol Css for bug fixing(00028977)  in Einstein Code V1 By Rahulk -->
+                                                    <th class="slds-text-align_right sdgcol" scope="col" style="width: 3.25rem;white-space: normal !important;padding-left: 1.6rem;">
+                                                        <lightning:input type="checkbox" label="" name="" aura:id="checkall" onchange="{!c.CheckAll}" />
+                                                    </th>
+                                                </aura:if>
+                                                <aura:iteration items="{!v.SDG.SDGFields}" var="field">
+                                                    <aura:if isTrue="{!!field.isHidden}">
+                                                        <c:sdgSortableColumn SDGField="{!field}" CurrentSortedColumn="{!v.SortColumn}" CurrentSortedOrder="{!v.SortOrder}"></c:sdgSortableColumn>
+                                                    </aura:if>
+                                                </aura:iteration>
+                                                
+                                                <aura:if isTrue="{!v.hasRowActions}">
+                                                  <th class="sdgcol">&nbsp;</th>   <!--  Add Sdgcol Css for bug fixing(00028977)  in Einstein Code V1 By Rahulk -->
+                                                </aura:if>
+                                            </tr>
+                                        </thead>
+                                        
+                                        <aura:if isTrue="{!v.FullQueryCount==0}">
+                                            <tbody aura:id="tableBody">
+                                                <tr class="slds-hint-parent">
+                                                    <td colspan="{!v.SDG.SDGFields.length+1}">
+                                                        <span class="slds-truncate">{!v.sdgNoData}</span>
+                                                    </td>
+                                                </tr>
+                                            </tbody>
+                                        </aura:if>
+                                        <aura:if isTrue="{!v.FullQueryCount>0}">
+                                            <tbody>
+                                                <aura:iteration items="{!v.processeddata}" var="row">
+                                                    <tr class="slds-hint-parent">
+                                                        <aura:if isTrue="{!v.TargetSize=='SMALL'}">
+                                                            <td>
+                                                                <div class="slds-clearfix">
+                                                                    <div class="slds-float_left">
+                                                                        <lightning:icon size="small" iconName="{!v.SVGName}" />
+                                                                    </div>
+                                                                </div>
+                                                            </td>
+                                                        </aura:if>
+                                                        <aura:if isTrue="{!v.MultiSelectMode || v.SDG.isEditableSDG}">
+                                                            
+                                                            <td class="slds-text-align_right" scope="col" style="width: 3.25rem;">
+                                                                <aura:if isTrue="{!row.errorMessage != null}">
+                                                                    <lightning:helptext content="{!row.errorMessage}" iconName="utility:warning" class="errorPopover"/>
+                                                                </aura:if> <!--Add helper text to show error in Phase4(InlineEdit) -->
+                                                                <lightning:input type="checkbox" value="{#row.rowID}" name="" aura:id="checkrow" onchange="{!c.checkboxchange}" />
+                                                                
+                                                            </td>
+                                                        </aura:if>
+                                                        
+                                                        <aura:iteration items="{!row.data}" var="renderfield" indexVar="index">
+                                                            <aura:if isTrue="{!!renderfield.isHidden}">
+                                                                <c:sdgDatagridCell sdgId="{!v.SDG.sdgId}" sObjectName="{!v.SDG.sObjectName}" rowId="{!row.rowID}" recTypeId="{!row.recordTypeId}" renderfield="{!renderfield}" isEditableSDG="{!v.SDG.isEditableSDG}" selectedRows="{!v.CheckedRowIDs}" updatedData="{!v.updatedData}" currentTheme ="{!v.EinsteinTheme}" applyInlineCss="{!v.applyInlineCss}" />
+                                                                <!-- add more parameter in sdgDatagridCell in  Phase4(InlineEdit) -->
+                                                                <!-- add more parameter(EinsteinTheme ) in sdgDatagridCell  in Einstein Code V1 by RahulK -->
+																<!--add more parameter (applyInlineCss) bug(00029057) fixing in Einstein Code V1 by Rahulk-->
+                                                            </aura:if>
+                                                            
+                                                        </aura:iteration>
+                                                        
+                                                        <aura:if isTrue="{!v.hasRowActions}">
+                                                            <td class="actions" scope="col">
+                                                                
+                                                                <lightning:buttonGroup>
+                                                                    
+                                                                    <aura:iteration items="{!v.SDGActions}" var="action">
+                                                                        <aura:if isTrue="{!action.Type=='Row Button'}">
+                                                                            <lightning:button label="{!action.Label}" iconName="{!action.Icon}" class="rowbutton" value="{#action.Id + ',' + row.rowID}"
+                                                                                              onclick="{! c.RaiseRowEventButton }" />
+                                                                        </aura:if>
+                                                                    </aura:iteration>
+                                                                    
+                                                                    
+                                                                    
+                                                                    <aura:if isTrue="{!v.hasRowMenu}">
+                                                                        
+                                                                        <lightning:buttonMenu class="aamenurelative slds-button_last rowbutton" visible="false" menuAlignment="right" alternativeText="More options"
+                                                                                              onselect="{! c.RaiseRowEventMenu }" variant="border-filled"
+                                                                                              value="{#row.rowID}">
+                                                                            <aura:iteration items="{!v.SDGActions}" var="action">
+                                                                                <aura:if isTrue="{!action.Type=='Row'}">
+                                                                                    <lightning:menuItem label="{!action.Label}" iconName="{!action.Icon}" value="{#action.Id + ',' + row.rowID}" />
+                                                                                </aura:if>
+                                                                            </aura:iteration>
+                                                                            
+                                                                            
+                                                                        </lightning:buttonMenu>
+                                                                    </aura:if>
+                                                                </lightning:buttonGroup>
+                                                                
+                                                            </td>
+                                                        </aura:if>
+                                                        
+                                                    </tr>
+                                                </aura:iteration>
+                                            </tbody>
+                                            <aura:if isTrue="{!v.hasSummary}">
+                                                <tfoot>
+                                                    
+                                                    <tr class="slds-hint-parent">
+                                                        
+                                                        <aura:if isTrue="{!v.MultiSelectMode}">
+                                                            <td>&nbsp;</td>
+                                                            
+                                                        </aura:if>
+                                                        
+                                                        <aura:iteration items="{!v.summarydata}" var="summaryfield" indexVar="index">
+                                                            <c:sdgDatagridCell renderfield="{!summaryfield}" />
+                                                        </aura:iteration>
+                                                    </tr>
+                                                    
+                                                    
+                                                    
+                                                </tfoot>
+                                            </aura:if>
+                                        </aura:if>
+                                        
+                                    </table>
+                                </div>
+                            </div>
+                            <!--Add Save and Cancel buttons in Phase4(InlineEdit)-->
+                            <div class="slds-grid slds-form_inline slds-p-around_x-small pageOptionsDiv">
+                                <div class="slds-col slds-size_5-of-12 slds-form-element">
+                                    <aura:renderIf isTrue="{!v.FullQueryCount>10}">
+                                        <lightning:select aura:id="PagerPage" name="PagerPage" label="{!v.sdgPage}" onchange="{!c.paging}">
+                                            <aura:iteration items="{!v.Pages}" var="opt">
+                                                <option value="{!opt.value}" text="{!opt.label}" label="{!opt.label}" />
+                                            </aura:iteration>
+                                        </lightning:select>
+                                        <lightning:select aura:id="PagerSize" name="PagerSize" label="{!v.sdgPage_Size}" value="{!v.PagerSizeValue}" onchange="{!c.pageSizeChanged}">
+                                            <option value="10">10</option>
+                                            <option value="20">20</option>
+                                            <option value="50">50</option>
+                                            <option value="100">100</option>
+                                        </lightning:select>
+                                    </aura:renderIf>
+                                </div>
+                                <div class="slds-col slds-size_7-of-12 slds-form-element">
+                                    <aura:renderIf isTrue="{!v.showEditButtons}">
+                                        <lightning:button variant="neutral" label="Cancel" title="Cancel" onclick="{! c.cancelChanges }"/>
+                                        <lightning:button variant="brand" label="Save" title="Save" onclick="{! c.saveChanges }"/>
+                                    </aura:renderIf>
+                                </div>
+                            </div>
+                            
+                        </div>
+                    </div>
+                </aura:renderIf>
+            </lightning:card>
+        </div>
+        <aura:set attribute="else">
+            
+            <div class="{!'sdgborder '+if(v.SDG.highlightString,v.SDG.sdgId+'cls_sdgMainBg','')}">
+                
+                <lightning:card iconName="{!if(v.SDG.showIcon,v.SVGName,'')}" class="{!if(v.SDG.highlightString,v.SDG.sdgId+'cls_sdg_card','')}">
+                    <aura:set attribute="title">
+                        <span class="slds-card__header-link baseCard__header-title-container">{!v.TitleName}</span>
+                        <!--<a class="slds-card__header-link baseCard__header-title-container" onclick="{!c.ShowAll}">{!v.TitleName}</a>-->
+                    </aura:set>
+                    <div class="slds-grid slds-wrap">
+                        <div class="slds-col slds-size_1-of-1 slds-large-size_1-of-1 slds-p-around_x-small cls_error">
+                            <div class="slds-notify slds-notify_alert slds-theme_alert-texture slds-theme_error slds-text-align_left" style="border-radius: .25rem;">
+                                <span class="slds-assistive-text">error</span>
+                                <span class="slds-icon_container slds-icon-utility-error slds-m-right_x-small" title="Description of icon when needed">
+                                    <lightning:icon iconName="utility:error" alternativeText="Error!" variant="inverse" size="x-small" />
+                                </span>
+                                <h2>{!v.ErrorMessage} </h2>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    
+                </lightning:card>
+                
+            </div>
+        </aura:set>
+    </aura:if>
+    
+    <aura:if isTrue="{!v.ShowDebug }">
+        <div class="slds-box slds-theme_shade slds-scrollable debugsize " aura:id="debuglogpanel">
+            <h1 class="slds-page-header__title">Debug Log
+                <lightning:buttonIcon iconName="utility:expand" variant="bare" class="slds-float_right" onclick="{! c.ToggleDebug }" alternativeText="Toggle size"
+                                      />
+            </h1>
+            <aura:iteration items="{!v.DebugLog}" var="item">
+                <p>{!item}</p>
+            </aura:iteration>
+        </div>
+        
+    </aura:if>
+    <c:OpenNewRecordPopupSDG aura:id="newRecordComp"/>
+    <!--  component to show reaming related Association in model pop-up in Phase3 CR by Akash(28-11-2019) -->
+    <c:ViewRelatedAssociations aura:id="relatedAssociation"/>
+    <!-- Hidden Button to handle outside click in Phase4(InlineEdit)-->
+    <aura:if isTrue="{!v.SDG.isEditableSDG}">
+        <input id="closeUpdateCmpButton" type="button" value="Clicked Outside" onclick="{!c.clickedOutside}" hidden="hidden"/>
+    </aura:if>
+</aura:component>

@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Reason_To_Park__c</fullName>
+    <externalId>false</externalId>
+    <label>Reason To Park</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Stage__c</controllingField>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Broken Deal</fullName>
+                <default>false</default>
+                <label>Broken Deal</label>
+            </value>
+            <value>
+                <fullName>Financial Distress</fullName>
+                <default>false</default>
+                <label>Financial Distress</label>
+            </value>
+            <value>
+                <fullName>Not Profitable Yet</fullName>
+                <default>false</default>
+                <label>Not Profitable Yet</label>
+            </value>
+            <value>
+                <fullName>Prove Business Model</fullName>
+                <default>false</default>
+                <label>Prove Business Model</label>
+            </value>
+            <value>
+                <fullName>Short-Term Issues</fullName>
+                <default>false</default>
+                <label>Short-Term Issues</label>
+            </value>
+            <value>
+                <fullName>Waiting to Scale</fullName>
+                <default>false</default>
+                <label>Waiting to Scale</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Parked</controllingFieldValue>
+            <valueName>Broken Deal</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Parked</controllingFieldValue>
+            <valueName>Financial Distress</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Parked</controllingFieldValue>
+            <valueName>Not Profitable Yet</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Parked</controllingFieldValue>
+            <valueName>Prove Business Model</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Parked</controllingFieldValue>
+            <valueName>Short-Term Issues</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Parked</controllingFieldValue>
+            <valueName>Waiting to Scale</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

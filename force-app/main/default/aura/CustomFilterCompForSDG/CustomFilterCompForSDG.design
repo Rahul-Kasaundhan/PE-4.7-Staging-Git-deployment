@@ -1,0 +1,15 @@
+<design:component>
+    <design:attribute name="label1" label="Picklist Label 1"/>
+    <design:attribute name="query1" label="Picklist Query 1"/>
+    
+    <design:attribute name="label2" label="Picklist Label 2"/>
+    <design:attribute name="query2" label="Picklist Query 2"/>
+    
+    <design:attribute name="label3" label="Picklist Label 3"/>
+    <design:attribute name="query3" label="Picklist Query 3"/>
+    
+    <design:attribute name="label4" label="Picklist Label 4"/>
+    <design:attribute name="query4" label="Picklist Query 4"/>
+    
+    <design:attribute name="showMyRecords" label="My Record filter"/>
+</design:component>

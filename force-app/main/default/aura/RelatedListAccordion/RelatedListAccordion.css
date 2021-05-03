@@ -1,0 +1,70 @@
+.THIS .cardheader{
+    background-color: rgb(243,242,242);
+    padding:16px !important;
+    margin:0;
+    border-bottom:1px solid rgb(221, 219, 218);
+}
+.THIS .sdgInvoke{
+    border:1px solid #e3d7d7;
+}
+.THIS .isDisabled {
+    color: currentColor;
+    cursor: not-allowed;
+    opacity: 0.5;
+    text-decoration: none;
+    pointer-events: none;
+}
+.THIS .headerTitle{
+    color:black;
+}
+.THIS .body{
+}
+.THIS .previous {
+    background-color:#ddd;
+    color: black;
+    border-radius:50%;
+    
+}
+
+.THIS .next {
+    background-color:#ddd ;
+    color: black;
+    border-radius:50%;
+    
+}
+.THIS .navB {
+    text-decoration: none;
+    display: inline-block;
+    padding: 8px 16px;
+}
+.THIS .headerTitle:hover {
+    color:rgb(0, 109, 204);
+}
+.THIS .navB:hover {
+    background-color:#696969;
+    color: black;
+}
+.THIS .newButtonIcon{
+    background:white;
+}
+.THIS .newButtonIcon .slds-dropdown_left{
+    left: auto;
+    right: 0;
+    transform: translateX(0);    
+}
+.THIS .newButtonIcon .slds-button{
+    border-radius:0.25rem;
+    background:white;
+}
+.THIS .newButtonIcon .slds-truncate{
+    color:#006DCC;
+}
+.THIS .newButtonIcon .slds-button_last{
+    background:rgb(243,242,242);
+}
+.THIS .newButtonIcon .slds-dropdown__item a{
+    background:white;
+}
+.THIS .newButtonIcon .slds-dropdown__item a:hover{
+    background:rgb(243,242,242);
+}

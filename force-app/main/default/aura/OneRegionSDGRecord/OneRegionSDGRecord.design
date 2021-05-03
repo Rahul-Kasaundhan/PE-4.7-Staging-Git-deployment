@@ -1,0 +1,14 @@
+<design:component label="One region with highlighted sections">
+    <flexipage:template >
+        <!-- The default width for the "left" region is "MEDIUM". In tablets,
+        the width is "SMALL" -->
+        <flexipage:region name="top" label="Top Region" defaultWidth="Large" />
+        
+        <flexipage:region name="leftBottom" label="Highlight Left Region" defaultWidth="MEDIUM" />
+        <flexipage:region name="rightBottom" label="Highlight Right Region" defaultWidth="MEDIUM" />
+        <flexipage:region name="midFooter" label="Highlight Bottom Region" defaultWidth="Large" />
+        
+        <flexipage:region name="bottom" label="Bottom Region" defaultWidth="Large" />
+    </flexipage:template>
+    
+</design:component>

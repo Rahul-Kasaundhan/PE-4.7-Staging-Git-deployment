@@ -1,0 +1,37 @@
+.THIS .applyCSS1{
+    width:2080px;
+    height: 2080px; 
+    margin-left:-100px;
+    margin-top: -1024px;
+}
+.THIS .applyCSS2{
+    padding-left: 425px;
+    outline:none;
+}
+.THIS .applyCSS3{
+    width: 850px;
+    height: 310px;
+    
+}
+
+.THIS .outPopupBox {margin: 0 .75rem; background: #fff; border-radius: .25rem;}
+.THIS .cls_headCustom {border-bottom: 1px solid rgb(221, 219, 218); margin-right:16px; margin-left:16px;}
+.THIS .outPopupBox .slds-modal__close {right: -1.1rem !important;}
+.THIS .scroll_Class {padding: 0em; overflow-y: auto; max-height: 700px;}
+.THIS .desc_Class {padding-left: 5.0rem; padding-right: 2rem;}
+
+@media only screen and (device-width: 1366px) {
+  .THIS .scroll_Class{
+       max-height: 350px !important;
+    }
+}
+@media only screen and (device-width: 1536px) {
+  .THIS .scroll_Class{
+       max-height: 400px !important;
+    }
+}
+@media only screen and (device-width: 1280px) {
+  .THIS .scroll_Class{
+       max-height: 300px !important;
+    }
+}

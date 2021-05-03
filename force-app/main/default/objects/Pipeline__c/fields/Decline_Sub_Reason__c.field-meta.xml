@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Decline_Sub_Reason__c</fullName>
+    <externalId>false</externalId>
+    <label>Decline Sub Reason</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <controllingField>Decline_Reason__c</controllingField>
+        <restricted>true</restricted>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Geography</fullName>
+                <default>false</default>
+                <label>Geography</label>
+            </value>
+            <value>
+                <fullName>Investment Strategy</fullName>
+                <default>false</default>
+                <label>Investment Strategy</label>
+            </value>
+            <value>
+                <fullName>Ownership Structure</fullName>
+                <default>false</default>
+                <label>Ownership Structure</label>
+            </value>
+            <value>
+                <fullName>Sector</fullName>
+                <default>false</default>
+                <label>Sector</label>
+            </value>
+            <value>
+                <fullName>Size</fullName>
+                <default>false</default>
+                <label>Size</label>
+            </value>
+        </valueSetDefinition>
+        <valueSettings>
+            <controllingFieldValue>Not Met Investment Criteria</controllingFieldValue>
+            <valueName>Geography</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Met Investment Criteria</controllingFieldValue>
+            <valueName>Investment Strategy</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Met Investment Criteria</controllingFieldValue>
+            <valueName>Ownership Structure</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Met Investment Criteria</controllingFieldValue>
+            <valueName>Sector</valueName>
+        </valueSettings>
+        <valueSettings>
+            <controllingFieldValue>Not Met Investment Criteria</controllingFieldValue>
+            <valueName>Size</valueName>
+        </valueSettings>
+    </valueSet>
+</CustomField>

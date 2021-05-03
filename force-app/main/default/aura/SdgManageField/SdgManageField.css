@@ -1,0 +1,97 @@
+.THIS .cls_bg {
+	background: #f5f6fa;
+}
+
+.THIS .cls_breadCurmBox {
+	width: auto;
+	min-height: auto;
+	height: auto;
+}
+
+.THIS .cls_box {
+	width: auto;
+	min-height: 100px;
+	height: auto;
+	background: #fff;
+	box-shadow: 0 0 4px #dcdcdc;
+	border-radius: 5px;
+	padding-right: 0px;
+}
+.THIS .cls_Listbox {
+	box-shadow: 0 0 4px #dcdcdc;
+	border-radius: 5px;
+}
+.THIS .cls_Listbox li {
+	cursor: pointer !important;
+}
+
+.THIS .cls_Listbox li:hover {
+	background: #f3f2f2;
+}
+.THIS.slds-spinner_container {  
+	z-index: 10000;
+	position: fixed;   
+  }
+
+
+.THIS .cls_Listbox .slds-icon-utility-clear {
+	position: relative !important;
+	top: 0px;
+}
+
+.THIS .cls_breadCurmBox .slds-popover_tooltip {
+	max-width: inherit !important;
+	min-width: 100% !important;
+	background-color: #1b5297 !important;
+}
+.THIS .cls_breadCurmBox .slds-popover {
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+}
+
+.THIS .cls_breadCrumbArrow {
+	position: relative;
+	top: 75px;
+}
+
+.THIS #allFields::-webkit-scrollbar-track {
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	border-radius: 10px;
+	background-color: #f5f5f5;
+}
+
+.THIS #allFields::-webkit-scrollbar {
+	width: 10px;
+	background-color: #f5f5f5;
+}
+
+.THIS #allFields::-webkit-scrollbar-thumb {
+	border-radius: 10px;
+	-webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.3);
+	background-color: #e6e4e4;
+}
+
+.THIS .slds-nubbin_bottom-left:before,
+.THIS .slds-nubbin_bottom-left:after {
+	display: none !important;
+}
+.THIS .fieldSelected {
+	background-color: #1b5297 !important;
+    color: white;
+}
+.THIS .slds-modal__container {
+	width : 20%;
+	max-width: 830px;
+}
+.THIS .errorMessage {
+    color: rgb(194, 57, 52);
+    padding-left: 45%;
+    font-size: 12px;
+}
+.THIS .slds-box.slds-box_x-small{
+	color: white;
+	background-color: #1b5297;
+    border-left-width: 0px;
+    border-right-width: 0px;
+
+}

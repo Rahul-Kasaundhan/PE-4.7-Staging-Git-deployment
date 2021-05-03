@@ -1,0 +1,575 @@
+<!----------------------------------------------
+    ** Project: PE 3.5
+    ** Start: 09-June-2016
+    ** Module: ContactTransfer
+    ** Class use: ContactTransfer_ctlr
+    ** Common Class use: NA
+    ** Standard Controller: Contact
+    ** Call From: Contact Detail Page
+    ** Developer: Vanita Tripathi
+    ** Last Modified: Vanita Tripathi (10-Nov-2016)
+    ** Version StartDate(YYYY-MM-DD)
+    ** 3.5     2016-05-24           
+----------------------------------------------->
+
+<apex:page standardController="contact" extensions="ContactTransfer_ctlr" docType="html-5.0" contentType="text/html;charset=utf-8"  standardStylesheets="false" title="Contact Transfer">
+    <apex:form >
+        <head>
+            <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+            <title>PE New | Fundraisings</title>
+
+            <script src="{!URLFOR($Resource.PE_35,'PE_3.5/js/jquery.js')}" type="text/javascript"></script>
+            <script src="{!URLFOR($Resource.PE_35,'PE_3.5/js/aw.js')}" type="text/javascript"></script>
+
+            <link rel= "stylesheet" href = "{!URLFOR($Resource.PE_35, 'PE_3.5/css/PeLightning.css')}" type ="text/css" />
+            <link rel= "stylesheet" href = "{!URLFOR($Resource.SLDS100, 'assets/styles/salesforce-lightning-design-system-vf.css')}" type ="text/css" />
+
+            <!-- Start FancyBox -->
+            <script src="{!URLFOR($Resource.PE_35,'PE_3.5/js/jquery-ui.js')}"></script>
+             
+            <script>
+                $(function() {
+                    $( ".FancyboxContainer" ).draggable({ cancel: ".PopupContentStart" });
+                });
+            </script>
+            <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.PE_35, 'PE_3.5/css/fancybox.css')}" media="screen" />
+            <link rel="stylesheet" type="text/css" href="{!URLFOR($Resource.PE_35, 'PE_3.5/css/aw.css')}" media="screen" />
+            <link href = "{!URLFOR($Resource.PE_35, 'PE_3.5/css/Navatar-Yellow-Theme.css')}" rel = "stylesheet" type = "text/css"/>
+            <script type="text/javascript" src="{!URLFOR($Resource.PE_35,'PE_3.5/js/common.js')}"></script>
+
+            <script type="text/javascript">
+                var popupStatus = 0;
+                    
+                function InsufficientPermissions_Fancybox() 
+                {
+                    loadPopupnew('fancybox_background','InsufficientPermissions_Fancybox');
+                    centerPopupnew('InsufficientPermissions_Fancybox');
+                }
+                
+                function CommitmentCreation_Fancybox() 
+                {
+                    loadPopupnew('fancybox_background','CommitmentCreation_Fancybox');
+                    centerPopupnew('CommitmentCreation_Fancybox');
+                }
+                
+                function Additional_fields_for_new_Company() 
+                {
+                    loadPopupnew('fancybox_background','Additional_fields_for_new_Company');
+                    centerPopupnew('Additional_fields_for_new_Company');
+                }
+                
+                function Additional_fields_for_new_Source_Firm() 
+                {
+                    loadPopupnew('fancybox_background','Additional_fields_for_new_Source_Firm');
+                    centerPopupnew('Additional_fields_for_new_Source_Firm');
+                }
+                
+                function New_Source_Contact() 
+                {
+                    loadPopupnew('fancybox_background','New_Source_Contact');
+                    centerPopupnew('New_Source_Contact');
+                }
+         
+                function Activity_SettingsActivity_Settings() 
+                {
+                    loadPopupnew('fancybox_background','Activity_Settings');
+                    centerPopupnew('Activity_Settings');
+                }
+                
+                function loadPopupnew(cid1,cid2)
+                {
+                    if(popupStatus==0){
+                        $('.'+cid1).css({
+                            "opacity": "0.5"
+                        });
+                        $('.'+cid1).fadeIn("slow");
+                        $('.'+cid2).fadeIn("slow");
+                        popupStatus = 1;
+                    }
+                };
+                function centerPopupnew(cid)
+                {
+                    //request data for centering
+                    var windowWidth = document.documentElement.clientWidth;
+                    var windowHeight = document.documentElement.clientHeight;
+                    var popupHeight = $('.'+cid).height();
+                    var popupWidth = $('.'+cid).width();
+                    
+                    //centering
+                    $('.'+cid).css({
+                        "position": "fixed",
+                        "top": windowHeight/2-popupHeight/2,
+                        "left": windowWidth/2-popupWidth/2
+                    });
+                };
+                
+                function closepopup(bgdivid,popupdivid)
+                {
+                    disablePopupnew(bgdivid);
+                    $('.'+popupdivid).fadeOut("slow");
+                } 
+                
+                function disablePopupnew(cid){
+                    if(popupStatus==1){
+                        $('.'+cid).fadeOut("slow");
+                        popupStatus = 0;
+                    }   
+                };
+                
+                
+            </script>
+            <!-- End FancyBox -->
+             
+            <!-- Start Yellow Tooltip -->
+            <link rel="stylesheet" href="{!URLFOR($Resource.PE_35, 'PE_3.5/css/tip-yellow.css')}" type="text/css" />
+            <script type="text/javascript" src="{!URLFOR($Resource.PE_35, 'PE_3.5/js/jquery.poshytip.js')}"></script>
+            <script type="text/javascript">
+                $(function(){
+                    $('.YellowTooltip').poshytip();
+                });
+            </script> 
+             
+            <style>
+             
+             .slds a:focus {
+                outline: thin dotted;
+                outline: none !important;
+                outline-offset: -2px;
+                }
+                
+            .ContentBox {
+                background: #FFFFFF;
+                border: #e2e6ef 1px solid;
+                margin: 10px 15px 10px 22px !important;
+                padding: 14px !important;
+                border-radius: 5px;
+                position: relative;
+            }
+            .mandatory_msg{color:#c23934;   font-size:12px; margin-bottom:10px;}
+
+            .td1 {
+                font-weight: normal;
+                padding-right: 0px !important;
+                text-align: right;
+                vertical-align:middle !important;
+                word-break: break-all;
+            }
+
+            .td2 {                  
+                vertical-align: middle;
+                font-size: .875rem;
+                color: #54698d;
+                word-break: break-all;
+            }
+            .lookupIconOn, .lookupIcon{                 
+                background-image : url({!URLFOR($Resource.PE_35, '/PE_3.5/images/search_16.png')});
+                font-size:12px !important;
+                position:relative; 
+                right: 47px;
+                background-position: left top;
+                background-repeat: no-repeat !important;        
+                background-color: #FFFFFF;
+            }
+            
+            .lookupInput img {
+                vertical-align: middle;
+                margin-right: -2.75em;
+                background-repeat: no-repeat;
+                
+            }
+            a.inputTextClass{               
+                border:none !important;
+                padding-right: 32px !important;
+                background-color: white !important;
+                color: #16325c !important;      
+                border-radius: 4px !important;
+                width: 100%;
+                transition: border 0.1s linear, background-color 0.1s linear;       
+                padding: 0 16px 0 12px !important;
+                line-height: 34px !important;
+                min-height: calc(34px + 2px);
+            }
+            .inputTextClass{                    
+                padding-right: 32px !important;
+                background-color: white !important;
+                color: #16325c !important;
+                border: 1px solid #d8dde6 !important;
+                border-radius: 4px !important;
+                width: 100%;
+                transition: border 0.1s linear, background-color 0.1s linear;       
+                padding: 0 16px 0 12px !important;
+                line-height: 34px !important;
+                min-height: calc(34px + 2px);
+            }
+            
+            #errorMessage{
+                color:red;
+                font-size:11px;
+                font-family:Calibri (Body);
+                font-style:italic;
+                font-weight: bold;
+            }   
+            
+            select{height:40px; margin-left:5px; border:1px solid red;}
+            .slds .slds-icon-custom-75 {
+                background-color: #fcb141 !important;
+            }
+            </style>
+        </head>
+        <body>
+            
+            <!--Start Loading-->
+                <div style="width:100%; height:100%; display:block; background:#fff; text-align:center; vertical-align:middle; opacity:0.7; position:fixed; top:0; left:0; z-index:9999999; display:none;" id="processingImg">
+                    <div style="width:100px; height:100%; position:relative;top:41%; background:url({!URLFOR($Resource.PE_35, 'PE_3.5/images/icon_loading.gif')}) no-repeat top left; margin:0 auto;"></div>
+                </div>
+            <!--End Loading-->
+            <apex:actionStatus id="actionStatusIdLoadingImage" onstart="document.getElementById('processingImg').style.display = 'block';" onstop="document.getElementById('processingImg').style.display = 'none';"/>
+            
+            <!--<apex:outputPanel id="showPageMessage" rendered="{!isError}">
+                <apex:pageMessages id="showErrorMsg"></apex:pageMessages>
+            </apex:outputPanel>-->           
+            <apex:outputPanel id="showPageMessage" >                                    
+                <apex:outputPanel id="showErrorMsg" rendered="{!isError}">
+                    <div class="slds">                        
+                        <div class="slds-box slds-theme--error" id="errorMsgDivId">
+                          <img src="{!URLFOR($Resource.PE_35,'PE_3.5/images/error-icon.png')}" style="float: left;margin-right:5px;" />  <p>{!errorMessage}</p>
+                        </div>
+                        
+                    </div>   
+                </apex:outputPanel>                                 
+            </apex:outputPanel> 
+            
+            <div class="slds">    
+
+            <!-- MASTHEAD -->
+            <!-- / MASTHEAD -->    
+
+            <!-- PRIMARY CONTENT WRAPPER -->
+                <div class="myapp"> 
+                
+                    <div id="temp">
+                        <div class="fancybox_background" style="opacity: 0.5;"></div>
+                        <!--Modified style by Lakshya on 20210423 [PE v4.7]; right: 359px;top: 200px;width: 440px; position: fixed; top: 232px; left: 543px;-->                                        
+                        <div class="InsufficientPermissions FancyboxContainer Popup" style="width: 31%; top: 40%; left: 35%; position: fixed;">
+         
+                            <div class="slds-modal__header">
+                                <div class="close_white_60">
+                            <a onclick="closepopup('fancybox_background','FancyboxContainer'); redirecttoContact();return false;" title="Close"><img src="{!URLFOR($Resource.PE_35, 'PE_3.5/images/close_white_60.png')}" /></a>
+                            </div> 
+                                <h2 class="slds-text-heading--medium" id="errorHeading">Insufficient Permission</h2>
+                            </div>
+                            <div class="PopupContentStart">
+                                <!--Modified by Lakshya on 20210422 [PE v4.7]-->
+                                <div id="errorMessageOnLoad" >This feature is temporarily unavailable. Please contact Navatar Support.</div>                           
+                                <div class="cl"></div> 
+                            </div>
+                            <!--Added center tag & changed button class to brand by Lakshya on 20210422 [PE v4.7]-->
+                            <!--Added style to display pointer in modal footer by Lakshya [PE v4.7] demo feedback-->
+                            <div class="slds-modal__footer" style="cursor:default;"><center><a class="slds-button slds-button--brand" onclick="closepopup('fancybox_background','FancyboxContainer');redirecttoContact();return false;">OK</a></center></div>   
+                        </div>
+                        <div class="fancybox_background"></div>
+                        <div class="Conformation FancyboxContainer" >
+         
+                            <div class="slds-modal__header">
+                                <div class="close_white_60 uiButton--modal-closeBtn uiButton--default uiButton" >
+                                    <a title="Close" onclick="closepopup('fancybox_background','FancyboxContainer');return false;" >
+                                        <img src="{!URLFOR($Resource.PE_35, 'PE_3.5/images/close_white_60.png')}" />
+                                    </a>
+                                </div>
+                                <h2 class="slds-text-heading--medium">Confirm</h2>
+                            </div>
+                                  
+                            <div class="PopupContentStart" style="position:relative; cursor:default; width:400px; z-index:100; padding:15px 25px 20px 25px">
+                                <p>How would you like to handle the mailing and other addresses associated with the contact? </p>
+                                <div class="cl"></div>        
+                            </div>    
+                            
+                            <div class="slds-modal__footer">
+                                <!--Commented by Lakshya on 20210422 [PE v4.7]-->                                
+                                <!--<apex:commandButton action="{!clearAddress}" value="Clear Address" id="btnClearAddress" styleclass="slds-button slds-button--neutral" rerender="" status="actionStatusIdLoadingImage"/>  
+                                <apex:commandButton action="{!retainAddress}" value="Retain Address" id="btnRetainAddress" styleclass="slds-button slds-button--neutral slds-button--brand" rerender="" status="actionStatusIdLoadingImage" />-->
+                            </div>
+                            
+                        </div>
+
+                        <div id="MainContentSection" class="float_r">                            
+                            <div class="ContentStart">                            
+                                <div class="slds-page-header" role="banner">
+                                    <div class="slds-media" style="padding-bottom:10px">
+                                        <div class="slds-media__figure">
+                                            <div class="slds-icon slds-icon-custom-75 slds-icon--large">
+                                                <img src="{!URLFOR($Resource.SLDS100, '/assets/icons/custom/custom80_60.png')}"/>
+                                            </div>
+                                        </div>
+                                        <div class="slds-media__body">
+                                            <p class="slds-page-header__title slds-truncate slds-align-middle" style="padding-top:8px" title="Contact Transfer">Contact Transfer</p>
+                                        </div>
+                                    </div>
+                                </div>
+                               
+                                <div style="clear:both"></div>
+                                
+                                <div class="ContentBox" >
+                                    <h2 class="slds-section__title">Contact Transfer</h2>  
+                                    <div id="errorMessage"  style='text-align:center'></div>                            
+                                    <div style="clear:both"></div>    
+                                    
+                                    <table class="table" border="0" cellpadding="5" style="margin:20px 0 10px 0; width:45% " cellspacing="0">
+                                        <tbody>                    
+                                            <tr>
+                                                <td class="td1" ><label class="slds-form-element__label" style="width:120px">Name</label></td>
+                                                <td  class="td2">{!contactName}</td>
+                                            </tr>                    
+                                            <tr>
+                                                <td class="td1" style="width:120px"><label class="slds-form-element__label">{!$ObjectType.Account.Fields.Name.Label}</label></td>
+                                                <td  class="td2">{!legalNameOld}</td>
+                                            </tr>                     
+                                            <tr>
+                                                <td colspan="2">
+                                                    <div style="width:110%; border-top:1px solid #e2e6ef; padding-bottom:10px; margin:20px auto 10px auto">
+                                                        <p style="padding-top:15px;">Please select an Institution to which you want to transfer the contact.</p>
+                                                    </div>
+                                                </td>                               
+                                            </tr>
+                                            <tr>
+                                                <td style="width:120px; text-align:right;"><label class="slds-form-element__label"><abbr class="slds-required">*</abbr>{!$ObjectType.Account.Fields.Name.Label}</label></td>
+                                                <td id="legalNameNewColumnId"> 
+                                                
+                                                    <apex:outputpanel id="legalname">
+                                                        <div class="slds-form-element__control slds-input-has-icon slds-input-has-icon--right" style="width:70%; ">
+                                                           
+                                                            <div class="slds-input__icon slds-icon-text-default">                                                               
+                                                            </div>
+                                                            
+                                                            <apex:inputField value="{!contactLookup.AccountId}" id="lookupId"  style="border:2px solid #c23934" styleclass="inputTextClass" >
+                                                                <!--Commented by Lakshya on 20210422 [PE v4.7]-->
+                                                                <!--<apex:actionSupport event="onchange" action="{!fetchLegalIdNew}" reRender="legalNameNewColumnId,showPageMessage,jsPanel" oncomplete="checkLegalName()"/>-->
+                                                            </apex:inputField>
+                                                            
+                                                        </div>
+                                                    </apex:outputpanel>
+                                                
+                                                </td>                                       
+                                            </tr>                                
+                                            <tr>
+                                                <td>&nbsp;</td>
+                                                <td>
+                                                    <apex:outputpanel id="errorMsg">
+                                                        <apex:message for="lookupId" id="lookupIderror" styleClass="mandatory_msg"/>
+                                                        <span class="mandatory_msg msg_blank"></span>
+                                                    </apex:outputpanel>
+                                                </td>
+                                            </tr>                   
+                                        </tbody>
+                                    </table>
+                                    
+                                    <div>
+                                    </div>
+                                    <div class="btns_section" style="text-align:center; margin-top:20px">                                                           
+                                        <apex:commandButton action="{!cancel}" value="Cancel" id="btnCancel" styleclass="slds-button slds-button--neutral" rerender="legalname" title="Cancel"/>  
+                                        <a onclick="checkField()"  id="btnTransfer" class="slds-button slds-button--brand click_for_step_2" title="Transfer">Transfer</a>                                            
+                                        <!--Commented by Lakshya on 20210422 [PE v4.7]-->                                
+                                        <!--<apex:actionFunction name="beforeTransferActivityOfContact" action="{!beforeTransferActivity}" oncomplete="changeErrorMsg();openPopupOfficeLocation();" rerender="legalname,errorMsg,jsPanel" status="actionStatusIdLoadingImage" />-->                                            
+                                        <apex:actionFunction name="redirectToContactDetailPage" action="{!cancel}" rerender="legalname" status="actionStatusIdLoadingImage"/>                                       
+                                    </div>
+                                    
+                                </div>            
+                            </div>
+                        </div>
+                        <div class="cl"></div>
+                    </div>
+                </div>
+            </div>
+            <!--Commented by Lakshya on 20210422 [PE v4.7]-->
+            <!--<apex:actionFunction name="officeLocationDisabled" action="{!retainAddress}"  rerender="jsPanel,showPageMessage,showErrorMsg" status="actionStatusIdLoadingImage" oncomplete="refreshMessage()"/>--> 
+        </body>
+        
+        <apex:outputpanel id="jsPanel">
+            <script>
+                // (PE3.5, SK, 11Aug2017)
+                var isTransferred = '{!if(isTransferred==true,'true','false')}';
+                var isContactIdNull = '{!if(isContactIdNull==true,'true','false')}';
+                var isOrgSettingActive = '{!if(isOrgSettingActive==true,'true','false')}';
+                var isCode12365 = '{!if(isCode12365==true,'true','false')}';
+                var isPopUpOpen = '{!if(isPopupOpen==true,'true','false')}';
+                var oldLegalName = '{!JSENCODE(legalNameOld)}';
+                var newLegalName = document.getElementById('j_id0:j_id1:lookupId').value;
+                var newLegalId = '{!JSENCODE(legalIdNew)}';
+                var oldLegalId = '{!JSENCODE(legalIdOld)}';
+                var isPageError = false;                
+                var isError = '{!if(isError==true,'true','false')}';
+                var featureDisable = true;//Added by Lakshya on 20210422 [PE v4.7]
+                //Commented by Lakshya on 20210422 [PE v4.7]
+                /*if(isOrgSettingActive=='false'){                
+                    $('.ContentBox').css('display','none');
+                    $('.InsufficientPermissions').css('display','block');
+                    $('#errorHeading').text('Insufficient Permission')
+                    $('#errorMessageOnLoad').html('You cannot access this functionality. Functionality may be disabled. Please contact Navatar administrator.');
+                }
+                if(isCode12365=='true'){
+                    $('.ContentBox').css('display','none');
+                    $('.InsufficientPermissions').css('display','block');
+                    $('#errorMessageOnLoad').text('Code: 12365. Please contact Navatar Support. System setup improperly.');
+                }
+                if((isContactIdNull=='true')){
+                    $('.ContentBox').css('display','none');
+                    $('.InsufficientPermissions').css('display','block');
+                    $('#errorMessageOnLoad').text('Contact ID missing in URL.');                    
+                }*/
+                //Added by Lakshya on 20210422 [PE v4.7]
+                if(featureDisable){                
+                    $('.ContentBox').css('display','none');
+                    $('.InsufficientPermissions').css('display','block');
+                    $('#errorHeading').text('Temporarily  Unavailable')
+                    $('#errorMessageOnLoad').html('This feature is temporarily unavailable. Please contact Navatar Support.');
+                }
+                
+            </script>
+        </apex:outputpanel>
+        <script>        
+            //Function to check if Legal Name is not empty.
+            function checkField()
+            {
+                try
+                {
+                    var newLegalName = document.getElementById('j_id0:j_id1:lookupId').value;
+                    var dynamicMessages = document.getElementsByClassName('mandatory_msg');
+                    
+                    if(dynamicMessages.length >0)
+                    {
+                        for(var j=0;j<dynamicMessages.length;j++)
+                        { 
+                            var errorData = dynamicMessages[j].innerHTML;                                       
+                            if(errorData=='No matches found.'){
+                                dynamicMessages[j].innerHTML = '';
+                                $('msg_blank').text('');
+                            }                       
+                        }  
+                    }   
+                    $('.errorMsg').css('display','none');
+                    
+                    if((isContactIdNull=='true')){
+                        $('.msg_blank').text('Contact ID missing in URL.');
+                    }
+                    if(isOrgSettingActive=='false'){
+                        //Modified text() by Lakshya on 20210422 [PE v4.7]
+                        $('.msg_blank').text('This feature is temporarily unavailable. Please contact Navatar Support.');
+                    }
+                    if(isCode12365=='true'){
+                        $('.msg_blank').text('Code: 12365. Please contact Navatar Support. System setup improperly.');
+                    }
+                    if((newLegalName!=''&& newLegalName!=undefined)&&(newLegalId!=oldLegalId && oldLegalName!=newLegalName)){
+                        $('.msg_blank').text('');
+                    }
+                    if((newLegalName==''||newLegalName==undefined)){                           
+                        $('.msg_blank').text('Please enter a value');                   
+                    }
+                                    
+                    if(newLegalName!='' && newLegalName!=undefined && isContactIdNull=='false' && isOrgSettingActive=='true' && isCode12365=='false'){
+                        $('.msg_blank').text('');
+                        //Modified text() by Lakshya on 20210422 [PE v4.7] 
+                        //beforeTransferActivityOfContact();                                                                         
+                    } 
+                }
+                catch(error){
+                    alert('checkfield---'+error);
+                }
+            }
+
+            function changeErrorMsg(){
+                try{
+                    
+                    var fieldClasses = document.getElementsByClassName("error");                        
+                    $('.msg_blank').text('');
+                    if(fieldClasses.length >0)
+                    {                   
+                        fieldClasses[0].classList.remove("error");
+                        var checkError = document.getElementsByClassName('errorMsg');
+                        
+                        if(checkError.length >0)
+                        {
+                            for(var j=0;j<checkError.length;j++)
+                            { 
+                                var errorData = checkError[j].innerHTML;                                    
+                                var dataError = errorData.split('<strong>Error:</strong> ').join('');
+                                checkError[j].classList.add('mandatory_msg');
+                                checkError[j].innerHTML = dataError;
+                                isPageError = true;
+                            }  
+                        }         
+                    
+                    }
+                    else{
+                        var checkError = document.getElementsByClassName('errorMsg');
+                        if(checkError.length >0)
+                        {
+                            for(var j=0;j<checkError.length;j++)
+                            { 
+                                var errorData = checkError[j].innerHTML;                                    
+                                var dataError = errorData.split('<strong>Error:</strong> ').join('');
+                                checkError[j].classList.add('mandatory_msg');
+                                checkError[j].innerHTML = dataError;
+                                isPageError = true;
+                            }  
+                        }                               
+                    }
+                    
+                }
+                catch(error){
+                    alert('changeErrorMsg---'+error);
+                }
+                
+            }
+            function handlerKeyPress(e) {
+                try{            
+                    var keynum = 0;
+                    if (window.event){
+                        keynum = window.event.keyCode;
+                    }
+                    else if (e.which){
+                        keynum = e.which;
+                    }
+
+                    // Here we check whether the Enter button was pressed
+                    if (keynum == 13){
+                        transferActivityOfContact();
+                    }
+                }
+                catch(error){
+                    alert('handlerKeyPress---'+error);
+                }
+            }
+            function openPopupOfficeLocation(){                 
+                var errorMessageText = $('.mandatory_msg').text();
+                var errorMessageLength = errorMessageText.trim().length;
+                
+                if(newLegalId==oldLegalId && oldLegalName==newLegalName){
+                    $('.msg_blank').text('Old and new Legal Name cannot be the same.');
+                }
+                else if((isPageError == 'false'|| isPageError==false)&& errorMessageLength==0 && (isError == false || isError == 'false')){
+                    if((isPopUpOpen=='true'||isPopUpOpen==true)){
+                        loadPopupnew('fancybox_background','Conformation');
+                        centerPopupnew('Conformation');
+                    }
+                    else{
+                        officeLocationDisabled();
+                    }
+                }                   
+            }
+            
+            function redirecttoContact(){
+                redirectToContactDetailPage();
+            }
+            
+            function checkLegalName(){                  
+                if(newLegalName!='' && newLegalName!=undefined){
+                    if(newLegalId!=oldLegalId && newLegalName!=oldLegalName){                           
+                        $('.mandatory_msg').text('');                                   
+                    }                       
+                }
+                
+            }
+        </script>
+     
+    </apex:form>
+</apex:page>

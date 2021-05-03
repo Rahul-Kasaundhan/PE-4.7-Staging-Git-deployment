@@ -1,0 +1,127 @@
+<aura:component controller="DisplayFieldSetCtrl" implements="flexipage:availableForAllPageTypes,force:hasRecordId">
+    <aura:attribute name="sObjectName" type="string" />
+    <aura:attribute name="imageUrl" type="string" />
+    <aura:attribute name="newImageUrl" type="string" default="" />
+    <aura:attribute name="imageMode" type="string" default="none" />
+    <aura:attribute name="fieldSetName" type="string" />
+    <aura:attribute name="imageIconUrl" type="string" />
+    <aura:attribute name="updateInProgress" type="Boolean" default="false" />
+    <aura:attribute name="Imagefield" type="string" />
+    <aura:attribute name="imagesizeClass" type="string" />
+    <aura:attribute name="imageHeight" type="Integer" />
+    <aura:attribute name="iconsizeClass" type="string" default="objectIconfor8" />
+    <aura:attribute name="showComponent" type="Boolean" default="false" />
+    <aura:attribute name="editImageAllowed" type="Boolean" default="false" />
+    <aura:attribute name="recordIdUsed" type="String" />
+    <aura:attribute name="updateImage" type="Boolean" default="false" />
+    <aura:attribute name="deleteImage" type="Boolean" default="false" />
+    <aura:attribute name="objList" type="List" />
+    <aura:attribute name="loaded" type="Boolean" default="true" />
+    <aura:attribute name="iconPosition" type="Integer" />
+    <aura:attribute name="initDone" type="Boolean" default="false" />
+    <div aura:id="measurement" />
+    
+    <aura:handler event="force:refreshView" action="{!c.refreshOnUpdate}" />
+    <aura:handler name="init" value="{!this}" action="{!c.loadData}" />
+    <aura:handler name="change" value="{!v.newImageUrl}" action="{!c.handleImageUrlChange}" />
+
+    <aura:if isTrue="{! v.loaded }">
+        <lightning:spinner alternativeText="Loading" />
+    </aura:if>
+    <div class="{!if(v.showComponent,'','slds-hide')}" id="parentDiv">
+        <aura:if isTrue="{!v.objList.length>0}">
+            <div class="slds-grid" style="{!'min-height:'+v.imageHeight+'px'}">
+                <aura:if isTrue="{!v.imageMode !='none'}">
+                    <!--Issue-00029291, Updated class to slds-col slds-size_1-of-11 and style to style="position: relative;margin-left: 25px" by Anirudh Raturi on 27-10-2020-->
+                    <div onclick="{!c.toggleOptions}" onmouseenter="{!c.toggleImageIcon}" onmouseleave="{!c.toggleImageIcon}"
+                         class="slds-col slds-size_1-of-11" style="position: relative;margin-left: 25px">
+                        <aura:if isTrue="{!v.imageMode == 'image' &amp;&amp; v.imageUrl}">
+                            <!--Bug ID : 00029274; Resolved by Lakshya on 13/10/20-->
+                            <!--Removed picAlignment class & added display: block;margin-left: auto;margin-right: auto;-->
+                            <img src="{!v.imageUrl}" style="{!'height:'+ v.imageHeight+'px;display: block;margin-left: auto;margin-right: auto;'}" />
+                        </aura:if>
+                        <!--Removed picAlignment class from img tag and remove style from lightning:icon tag added slds-text-align_center class by Anirudh Raturi on 27-10-2020 -->
+                        <div class="{!if(v.imageMode == 'icon','',' slds-hide')+' slds-text-align_center'}"> 
+                            <aura:if isTrue="{!v.sObjectName =='Contact'}">
+                                <img style="{!'background:#80808057;height:'+ v.imageHeight+'px'}"
+                                     src="/img/icon/t4v35/standard/user_120.png" />
+                                <aura:set attribute="else">
+                                    <lightning:icon class="{!v.iconsizeClass+if(v.imageIconUrl,'',' slds-hide')}"
+                                                    iconName="{!v.imageIconUrl}" size="large"/>
+                                </aura:set>
+                            </aura:if>  
+                        </div>
+                        <!-- Issue-00029293, updated v.imageHeight-18 to v.imageHeight-20 by Anirudh Raturi on October 27-10-2020 -->
+                        <div style="{!'top:'+if(v.imageMode == 'icon',if(v.sObjectName =='Contact',v.imageHeight-18,if(v.imageHeight == '130',v.iconPosition+10,v.iconPosition)),v.imageHeight-18)+'px'}" aura:id="imageIcon" class="imageIcon">
+                        <!-- Issue-00029291 updated just above div tag by Anirudh Raturi on 28-10-2020 -->    
+                            <lightning:icon iconName="utility:photo" alternativeText="Update Image" size="x-small"
+                                            title="Update Photo"/> <!-- Issue-00029276, Updated title="Update Image" to title="Update Photo" by Anirudh Raturi on 13-10-2020 -->
+                                            
+                            <div class="actionMenu uiMenuList uiPopupTarget uiMenuList--right uiMenuList--default visible hideOptions" style="margin-top:0px;"
+                                 aura:id="options">
+                                <div class="actionMenu" role="menu">
+                                    <ul class="scrollable" role="presentation">
+                                        <li class="uiMenuItem" role="presentation">
+                                            <a href="javascript:void(0);" onclick="{!c.handleSelect}"
+                                               data-produto="update" role="menuitem" aria-disabled="false" tabindex="0"
+                                               title="Update Photo">Update Photo</a>
+                                        </li>
+                                        <li class="{!if(v.imageMode == 'image','uiMenuItem ',' slds-hide')}"
+                                            role="presentation">
+                                            <a href="javascript:void(0);" onclick="{!c.handleSelect}"
+                                               data-produto="delete" role="menuitem" aria-disabled="false" tabindex="0"
+                                               title="Delete Photo">Delete Photo</a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </aura:if>
+                <aura:iteration items="{!v.objList}" var="obj">
+                    <div class="{!'slds-col slds-p-left_x-large slds-p-right_x-large'+if(obj.objName == v.sObjectName,' ',' slds-hide')}">
+                        <lightning:recordViewForm recordId="{!obj.recordId}" objectApiName="{!obj.objName}" density="auto">
+                            <aura:iteration items="{!obj.fields}" var="field" indexVar="index">
+                                <div class="{!field.fieldType == 'TEXTAREA'?'slds-size_12-of-12 slds-p-left_medium': 'slds-size_6-of-12 slds-p-left_medium'}"
+                                     style="display: inline-block;" >   <!--BugId-00029191  Updated this css by Anirudh Raturi on 06-Oct-2020    -->                                   
+                                     <lightning:outputField aura:id="{!field.apiName}" fieldName="{!field.apiName}"
+                                                              class="slds-form-element slds-form-element_readonly"/>
+                                </div>
+                            </aura:iteration>
+                        </lightning:recordViewForm>
+                    </div>
+                </aura:iteration>
+            </div>
+        </aura:if>
+        
+        <aura:if isTrue="{!v.updateImage}">
+            <c:FileUploader showPopup="{!v.updateImage}" imageUrl="{#v.imageUrl}" newImageUrl="{!v.newImageUrl}" 
+                            imageField="{!v.Imagefield}"
+                            recordId="{!v.recordIdUsed}" 
+                            iconName="{!v.imageIconUrl}"
+                            iconMode="{!v.imageMode == 'icon' &amp;&amp; v.sObjectName!='Contact'}"
+                            />
+        </aura:if>
+        <aura:if isTrue="{!v.deleteImage}">
+            <section role="dialog" tabindex="-1" class="slds-modal slds-fade-in-open slds-modal_small">
+                <div class="deletePopup slds-modal__container">
+                    <header class="modal-header slds-modal__header empty slds-modal__header--empty">
+                        <lightning:buttonIcon iconName="utility:close" onclick="{! c.closedelPopup }" alternativeText="close"
+                                              variant="bare-inverse" size="large" class="slds-modal__close" />
+                    </header>
+                    <div class="slds-modal__content slds-p-around_medium slds-is-relative">
+                        <div class="slds-text-align--center">
+                            Are you sure you want to delete the current photo?
+                        </div>
+                    </div>
+                    <footer class="slds-modal__footer">
+                        <button class="slds-button slds-button_neutral" onclick="{!c.closedelPopup}">Cancel</button>
+                        <button class="slds-button slds-button_brand"
+                                onclick="{!c.handledeleteImage}">Delete Photo</button>
+                    </footer>
+                </div>
+            </section>
+            <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if>
+    </div>
+</aura:component>

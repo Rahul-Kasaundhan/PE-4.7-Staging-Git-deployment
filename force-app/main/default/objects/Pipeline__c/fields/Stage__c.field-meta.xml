@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Stage__c</fullName>
+    <externalId>false</externalId>
+    <label>Stage</label>
+    <required>false</required>
+    <trackHistory>false</trackHistory>
+    <trackTrending>false</trackTrending>
+    <type>Picklist</type>
+    <valueSet>
+        <valueSetDefinition>
+            <sorted>false</sorted>
+            <value>
+                <fullName>Deal Received</fullName>
+                <default>false</default>
+                <label>Deal Received</label>
+            </value>
+            <value>
+                <fullName>NDA Signed</fullName>
+                <default>false</default>
+                <label>NDA Signed</label>
+            </value>
+            <value>
+                <fullName>Management Meeting</fullName>
+                <default>false</default>
+                <label>Management Meeting</label>
+            </value>
+            <value>
+                <fullName>IOI</fullName>
+                <default>false</default>
+                <label>IOI</label>
+            </value>
+            <value>
+                <fullName>LOI</fullName>
+                <default>false</default>
+                <label>LOI</label>
+            </value>
+            <value>
+                <fullName>Due Diligence</fullName>
+                <default>false</default>
+                <label>Due Diligence</label>
+            </value>
+            <value>
+                <fullName>Closed</fullName>
+                <default>false</default>
+                <label>Closed</label>
+            </value>
+            <value>
+                <fullName>Declined/Dead</fullName>
+                <default>false</default>
+                <label>Declined/Dead</label>
+            </value>
+            <value>
+                <fullName>Parked</fullName>
+                <default>false</default>
+                <label>Parked</label>
+            </value>
+        </valueSetDefinition>
+    </valueSet>
+</CustomField>

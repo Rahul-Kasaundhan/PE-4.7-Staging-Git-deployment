@@ -1,0 +1,84 @@
+<!-- Copyright (c) 2018, salesforce.com, inc. 
+    * All rights reserved. 
+    * SPDX-License-Identifier: BSD-3-Clause 
+    * For full license text, see the LICENSE file in the repo root or https://opensource.org/licenses/BSD-3-Clause 
+-->
+<!--
+Project                 Developer         Date           Description    
+1.3 Phase4(Inlinedit)   Rahulk            17-02-2020     Implement Inline edit for sdg fields.
+-->
+<aura:component>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.onInit}" />
+    <aura:attribute name="renderfield" type="object" access="global" />
+    <aura:attribute name="sdgAgo" type="String" access="public" default="{!$Label.c.sdgAgo}" />
+    <aura:attribute name="sdgIn" type="String" access="public" default="{!$Label.c.sdgIn}" />
+    <aura:attribute name="rowId" type="String" access="public"/>
+    <!-- Start:- Variable use in Phase4(Inlineedit) -->
+	<aura:attribute name="sdgId" type="String" access="public" />
+    <aura:attribute name="sObjectName" type="String" access="public" />
+    <aura:attribute name="isEditableSDG" type="Boolean" access="public" />
+    <aura:attribute name="selectedRows" type="List" access="public" />
+    <aura:attribute name="isLoading" type="Boolean" default="false" />
+    <aura:attribute name="updatedData" type="Object" />
+    <aura:attribute name="highlightClass" type="Object" />
+    <aura:attribute name="isValueUpdated" type="Boolean" default="false" />
+    <aura:attribute name="updatedValue" type="String" default="" />
+    <aura:attribute name="cmpGlobalId" type="String" default="" />
+    <aura:attribute name="recTypeId" type="String" />
+    <aura:attribute name="blurCell" type="Boolean" default="false" />
+    <aura:attribute name="currentTheme" type="String" access="public" /> <!-- Variable add for check current theam in Einstein Code V1 By Rahulk --> 
+	<!-- End:- Variable use in Phase4(Inlineedit) -->
+	  
+    <!-- Fire event with row ID click on related Association button  in Phase3 CR by Akash(28-11-2019) -->
+    <aura:registerEvent name="relatedAssociationEvent" type="c:relatedAssociationEvent"/>
+    <aura:attribute name="sRelatedAssociationIds" type="String[]"/>  <!--Add Varibale for bugs(00028217)-->
+	
+    <aura:registerEvent name="updateFieldsData" type="c:UpdateFieldsData" />
+    <aura:handler event="c:UpdateFieldsData" action="{!c.updateFieldsData}" />
+    <aura:attribute name="applyInlineCss" type="String" default='sdgdatatablewrapper'/><!--Added for bug(00029057) fixing in Einstein Code V1 by Rahulk-->
+
+    <!-- Don't change the class structure, if you are not fully aware. Changing might result in inline edit not working. -->
+    <td data-label="{#v.renderfield.FieldLabel}" class="{!'pullleft pullup ' + v.highlightClass + ' ' + v.rowId + '_' + v.renderfield.Path}"
+        style="{!if(v.renderfield.FieldColor,'background:'+v.renderfield.FieldColor,'')}" ondblclick="{!c.updateValue}"> 
+
+        <span class="slds-grid slds-grid--align-spread">
+            <span class="slds-truncate">{!v.body}</span>
+
+            <aura:if isTrue="{!v.isEditableSDG}">
+                <span class="action_icons">
+                    <aura:if isTrue="{!v.renderfield.isEditableField}">
+                        <aura:if isTrue="{!!v.isLoading}">
+                            <lightning:buttonIcon iconName="utility:edit" variant="bare" alternativeText="Edit" onclick="{!c.updateValue}" />
+                            <aura:set attribute="else">
+                                <div role="status" class="slds-spinner slds-spinner_x-small">
+                                    <span class="slds-assistive-text">Loading</span>
+                                    <div class="slds-spinner__dot-a"></div>
+                                    <div class="slds-spinner__dot-b"></div>
+                                </div>
+                            </aura:set>
+                        </aura:if>
+                        <aura:set attribute="else">
+                            <lightning:buttonIcon iconName="utility:lock" variant="bare" alternativeText="Locked" />
+                        </aura:set>
+                    </aura:if>
+                </span>
+            </aura:if>
+        </span>
+
+        <aura:if isTrue="{!and(v.isEditableSDG, v.renderfield.isEditableField)}"> 
+            <!--Add Style Condition for Dark Mode in for bug fixing (00028987) in Einstein Code V1 By Rahulk -->
+            <section aura:id="updateCmp" aria-describedby="dialog-body-id-99" aria-label="Update"
+                class="slds-popover slds-popover_large updateFormSection" 
+                data-cmpId="{!v.cmpGlobalId}" role="dialog" ondblclick="{!c.stopEvent}" Style="{!if(v.currentTheme == 'Standard','','color: black!important;')}" >
+
+                <div class="slds-popover__body" id="dialog-body-id-99" aura:id="updateCmpBody"></div>
+                <footer class="slds-text-align_right" aura:id="updateCmpFooter"></footer>
+            </section>
+        </aura:if>
+
+        <aura:if isTrue="{!v.blurCell}">
+            <lightning:spinner size="small" variant="base" />
+        </aura:if>
+    </td>
+</aura:component>

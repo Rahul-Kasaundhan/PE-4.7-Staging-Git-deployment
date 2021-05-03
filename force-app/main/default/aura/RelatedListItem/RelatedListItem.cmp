@@ -1,0 +1,112 @@
+<aura:component  access="global" controller="RelatedListController" >
+    <aura:attribute type="list" name="record" />
+    <aura:attribute type="Boolean" name="isPrimary" default="false" />
+    <aura:attribute type="Boolean" name="isIcon" default="false" />
+    <aura:attribute type="Boolean" name="showIcon" default="true" />
+    <aura:attribute type="String" name="relatedObjName" />
+    <aura:attribute name ="showDelModal" type="Boolean" default="false" />
+    <aura:attribute type="String" name="imageUrl" default="" />
+    <!--aura:attribute type="String" name="reportId" default="" />
+    <aura:attribute type="String" name="reportingField" default="" /-->
+    <aura:attribute name="width" type="String"/>
+    <aura:attribute name ="enableDelete" type="Boolean" default="false" />
+    <aura:attribute type="String" name="HeaderIcon"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.loadData}" />
+    
+    <lightning:flexipageRegionInfo width="{!v.width}"/>
+    
+    <aura:registerEvent name="relatedListcmp" type="c:RelatedListEvent"/>
+    <div class="slds-media__figure">
+        <aura:if isTrue="{!v.showIcon}">
+            <aura:if isTrue="{!v.record.imageUrl}">
+                <!-- Bug: 00029189, Updated by Hemendra on October 1, 2020 -->
+                <img src="{!v.record.imageUrl}" style="height:35px;width:35px;float:right;border-radius: 0.25rem;"></img>
+                <aura:set attribute="else">
+                    <aura:if isTrue="{!v.isPrimary}">
+                        <img src="/img/icon/t4v35/standard/user_120.png" style="background:#80808057;height:35px;width:35px;float:right;border-radius: 0.25rem;"></img>
+                        <aura:set attribute="else">
+                            <lightning:icon iconName="{!v.HeaderIcon}" class="objectIcon" style="float:right;border-radius: 0.25rem;"
+                                            title="Collapse" size="small" />
+                        </aura:set>
+                    </aura:if>
+                </aura:set>
+            </aura:if>
+            
+        </aura:if>
+    </div>
+    <div class="slds-media__body">
+        <a style="font:14px;color:#006DCC;border-bottom:1px dotted;text-decoration: none;"
+           href="{!'/'+v.record.id}" target="_blank" > {!v.record.name}</a>&nbsp;&nbsp;   <!-- BugId-00029258 Updated inline css(i.e.text-decoration: none;) by Anirudh Raturi on 09-10-2020  -->  
+        <!--span style="float:right;margin-right: 0.4rem;">
+            <lightning:buttonMenu class="{!v.width !='MEDIUM'?'buttonIconCorner':'buttonIcon'}" alternativeText="Show menu" iconSize="x-small" onselect="{! c.handleSelect }">
+                <lightning:menuItem value="Edit" label="Edit" />
+                <aura:if isTrue="{!v.enableDelete}">
+                    <lightning:menuItem value="Delete" label="Delete"/>
+                </aura:if>
+            </lightning:buttonMenu>
+        </span-->
+        <br/>
+        <ul class="itemRows truncate">
+            <aura:iteration items="{!v.record.rows}" var="item" indexVar="index">
+                <li class="tableRowGroup">
+                    <div class="slds-list--horizontal forceListRecordItem">
+                        <div class="slds-item--label slds-truncate recordCell" style="color:#696969;" title="{!item.label}">{!item.label}: </div>
+                        <div class="slds-item--detail slds-truncate recordCell" title="{!item.value}">
+                            <!--aura:if isTrue="{!item.apiName == v.reportingField}">
+                                <a href="{!v.reportId==''?'#':'/lightning/r/Report/'+v.reportId+'/view?&amp;fv0='+v.record.id}" 
+                                   target="_blank">{!item.value}</a>
+                                <br/>
+                                <aura:set attribute="else"-->
+                            <aura:if isTrue="{!item.fieldType == 'EMAIL'}" >
+                                <lightning:formattedEmail value="{!item.value}" hideIcon="true" />
+                                <aura:set attribute ="else">
+                                    <aura:if isTrue="{!item.fieldType == 'CURRENCY'}">
+                                        <lightning:formattedNumber value="{!item.value}" style="currency" currencyCode="USD"/>
+                                        <aura:set attribute = "else">
+                                            {!item.value}
+                                        </aura:set>
+                                    </aura:if>
+                                </aura:set>
+                            </aura:if>
+                            <br/>
+                            <!--/aura:set>
+                            </aura:if-->
+                        </div>
+                    </div>
+                </li>
+            </aura:iteration>
+        </ul>
+    </div>    
+    <div>
+        <!--aura:if isTrue="{!v.showDelModal}">
+        <section role="dialog" tabindex="-1" aria-labelledby="modal-heading-01" aria-modal="true" aria-describedby="modal-content-id-1" class="slds-modal slds-fade-in-open">
+            <div class="slds-modal__container">
+                <header class="slds-modal__header">
+                    <lightning:buttonIcon iconName="utility:close"
+                                          onclick="{! c.closeModel }"
+                                          alternativeText="close"
+                                          variant="bare-inverse"
+                                          class="slds-modal__close"/>
+                    <h2 id="modal-heading-01" class="slds-text-heading_medium slds-hyphenate">Delete {!v.record.name}</h2>
+                </header>
+                <div class="slds-modal__content slds-p-around_medium" id="modal-content-id-1">
+                    <p>Are you sure you want to delete  {!v.record.name}?  
+                    </p>
+                </div>
+                <footer class="slds-modal__footer">
+                    <lightning:button variant="neutral"
+                                      label="Cancel"
+                                      title="Cancel"
+                                      onclick="{! c.closeModel }"/>
+                    <lightning:button variant="brand"
+                                      label="Delete"
+                                      title="Delete"
+                                      onclick="{!c.onRecorddelete}"/>
+                </footer>
+            </div>
+        </section>
+        <div class="slds-backdrop slds-backdrop_open"></div>
+        </aura:if-->
+    </div>
+</aura:component>

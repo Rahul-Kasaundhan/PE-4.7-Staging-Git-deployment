@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>URL__c</fullName>
+    <description>Use this field to provide relative or absolute URL along with the parameters to redirect to the desired page. E.g.: Redirect the user to a report where the filters are passed within &lt;&lt; &gt;&gt; in URL to display the desired result.</description>
+    <externalId>false</externalId>
+    <label>URL</label>
+    <length>255</length>
+    <required>false</required>
+    <trackTrending>false</trackTrending>
+    <type>Text</type>
+    <unique>false</unique>
+</CustomField>

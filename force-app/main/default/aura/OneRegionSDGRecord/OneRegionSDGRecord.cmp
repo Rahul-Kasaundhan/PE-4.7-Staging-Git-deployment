@@ -1,0 +1,42 @@
+<aura:component implements="lightning:recordHomeTemplate" description="A main Header region with custom highlighted region and a footer region.">
+    <aura:attribute name="top" type="Aura.Component[]" />
+    <aura:attribute name="bottom" type="Aura.Component[]" />
+    <aura:attribute name="midFooter" type="Aura.Component[]" />
+    <aura:attribute name="leftBottom" type="Aura.Component[]" />
+    <aura:attribute name="rightBottom" type="Aura.Component[]" />
+    
+    
+    <div>
+        <lightning:layout>
+            <lightning:layoutItem flexibility="grow" class="oneColumnCustom">
+                {!v.top}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    
+    
+    <div>
+        <lightning:layout>
+            <lightning:layoutItem flexibility="grow" class="oneColumnCustom">
+                {!v.midFooter}
+            </lightning:layoutItem>            
+        </lightning:layout>
+        <lightning:layout>
+            <lightning:layoutItem flexibility="grow" class="twoColumnCustom">
+                {!v.leftBottom}
+            </lightning:layoutItem>
+            <lightning:layoutItem flexibility="grow" class="twoColumnCustomRight">
+                {!v.rightBottom}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+    
+    
+    <div>
+        <lightning:layout>
+            <lightning:layoutItem flexibility="grow" class="oneColumnCustom">
+                {!v.bottom}
+            </lightning:layoutItem>
+        </lightning:layout>
+    </div>
+</aura:component>

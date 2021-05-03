@@ -1,0 +1,26 @@
+.THIS .slds-file-selector__text {
+    display: none;
+}
+.THIS .slds-file-selector__dropzone {
+    border: 0px !important;
+}
+.THIS .forcePageError{
+    border-bottom: 1px solid rgb(221, 219, 218);
+    margin-bottom: 1rem;
+    padding-bottom: 0.75rem;
+}
+.THIS .objectIconClass .slds-icon_large {
+  width: 170px;
+  height: 170px;
+}
+
+/* remove the "Upload Files" text from the button of the lightning:input type file, Issue-00029277  Added bu Anirudh Raturi on 13-10-2020 */
+.THIS .slds-file-selector__dropzone .slds-file-selector__button{
+    font-size: 0;
+}
+/* insert the text "Upload Image" into the button of the lightning:input type file , Issue-00029277  Added bu Anirudh Raturi on 13-10-2020 */
+.THIS .slds-file-selector__dropzone .slds-file-selector__button:after{
+    content: 'Upload Image';
+    font-size: .8125rem;
+    color: rgba(27, 82, 151, 1.0);
+}

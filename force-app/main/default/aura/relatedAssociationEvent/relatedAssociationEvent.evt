@@ -1,0 +1,3 @@
+<aura:event type="COMPONENT" description="Event to open related association popup" >
+    <aura:attribute name="taskId" type="String[]" /> <!-- Change type string to array of String for bugs(00028217)-->
+</aura:event>

@@ -1,0 +1,94 @@
+.THIS .disabedInput {
+    pointer-events: none;
+}
+.THIS.flexipageHeader {
+    display: none;
+}
+.THIS#parentDiv {
+    background-color: white;
+    padding: 15px 15px 15px 15px;
+}
+.THIS .paddingInner {
+    padding: 0px 41px;
+}
+.THIS .photoCss {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    padding: 5px;
+}
+
+.THIS .slds-form-element_stacked {
+    margin-bottom: 0px;
+}
+.THIS .objectIconfor80 .slds-icon_large{
+    width:80px;
+    height:80px;
+}
+.THIS .objectIconfor100 .slds-icon_large {
+    width: 100px;
+    height: 100px;
+}
+.THIS .objectIconfor120 .slds-icon_large {
+    width: 120px;
+    height: 120px;
+}
+.THIS .objectIconfor140 .slds-icon_large {
+    width: 140px;
+    height: 140px;
+}
+.THIS .objectIconfor160 .slds-icon_large{
+    width: 160px;
+    height: 160px;
+}
+.THIS .objectIconfor170 .slds-icon_large {
+    width: 170px;
+    height: 170px;
+}
+.THIS .objectIconfor180 .slds-icon_large {
+    width: 180px;
+    height: 180px;
+}
+.THIS .customOutput .slds-form-element .slds-form-element__label,
+.THIS .customOutput lightning-helptext {
+    display: none;
+}
+.THIS .picAlignment {
+    position: absolute;
+    right:0;
+    margin-left: 10%;
+}
+.THIS .imageIcon {
+    display: none;
+    position: absolute;
+    right: 0;
+    background: rgba(255, 255, 255, 0.6);
+}
+.THIS .show {
+    display: unset !important;
+}
+.THIS .hideOptions {
+    display: none !important;
+}
+.THIS .deletePopup {
+    margin: 0 auto;
+    width: 50%;
+    max-width: 40rem;
+    min-width: 20rem;
+}
+.THIS .Compactcss .slds-form-element__label{
+    white-space: nowrap;
+    max-width: none;    
+     /* BugId-00029192  Added this css by Anirudh Raturi on 05-Oct-2020  */
+} 
+.THIS  .slds-form-element__label{
+    white-space: nowrap;
+    max-width: none;
+    /*  BugId-00029192  Added this css by Anirudh Raturi on 05-Oct-2020   */
+} 
+.THIS .customField .slds-form-element__control{
+    padding-left:0;
+}
+.THIS .slds-form-element__static{
+ width: auto;
+}

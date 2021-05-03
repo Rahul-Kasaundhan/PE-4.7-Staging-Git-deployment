@@ -1,0 +1,16 @@
+.THIS .twoColumnCustom{
+    width: 50%;
+    padding: 5px;
+}
+.THIS .twoColumnCustomRight{
+    width: 50%;
+    padding: 5px 5px 5px 0px;
+}
+/*bug fixing- changed css for one column custom width ~Sameeksha Sahu*/
+.THIS .oneColumnCustom{
+    padding: 0px 5px 5px 5px;
+    width:100%;
+}
+.THIS .oneColumnHighlightCustom{
+    padding: 5px;
+}

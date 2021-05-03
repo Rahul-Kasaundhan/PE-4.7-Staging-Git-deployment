@@ -1,0 +1,84 @@
+<!--
+New Implimentation:
+Developer       :   Sameeksha Sahu
+Project         :   Navigation & SDG 
+Date            :   30/July/2019
+Description     :   Lightning component for utility bar edge menu Navigation
+-->
+<aura:component implements="lightning:utilityItem" controller="navatarEdgeMenuCntlr" access="global" >
+	<aura:attribute name="mapIdToURL2" type="String"/>
+    <aura:attribute name="objectAPIName" type="String" default="Account"/>
+    <!-- to disable pop-out feature in utility bar ~Akash-->
+    <aura:attribute name="supportsPopOut" type="Boolean" default="false" />
+	<aura:attribute name="flagCheck" type="Boolean" default="false"/>
+    <aura:attribute name="cmpGlobalId" type="String" default="1"/><!--added by Aditya PEv4.7 on 20 April 2021-->
+    <aura:attribute name="expandNavigationView" type="String" default="True"/><!--added by Aditya PEv4.7 27 April 2021-->
+    <aura:attribute name="navigationType" type="String"/><!--added by Aditya PEv4.7 on 19 April 2021-->
+    
+ 
+    <lightning:utilityBarAPI aura:id="utilitybar"/>    
+    
+    <aura:html tag="style">    
+      .treeview span.icon {
+            width: 17px !important;
+            margin-right: 1px !important;
+        }  
+      
+        /*added cmpGlobalId by Aditya PEv4.7 20 April 2021*/
+        .node-{!'treeview12'+v.cmpGlobalId}:hover { 
+        				/*background: rgb(243, 242, 242) !important;*/
+        				background: rgba(21, 137, 238, 0.1) !important;
+                        cursor: pointer !important;
+        }
+        
+       .oneUtilityBarPanel .slds-utility-panel__body{
+        			/*background: #f9f9fa !important;*/
+        			background: #f2f5fa !important; /*changed from dae4ef to #f2f5fa by Aditya PEv4.7 26 April 2021*/       			
+        } 
+        .panel{background: transparent !important;
+        			}
+        
+        /* width */
+        .slds-utility-panel__body::-webkit-scrollbar {
+          width: 10px;
+        }
+        
+        /* Track */
+        .slds-utility-panel__body::-webkit-scrollbar-track {
+          box-shadow: inset 0 0 5px grey; 
+          border-radius: 10px;
+        }
+         
+        /* Handle */
+        .slds-utility-panel__body::-webkit-scrollbar-thumb {
+          background: #999; 
+          border-radius: 10px;
+        }
+        
+        /* Handle on hover */
+        .slds-utility-panel__body::-webkit-scrollbar-thumb:hover {
+          background: #999; 
+        }
+        
+    </aura:html>
+    
+    <ltng:require 
+                  styles="{!$Resource.BootstrapTree + '/css/bootstrap.css'}"/>
+    <ltng:require 
+                  scripts="{!join(',', 	$Resource.jQueryTree+'/jquery-3.3.1.js',
+                           $Resource.BootstrapTree+'/js/bootstrap-treeview.js'
+                           )}" 
+                  afterScriptsLoaded="{!c.doinit}" 
+                  />
+    
+    <div class="container" id="edgemenue">        
+        <div class="row">            
+            <div class="col">                                
+                <div style="border: none;" id="{!'treeview12'+v.cmpGlobalId}"><!--added cmpGlobalId by Aditya PEv4.7 on 20 April 2021-->
+                </div>
+            </div>
+        </div>
+    </div>
+    <c:OpenNewRecordPopupSDG aura:id="newRecordTypeComp"/>
+    <div aura:id="MultipleAssociationModal"/>
+</aura:component>

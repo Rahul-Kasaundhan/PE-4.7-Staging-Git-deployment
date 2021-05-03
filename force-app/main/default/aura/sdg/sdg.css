@@ -1,0 +1,319 @@
+.THIS .hidden{
+    display:none;
+}
+.THIS .slds-card__body {
+    
+    margin-bottom: 0px;
+    border-bottom: 0px;
+    
+}
+
+
+/* Change text-align right to center for bug fixing(00028986) in Enistein code v1 by RahulK */
+.THIS .actions {
+    text-align:center;
+    width:auto;
+}
+.THIS .sdgdatatablewrapper{
+    overflow-x: auto;
+}
+
+
+.THIS .data{
+    width:100%;
+}
+.THIS .rowbutton, .THIS .rowbutton button {
+    line-height: 1.5em;
+    white-space: nowrap;
+    height: 1.5rem;
+    
+}
+.THIS .debugsize {
+    max-height: 100px;
+}
+.THIS .working tbody, .THIS .working tbody a, .THIS .working td:before, .THIS .working button
+{
+    background-color:rgb(244, 246, 249);
+    color:transparent !important;
+    text-shadow: 0 0 5px rgba(0,0,0,0.3);
+}
+.THIS .blurredImz{
+    display: block !important;
+}
+
+.THIS .menurelative
+{
+    position:relative;
+}
+.THIS .sdgborder
+{
+    border: 1px solid rgb(221, 219, 218);
+    border-radius: 0.25rem;
+    background: white;
+    position: relative;
+}
+
+.THIS .slds-card__header
+{
+    padding-left: 1rem !important;
+    padding-right: 1rem !important;
+    padding-top: 0.7rem !important;
+}
+
+.THIS .wraplongtext
+{
+    white-space:normal;
+}
+.THIS a:visited.no-visited 
+{
+    color: red;
+}
+
+
+.THIS .no-visited span.header-label
+{
+    color:rgb(22, 50, 92);
+}
+.THIS .slds-table
+{
+    border-collapse: separate;
+}
+.THIS .centeredwrapper
+{
+    position:relative;
+}
+.THIS .smallcolheader
+{
+    display:none;
+    flex-wrap: wrap;
+}
+.THIS .smallcolheader.narrow
+{
+    display:flex;
+    flex-wrap: wrap;
+}
+
+.THIS
+{
+    
+    width:100%;
+}
+
+.THIS .colheader
+{
+    font-size: 0.75rem;
+    line-height: 1.25;
+    text-transform: uppercase;
+    letter-spacing: .0625em;
+    color: #54698d;
+    background-color:white;
+    border-top:1px solid #d8dde6;
+}
+.THIS .centered
+{
+    margin: 0 auto;
+    position: absolute;
+    left: 45%;
+    top: 100px;
+    
+}
+.THIS .placeholder
+{
+    width:100%;
+    
+    padding:1em;
+}
+.THIS .placeholder .inner
+{
+    width:90%;
+    
+}
+
+.THIS .placeholder .text
+{
+    border-radius: 15rem;
+    display: block;
+    margin-bottom: .75rem;
+    background-color: rgb(224, 229, 238);
+    height: .5rem;
+    
+}
+.THIS .placeholder .text-body:last-child {
+    margin-bottom:0px;
+}
+.THIS .text-long
+{
+    width:100%;
+}
+.THIS .text-medium
+{
+    width:60%;
+}
+.THIS .slds-table.narrow  {
+    border: 0;
+}
+.THIS .slds-table.narrow  caption {
+    font-size: 1.3em;
+}
+.THIS .slds-table.narrow thead {
+    border: none;
+    clip: rect(0 0 0 0);
+    height: 1px;
+    margin: -1px;
+    overflow: hidden;
+    padding: 0;
+    position: absolute;
+    width: 1px;
+}
+.THIS .smallcolheader.narrow th {
+    background-color: rgb(250, 250, 249);
+    
+    padding: 5px;
+    flex-wrap: wrap;
+    font-weight: unset;
+    text-transform: uppercase;
+    font-size:0.9em;
+    
+    
+}
+.THIS .filter{
+    width:100%;
+}
+
+.THIS .slds-table.narrow tr {
+    border-bottom: 1px solid #ddd;
+    display: block;
+    margin: 1em 1em 2em 1em;
+    border-top: 2px solid #dddbda;
+}
+.THIS .slds-table_cell-buffer.narrow tr>td:last-child
+{
+    padding-right:0px;
+}
+.THIS .slds-table.narrow td {
+    display: block;
+    font-size: 1em;
+    text-align: right;
+    min-height:2em;
+    box-shadow: none;
+}
+
+.THIS .slds-table_bordered.narrow tbody tr:hover > td
+{
+    box-shadow: white 0px 0px 0px inset;
+    background-color:white;
+}
+
+.THIS .slds-table.narrow td:before {
+    content: attr(data-label);
+    float: left;
+    text-transform: uppercase;
+}
+.THIS .slds-table.narrow td:last-child {
+    border-bottom: 0;
+}
+.THIS .slds-table_cell-buffer.narrow tr>th:first-child, 
+.THIS .slds-table_cell-buffer.narrow tr>td:first-child, 
+.THIS .slds-table--cell-buffer.narrow tr>th:first-child, 
+.THIS .slds-table--cell-buffer.narrow tr>td:first-child
+{
+    padding: .25rem .5rem;
+}
+.THIS .slds-table.narrow td:before
+{
+    text-transform:none;
+    color: rgb(112, 110, 107);
+}
+.THIS .slds-table.narrow td, .THIS .slds-table_cell-buffer.narrow tr>td:first-child
+{
+    border-top: none;
+    padding-top:0px;
+    padding-bottom: 0px;
+    min-height: 1.5em;
+}
+
+.THIS .slds-table.narrow tr {
+    border-bottom: none;
+    display: block;
+    border-top: 0px solid #dddbda;
+    margin: 5px 2px 0em 2px;
+    padding-top:10px;
+}
+/* UPdate CSS for Expand/ Collapse bug fixing(00028983) in Einstein Code V1 */        
+.THIS .cls_ArrowiconPosition {
+    position: relative;
+    z-index: 1;
+    float: left;
+    top: 20px !important;
+    left: 5px;
+    cursor: pointer !important;
+}
+/*CSS FOR HIGHLIGHT SDG 05-08-2019 RAJU*/
+.THIS .cls_sdg_tableBorder {
+    border-top: 1px solid #bec7d0 !important;
+    border-bottom: 1px solid #bec7d0 !important;
+}
+
+.THIS table.cls_sdg_tableBorder tr:nth-child(even) {
+    background-color: #e4ecf7 !important;
+    border-top: 1px solid #d5dce6 !important;
+}
+.THIS .cls_sdgMainBg {
+    padding: 5px !important;
+    border: 0 !important;
+}
+/*END*/
+/*START Css for error message in case of filter error*/
+.THIS .errorMessage {
+    color: rgb(194, 57, 52);
+    padding-left: 45%;
+    font-size: 12px;
+}
+/*END*/
+
+.THIS .cls_error .slds-notify_alert {justify-content: left !important;font-size: 1rem !important; font-weight: 700 !important;}
+
+.THIS .errorPopover {
+    position: absolute;
+    left: 5px;
+}
+
+.THIS .errorPopover button {
+    color: var(--lwc-colorBackgroundToastError,rgb(194, 57, 52));
+}
+
+.THIS .slds-checkbox .slds-checkbox__label .slds-form-element__label {
+    display: flex !important;
+}
+.THIS .hidefilter {
+	display: none;
+}
+
+/* Added to resolve Bug: 00028453 */
+.THIS .pageOptionsDiv {
+    width: 100%;
+}
+/*END*/
+        
+/* CSS add for DarkMode bug fix(00028983) in Einstein Code V1 */        
+.THIS .cls_ArrowiconPositionForcstm {
+    position: relative;
+    z-index: 1;
+    float: left;
+    top: 20px !important;
+    left: 5px;
+    cursor: pointer !important;
+}
+
+.THIS .titleHeadPosition {position: relative !important; top: -11px !important;}
+.THIS .sdgdatatablewrapper .slds-checkbox{ /*Add Css for Bug fixing(00028977) */
+    position: relative !important;
+    left: -2px;
+}
+/* CSS add for DarkMode bug fix(00029049) in Einstein Code V1 */   
+.THIS .cstmdropdownMenu{
+     width: 150px !important;
+}
+  .THIS .inableInlineEdit{
+   height: 450Px;
+}

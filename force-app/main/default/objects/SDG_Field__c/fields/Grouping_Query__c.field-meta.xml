@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomField xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Grouping_Query__c</fullName>
+    <description>Use this field to write an aggregate SOQL query to display count/sum/min/max/avg in a column.
+E.g.: “Select count(Id), AccountId from Contact where AccountId in &lt;&lt;AccountId&gt;&gt; group by AccountId”
+This query will specify number of Contacts for an Account.</description>
+    <externalId>false</externalId>
+    <label>Grouping Query</label>
+    <length>20000</length>
+    <trackTrending>false</trackTrending>
+    <type>LongTextArea</type>
+    <visibleLines>10</visibleLines>
+</CustomField>

@@ -1,0 +1,48 @@
+<!-- 
+**   Project :- Navigation & SDG  
+**  Version        Date  (DD-MM-YYYY)            Author  Description of Action
+**  1.3            29-01-2020                    RahulK  Phase4:-On page load get picklist query values from Design and prepare  combobox.
+ -->
+<aura:component implements="flexipage:availableForAllPageTypes,forceCommunity:availableForAllPageTypes,force:hasRecordId,force:appHostable" access="global" controller="CustomFilterCompForSDG_Cntlr">
+    <aura:attribute name="filterCount" type="String" default="3"/>
+	<aura:attribute name="RecordPicklist" type="List" />    
+    <aura:attribute name="picklist1" type="List" />
+    <aura:attribute name="picklist2" type="List" />
+    <aura:attribute name="picklist3" type="List" />
+    <aura:attribute name="picklist4" type="List" />
+    
+    <aura:attribute name="query1" type="String" default=""/>
+    <aura:attribute name="query2" type="String" default=""/>
+    <aura:attribute name="query3" type="String" default=""/>
+    <aura:attribute name="query4" type="String" default=""/>
+
+    <aura:attribute name="label1" type="String" default=""/>
+    <aura:attribute name="label2" type="String" default=""/>
+    <aura:attribute name="label3" type="String" default=""/>
+    <aura:attribute name="label4" type="String" default=""/>   
+    
+    <aura:attribute name="showMyRecords" type="Boolean" default="true"/>
+    
+    <aura:handler name="init" value="{!this}" action="{!c.doInit}" />
+    <aura:registerEvent name="sdgFilterEvent" type="c.EventPassValueToSDG"/>
+    <div style="background-color: rgb(243, 242, 242);border-radius: .25rem;">
+        <div class="slds-grid slds-wrap slds-p-around_x-small" style="position: relative; top:-5px;">
+            <div class="{!if(v.picklist1.length > 0,'slds-col slds-size_1-of-'+v.filterCount+' slds-p-around_xx-small','slds-hide')}">
+                <lightning:combobox id="1" name="{!v.label1}" label="{!v.label1}" value="" placeholder="All" options="{! v.picklist1 }" onchange="{! c.changePicklist }"/>                
+            </div>
+            <div class="{!if(v.picklist2.length > 0,'slds-col slds-size_1-of-'+v.filterCount+' slds-p-around_xx-small','slds-hide')}">
+                <lightning:combobox id="2" name="{!v.label2}" label="{!v.label2}" value="" placeholder="All" options="{! v.picklist2 }" onchange="{!c.changePicklist }"/>                
+            </div>
+            <div class="{!if(v.picklist3.length > 0,'slds-col slds-size_1-of-'+v.filterCount+' slds-p-around_xx-small','slds-hide')}">
+                <lightning:combobox id="3" name="{!v.label3}" label="{!v.label3}" value="" placeholder="All" options="{! v.picklist3 }" onchange="{! c.changePicklist }"/>                
+            </div>
+            <div class="{!if(v.picklist4.length > 0,'slds-col slds-size_1-of-'+v.filterCount+' slds-p-around_xx-small','slds-hide')}">
+                <lightning:combobox id="4" name="{!v.label4}" label="{!v.label4}" value="" placeholder="All" options="{! v.picklist4 }" onchange="{! c.changePicklist }"/>                
+            </div>
+            <div class="{!if(v.showMyRecords,'slds-col slds-size_1-of-'+v.filterCount+' slds-p-around_xx-small','slds-hide')}">
+                <lightning:combobox id="UserRecords" name="progress" label="Show" value="All Records" options="{!v.RecordPicklist }" onchange="{!c.changePicklist }"/>                
+            </div>
+        </div>
+    </div>
+    
+</aura:component>
