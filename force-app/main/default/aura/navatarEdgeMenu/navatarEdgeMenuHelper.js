@@ -4,12 +4,11 @@
         //start changes for utilityType by Aditya PEv4.7 on 19 April 2021
         var globalId = component.getGlobalId().replace(":", "");        
         component.set("v.cmpGlobalId",globalId);
-        var navigationType = component.get("v.navigationType");
         var expandLevels = 2; // for expanded view of navigation menu
         if(component.get("v.expandNavigationView") == 'False'){
             expandLevels = 1; // for collapsed view of navigtion menu
         }
-        
+        var navigationType = component.get("v.navigationType");
         getJsonAction.setParams({
             navigationType: navigationType
         });

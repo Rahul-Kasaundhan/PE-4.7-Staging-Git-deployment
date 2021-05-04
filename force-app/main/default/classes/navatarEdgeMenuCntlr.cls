@@ -38,7 +38,7 @@ public with sharing class navatarEdgeMenuCntlr{
             	strNavigationType = 'WHERE Navigation_Type__c=\'' + String.escapeSingleQuotes(navigationType)+ '\'';
                 navigationTypeParent = 'AND Navigation_Type__c=\'' + String.escapeSingleQuotes(navigationType) + '\'';
             }
-            navQuery = 'SELECT id, Name, Order__c, URL__c, Quick_Create_Object__c, Quick_Create_Record_Type__c, List_View_Object__c, List_View_Name__c, Activities_Button_API_Name__c, Navigation_Type__c, Icon__c, Icon_Background_Color__c, (SELECT id, Name, Order__c, URL__c, Quick_Create_Object__c, Quick_Create_Record_Type__c, List_View_Object__c, List_View_Name__c, Activities_Button_API_Name__c, Navigation_Type__c, Icon__c, Icon_Background_Color__c FROM Parent__r '+ strNavigationType + ' ORDER By Order__c nulls last) FROM Navigation__c WHERE parent__c = null ' + navigationTypeParent + ' ORDER By Order__c nulls last';
+            navQuery = 'SELECT id, Name, Order__c, URL__c, Quick_Create_Object__c, Quick_Create_Record_Type__c, List_View_Object__c, List_View_Name__c, Activities_Button_API_Name__c, Navigation_Type__c,(SELECT id, Name, Order__c, URL__c, Quick_Create_Object__c, Quick_Create_Record_Type__c, List_View_Object__c, List_View_Name__c, Activities_Button_API_Name__c, Navigation_Type__c FROM Parent__r '+ strNavigationType + ' ORDER By Order__c nulls last) FROM Navigation__c WHERE parent__c = null ' + navigationTypeParent + ' ORDER By Order__c nulls last';
             List<Navigation__c> navList = Database.query(navQuery);
             //end changes for PEv4.7 by Aditya 26 April 2021
             //Phase 3 CR changes: query the Activities_Button_API_Name__c field.
@@ -94,15 +94,7 @@ public with sharing class navatarEdgeMenuCntlr{
             }
         }
         else{
-            //start changes for icon by Aditya PEv4.7 22 April 2021
-            String iconUrl = '';
-            String bgICon = objNav.Icon_Background_Color__c != null ? objNav.Icon_Background_Color__c : '9ca3fd';
-            if(objNav.Parent__r.size()!= 0 && objNav.Icon__c!=null){
-              iconUrl = '<img src="/img/icon/t4v35/'+objNav.Icon__c.split(':')[0].toLowercase()+'/'+objNav.Icon__c.split(':')[1].toLowercase()+'.svg" class="iconStyle" style="background:#'+bgICon+'"/>'; //added toLowecase to handle case sensitive issue of icontype and name by Aditya PEv4.7 26 April
-            }
-            navLabel.text = iconUrl + '<span class=\'wordBlockClass\'>'+objNav.Name+'</span>';
-            //end changes for icon by Aditya PEv4.7 22 April 2021
-            //navLabel.text = '<span class=\'wordBlockClass\'>'+objNav.Name+'</span>';
+            navLabel.text = '<span class=\'wordBlockClass\'>'+objNav.Name+'</span>';
             navLabel.id = objNav.id;
         }
         

@@ -97,6 +97,14 @@
         <members>ContactTransfer</members>
         <members>CreateMassFundraising</members>
         <members>PageWithSessionId</members>
+		<members>Valuation_Status</members>
+		<members>Review_Status</members>
+		<members>Request_Tracker_Status</members>
+		<members>Marketing_Event_Status</members>
+		<members>Log_Time_Status</members>
+		<members>Deal_Team_Status</members>
+		<members>Deal_Expert_Status</members>
+		<members>Attendee_Status</members>
         <name>ApexPage</name>
     </types>
     <types>
@@ -454,6 +462,16 @@
         <members>SDG_Field__c-Field Layout</members>
         <members>SDG__c-SDG Layout</members>
         <members>sdg_Preferences__c-Sortable Data Grid Preference Layout</members>
+		<members>Attendee__c-Attendee Layout</members>
+        <members>Deal_Expert__c-Deal Expert Layout</members>
+        <members>Deal_Team__c-Deal Team Layout</members>
+        <members>Log_Time__c-Time Log Layout</members>
+        <members>Marketing_Event__c-Firm Events</members>
+        <members>Marketing_Event__c-Third Party Events</members>
+        <members>Marketing_Event__c-Marketing Event Layout</members>
+        <members>Request_Tracker__c-Request Tracker Layout</members>
+        <members>Review__c-Review Layout</members>
+        <members>Valuation__c-Valuation Layout</members>
         <name>Layout</name>
     </types>
     <types>

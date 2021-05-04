@@ -1,4 +1,4 @@
 <design:component>
-	<design:attribute name="navigationType" label="Navigation Type" description="Select the type of Utility Bar"/><!--added by Aditya PEv4.7-->
+	<design:attribute name="navigationType" label="Navigation Type" description="Select the type of Utility Bar" required="true"/><!--added by Aditya PEv4.7-->
     <design:attribute name="expandNavigationView" label="Expand Navigation View" datasource="True,False" default="True" description="True for Expanded View and False for Collapsed View"/><!--added by Aditya PEv4.7 27 April 2021-->
 </design:component>

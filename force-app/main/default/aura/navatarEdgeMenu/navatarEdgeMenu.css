@@ -21,9 +21,8 @@
     content: " ";
 }
 .THIS .wordBlockClass{
-    width: 83%; /*changed from 84 to 83 by Aditya PEv4.7 22 April 2021*/
+    width: 84%;
     display: inline-table;
-    padding-left: 5px; /*added by Aditya PEv4.7 22 April 2021*/
 }
 
 .THIS .row:after{
@@ -129,15 +128,4 @@
     
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
-}
-/*added by Aditya PEv4.7 22 April 2021*/	
-.THIS .iconStyle {
-    height: 23px;
-    width: 23px;
-    border-radius: 50%;
-}
-/*added by Aditya for indent in child records PEv4.7 23 April 2021*/
-.THIS .treeview span.indent {
-	margin-left: 12px;
-	margin-right: 20px;
 }

@@ -11,14 +11,19 @@
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
-                <fullName>New Interactive</fullName>
+                <fullName>New Interaction</fullName>
                 <default>false</default>
-                <label>New Interactive</label>
+                <label>New Interaction</label>
             </value>
             <value>
                 <fullName>New Relationship</fullName>
                 <default>false</default>
                 <label>New Relationship</label>
+            </value>
+            <value>
+                <fullName>Quick Action</fullName>
+                <default>false</default>
+                <label>Quick Action</label>
             </value>
         </valueSetDefinition>
     </valueSet>
