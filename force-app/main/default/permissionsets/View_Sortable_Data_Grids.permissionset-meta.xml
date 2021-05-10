@@ -117,16 +117,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Contact.Last_Touch_Point__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.Next_Touchpoint_Date__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Contact.Profile_Image__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -143,16 +133,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Contact.Sector__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.Touchpoint_Overdue__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Contact.last_touch_point_due__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -532,16 +512,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Navigation__c.Icon_Background_Color__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Navigation__c.Icon__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Navigation__c.List_View_Name__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -632,11 +602,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Pipeline__c.NDA_Documents__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>Pipeline__c.Platform_Company__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -698,11 +663,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Pipeline__c.Valuation__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Pipeline__c.Watchlist__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>

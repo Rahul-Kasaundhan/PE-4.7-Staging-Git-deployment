@@ -25,6 +25,12 @@
                 <default>false</default>
                 <label>Quick Action</label>
             </value>
+            <value>
+                <fullName>New Interactive</fullName>
+                <default>false</default>
+                <isActive>false</isActive>
+                <label>New Interactive</label>
+            </value>
         </valueSetDefinition>
     </valueSet>
 </CustomField>

@@ -21,7 +21,6 @@
         <members>SDGInternal</members>
         <members>SDGRequest</members>
         <members>SDGResult</members>
-        <members>TaskTriggerHandler</members>
         <members>TestCommonLayoutWrapper</members>
         <members>TestContactTransfer_ctlr</members>
         <members>TestViewRelatedAssociationsCtrl</members>
@@ -32,7 +31,6 @@
         <members>Test_FileUploaderCtrl</members>
         <members>Test_NewRecordPopupCtrlSdg</members>
         <members>Test_RelatedListController</members>
-        <members>Test_TaskTriggerHandler</members>
         <members>Test_navatarEdgeMenuCntlr</members>
         <members>Test_sdgNamespaceUtility2</members>
         <members>Test_sdgRequestMock</members>
@@ -105,10 +103,10 @@
 		<members>Deal_Team_Status</members>
 		<members>Deal_Expert_Status</members>
 		<members>Attendee_Status</members>
+		<members>Due_Diligence_Status</members>
         <name>ApexPage</name>
     </types>
     <types>
-        <members>taskTrigger</members>
         <members>trgSDG</members>
         <members>trgSDGField</members>
         <name>ApexTrigger</name>
@@ -154,10 +152,6 @@
         <name>AuraDefinitionBundle</name>
     </types>
     <types>
-        <members>Sortable_Data_Grids_Lightning</members>
-        <name>CustomApplication</name>
-    </types>
-    <types>
         <members>Account.Conversion_Date__c</members>
         <members>Account.Firm_Type_formula__c</members>
         <members>Account.Fund_Types__c</members>
@@ -186,14 +180,10 @@
         <members>Attendee__c.Status__c</members>
         <members>Contact.Expert_Status__c</members>
         <members>Contact.Industry_Expertise__c</members>
-        <members>Contact.Last_Touch_Point__c</members>
-        <members>Contact.Next_Touchpoint_Date__c</members>
         <members>Contact.Profile_Image__c</members>
         <members>Contact.Region__c</members>
         <members>Contact.Relationships_Classification__c</members>
         <members>Contact.Sector__c</members>
-        <members>Contact.Touchpoint_Overdue__c</members>
-        <members>Contact.last_touch_point_due__c</members>
         <members>Deal_Expert__c.Contact__c</members>
         <members>Deal_Expert__c.Expert_Fees__c</members>
         <members>Deal_Expert__c.Hours_Spent__c</members>
@@ -265,8 +255,6 @@
         <members>Marketing_Event__c.Total_Expense__c</members>
         <members>Marketing_Event__c.Type__c</members>
         <members>Marketing_Event__c.Upcoming_Events__c</members>
-        <members>Navigation__c.Icon_Background_Color__c</members>
-        <members>Navigation__c.Icon__c</members>
         <members>Navigation__c.Navigation_Type__c</members>
         <members>Pipeline__c.Closing_Date__c</members>
         <members>Pipeline__c.Days_To_Close__c</members>
@@ -278,7 +266,6 @@
         <members>Pipeline__c.Follow_Up_Date__c</members>
         <members>Pipeline__c.LOI_Deadline_Date__c</members>
         <members>Pipeline__c.Management_Meeting_Date__c</members>
-        <members>Pipeline__c.NDA_Documents__c</members>
         <members>Pipeline__c.Platform_Company__c</members>
         <members>Pipeline__c.Pre_Clearance_Budget__c</members>
         <members>Pipeline__c.Pre_Clearance_Expense__c</members>
@@ -292,7 +279,6 @@
         <members>Pipeline__c.Sector__c</members>
         <members>Pipeline__c.Stage__c</members>
         <members>Pipeline__c.Valuation__c</members>
-        <members>Pipeline__c.Watchlist__c</members>
         <members>Quarterly_Financial_Performance__c.Cash_Flow__c</members>
         <members>Quarterly_Financial_Performance__c.Closing_Cash__c</members>
         <members>Request_Tracker__c.Category__c</members>
@@ -424,6 +410,7 @@
         <members>SDG__c</members>
         <members>Valuation__c</members>
         <members>sdg_Preferences__c</members>
+		<members>Due_Diligence_Partner__c-Due Diligence Partner Layout</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -441,11 +428,9 @@
         <members>Sortable_Data_Grid_Action_Record_Page</members>
         <members>Sortable_Data_Grid_Field_Record_Page</members>
         <members>Sortable_Data_Grid_Record_Page</members>
-        <members>Sortable_Data_Grids_UtilityBar</members>
         <name>FlexiPage</name>
     </types>
     <types>
-        <members>Task_Type_Update</members>
         <members>Update_Account_when_convert_Watchlist_to_Under_Evaluation</members>
         <members>Update_Highest_Stage_Reached_Field</members>
         <name>Flow</name>

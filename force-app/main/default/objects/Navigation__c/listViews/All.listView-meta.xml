@@ -3,8 +3,6 @@
     <fullName>All</fullName>
     <columns>NAME</columns>
     <columns>Navigation_Type__c</columns>
-    <columns>Icon__c</columns>
-    <columns>Icon_Background_Color__c</columns>
     <columns>Order__c</columns>
     <columns>Parent__c</columns>
     <columns>URL__c</columns>
