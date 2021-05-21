@@ -109,6 +109,7 @@
     <types>
         <members>trgSDG</members>
         <members>trgSDGField</members>
+		<members>updateWatchlistFlag_Task</members>
         <name>ApexTrigger</name>
     </types>
     <types>
@@ -416,6 +417,15 @@
     <types>
         <members>Navigation__c</members>
         <members>SDG__c</members>
+		<members>Due_Diligence_Partner__c</members>
+        <members>Attendee__c</members>
+        <members>Marketing_Event__c</members>
+        <members>Deal_Expert__c</members>
+        <members>Deal_Team__c</members>
+        <members>Log_Time__c</members>
+        <members>Request_Tracker__c</members>
+        <members>Review__c</members>
+        <members>Valuation__c</members>
         <name>CustomTab</name>
     </types>
     <types>
