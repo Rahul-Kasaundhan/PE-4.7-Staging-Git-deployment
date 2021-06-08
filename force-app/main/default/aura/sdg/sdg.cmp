@@ -184,8 +184,13 @@
         background-color: var(--lwc-colorBackgroundToastError,rgb(194, 57, 52));
         }
         /*END*/
-        
+        .right_margin16 {margin-right: -16px;}/*Added by Lakshya on 20210514; Bug ID : 00029602*/
         <aura:if isTrue="{!(v.EinsteinTheme == 'Dark')}">
+            /*Added by Lakshya on 20210519; 00029605*/
+            .btn_left_gap_dark{
+            	left: -9px !IMPORTANT;
+            }
+            
             /*CSS START EINSTEIN BLUE THEME*/
             .EinsteinTheme_Blue .{!v.SDG.sdgId}cls_sdg_card, .EinsteinTheme_Blue .slds-table {
             background: #16325c !important;
@@ -293,6 +298,11 @@
             }
         </aura:if>
         <aura:if isTrue="{!(v.EinsteinTheme == 'Light')}">
+            /*Added by Lakshya on 20210519; 00029605*/
+            .btn_left_gap_light{
+            	left: -5px !IMPORTANT;
+            }
+            
              /*Add Css for bug fixing(00029060) in Einstein Code V1 by Rahulk*/
             .EinsteinTheme_white .sdgheader{
                padding-left: 11px !important;
@@ -392,7 +402,7 @@
           .EinsteinTheme_Blue .slds-dropdown, .EinsteinTheme_white .slds-dropdown {width: 150px !important}   
         */
         /*Modified top : 6px to -1px and left : -3px to -5px by Lakshya on 20210420 to resolve button's alignment issue [PE v4.7]*/
-        .cls_posIconFilter {position: relative !important; top: -1px !important; left: -5px !important;}
+        .cls_posIconFilter {position: relative !important; top: -1px !important;} /*Removed left: -5px !important; by Lakshya on 20210519; 00029605*/
         /*Modified top : 6px to -1px and added left : -6px !important by Lakshya on 20210420 to resolve button's alignment issue  [PE v4.7]*/
         .cls_btnMenu { position: relative; display: inline-block; top: -1px !important; left: -6px !important } /*Add css for Show btn Menu for bug fixing (00028983) in Einstein Code V1 */
         .right_margin{margin-right: -21px;}/*Added by Lakshya on 20210426 [PE v4.7] demo feedback*/
@@ -410,6 +420,14 @@
 
         /*Added by Lakshya on 20210426 [PE v4.7] Raju Sir gradient background in the edit mode fix*/
         .EinsteinTheme_Blue .darkThemeEditCell .cls_desDark:after {background: linear-gradient(to right, rgba(160,160,160,0.4) 0%,rgba(160,160,160,1) 69%);}}
+    	
+        /*CSS Add by Raju for pagination on dated 18-05-2021; 00029618*/
+        .slds-form-element__label {color: inherit !important}
+        .EinsteinTheme_Blue .slds-form-element__label {color: rgb(255, 255, 255) !important}
+        .EinsteinTheme_Blue .slds-select_container:after{border-top: 5px solid #000;}
+        .EinsteinTheme_Blue .slds-select_container:before{border-bottom: 5px solid #000;}
+        .EinsteinTheme_Blue .slds-select {color: rgb(8,7,7) !important}
+        
     </style>
     <aura:if isTrue="{!v.ShowComponent}">
         <div class="{!'sdgborder ' + v.SDG.sdgId+ '_grid ' +if(v.SDG.highlightString,v.SDG.sdgId+'cls_sdgMainBg','') + if(v.EinsteinTheme == 'Light',' EinsteinTheme_white cls_sdgMainOverride ','') + if(v.EinsteinTheme == 'Dark',' EinsteinTheme_Blue cls_sdgMainOverride ','') + if(v.hideSdgInToggle,' slds-hide ','')}">
@@ -459,10 +477,10 @@
                         </div>
                     </div>
                 </div>
-                
                 <aura:set attribute="actions">
                     <!--Moved code inside div & added margin-right class with if condition by Lakshya on 20210426 [PE v4.7] demo feedback-->
-                    <div class="{!if(v.EinsteinTheme, 'right_margin')}">
+                    <!--Modified if condition by Lakshya  on 20210514; Bug ID : 00029602-->
+                    <div class="{!if(and(v.EinsteinTheme != 'Standard', v.EinsteinTheme), 'right_margin', 'right_margin16')}">
                         <aura:if isTrue="{!and(v.EinsteinTheme != 'Standard',v.EinsteinTheme)}">
                             <lightning:buttonGroup><!--Added by Lakshya on 20210420 to display buttons in a group [PE v4.7]-->
                                 <!--Added below code by Lakshya on 20210420 to display buttons upfront in light theme [PE v4.7]-->
@@ -490,23 +508,28 @@
                             
                             <aura:renderIf isTrue="{!v.hasFilters}">
                                 <!--Changed iconSize from x-small to medium by Lakshya on 20210420 to match button's size [PE v4.7]-->    
-                                <lightning:buttonIcon iconName="utility:filterList" variant="border-filled" class="{!v.ToggleFilterStyle + ' cls_posIconFilter '}" onclick="{! c.ToggleFilters }"
-                                                    aura:id="FilterToggleButton" alternativeText="Toggle Filters." size="medium" />
+                                <!--Added if condition in size & class by Lakshya on 20210519; 00029605-->
+                                <lightning:buttonIcon iconName="utility:filterList" variant="border-filled" class="{!v.ToggleFilterStyle + ' cls_posIconFilter ' + if(v.EinsteinTheme != 'Dark', 'btn_left_gap_light', 'btn_left_gap_dark')}" onclick="{! c.ToggleFilters }"
+                                                    aura:id="FilterToggleButton" alternativeText="Toggle Filters." size="{!if(v.EinsteinTheme != 'Dark', 'medium', 'x-small')}" />
                             </aura:renderIf>
                             <div id="mydiv" class="cls_btnMenu"> <!-- Add div for bug fixing (00028983) in Einstein Code V1 -->
                                 <!--Changed iconSize from x-small to medium by Lakshya on 20210420 to match button's size [PE v4.7]-->
-                                <lightning:buttonMenu alternativeText="Show menu" variant="border-filled" iconSize="medium" menuAlignment="auto" onselect="{! c.RaiseEventMenuItem }" >
+                                <!--Added if condition in size by Lakshya on 20210519; 00029605-->
+                                <lightning:buttonMenu alternativeText="Show menu" variant="border-filled" iconSize="{!if(v.EinsteinTheme != 'Dark', 'medium', 'x-small')}" menuAlignment="auto" onselect="{! c.RaiseEventMenuItem }" >
                                     <aura:if isTrue="{!v.SDG.sdgId}">
                                         <!--20210225 1545 Modified below line by Lakshya to resolve manage fields button issue if Enable Manage Fields value is changed; enableManageField-->
                                         <aura:if isTrue="{!and(v.SDG.enableManageField,v.SDG.isEnableManageField)}">
-                                        <lightning:menuItem label="Manage fields" iconName="utility:custom_apps"  value="openManageFieldPopup" />
+                                        <!--Added title by Lakshya on 20210519;  00029626-->
+                                        <!--Added cstmdropdownMenu by Lakshya to fix icon issue on 20210521-->
+                                        <lightning:menuItem label="Manage fields" iconName="utility:custom_apps"  value="openManageFieldPopup" title="Manage fields." class="cstmdropdownMenu"/>
                                         </aura:if>
                                         <!-- Tooltip add for Setup and Reload for bug fixing(00028979) in Einstein Code V1 By Rahulk 
                                         Add Class(cstmdropdownMenu) with width for Bug fixing (00029049) in Einstein Code V1 by Rahulk
                                         -->
                                         <lightning:menuItem label="Setup" iconName="utility:setup" value="navigateToSdg" title="Open SDG record."  class="cstmdropdownMenu"/>
                                     </aura:if>
-                                    <lightning:menuItem label="Reload" iconName="utility:refresh" value="reload" title="Reload" class="cstmdropdownMenu" />
+                                    <!--Modified title attribute by Lakshya on 20210521; 00029656-->
+                                    <lightning:menuItem label="Reload" iconName="utility:refresh" value="reload" title="Reload." class="cstmdropdownMenu" />
                                 
                                     <aura:if isTrue="{! v.EinsteinTheme == 'Dark'}">
                                         <!--Added below code inside aura if by Lakshya on 20210420 to display list buttons inside dropdown for dark theme only [PE v4.7]-->
@@ -559,7 +582,7 @@
                                     <aura:if isTrue="{!v.SDG.sdgId}">
                                         <aura:if isTrue="{!and(v.SDG.enableManageField,v.SDG.isEnableManageField)}">
                                             <lightning:buttonIcon iconName="utility:custom_apps" variant="border-filled"
-                                                onclick="{! c.openManageFieldPopup }" alternativeText="Manage field." />
+                                                onclick="{! c.openManageFieldPopup }" alternativeText="Manage fields." /><!--changed alternativeText from "Manage Field." to "Manage Fields" according to Saakshi by Aditya 13 May 2021 PEv4.7 -->
                                         </aura:if>
                                         <lightning:buttonIcon iconName="utility:setup" variant="border-filled" onclick="{! c.navigateToSdg }"  alternativeText="Open SDG record."/>
                                     </aura:if>
@@ -568,7 +591,8 @@
                                         <lightning:buttonIcon iconName="utility:filterList" variant="border-filled" class="{!v.ToggleFilterStyle}" onclick="{! c.ToggleFilters }"
                                                             aura:id="FilterToggleButton" alternativeText="Toggle Filters."  />
                                     </aura:renderIf>
-                                    <lightning:buttonIcon iconName="utility:refresh" variant="border-filled" onclick="{! c.reload }" alternativeText="Reload"
+                                    <!--Modified title attribute by Lakshya on 20210521; 00029656-->
+                                    <lightning:buttonIcon iconName="utility:refresh" variant="border-filled" onclick="{! c.reload }" alternativeText="Reload."
                                                         />
                                     <aura:iteration items="{!v.SDGActions}" var="action">
                                         <aura:if isTrue="{!action.Type=='List Multi'}">
@@ -666,7 +690,8 @@
                                         <aura:if isTrue="{!v.FullQueryCount==0}">
                                             <tbody aura:id="tableBody">
                                                 <tr class="slds-hint-parent">
-                                                    <td colspan="{!v.SDG.SDGFields.length+1}">
+                                                    <!--Modified colspan from +1 to +2 by Lakshya; 00029635-->
+                                                    <td colspan="{!v.SDG.SDGFields.length+2}">
                                                         <span class="slds-truncate">{!v.sdgNoData}</span>
                                                     </td>
                                                 </tr>
@@ -691,7 +716,7 @@
                                                                 <aura:if isTrue="{!row.errorMessage != null}">
                                                                     <lightning:helptext content="{!row.errorMessage}" iconName="utility:warning" class="errorPopover"/>
                                                                 </aura:if> <!--Add helper text to show error in Phase4(InlineEdit) -->
-                                                                <lightning:input type="checkbox" value="{#row.rowID}" name="" aura:id="checkrow" onchange="{!c.checkboxchange}" />
+                                                                <lightning:input type="checkbox" value="{#row.rowID}" name="" class="checkrow" aura:id="checkrow" onchange="{!c.checkboxchange}" />
                                                                 
                                                             </td>
                                                         </aura:if>

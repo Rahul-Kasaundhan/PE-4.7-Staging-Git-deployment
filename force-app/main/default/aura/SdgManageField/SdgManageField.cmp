@@ -123,10 +123,13 @@
 								<ul class="cls_Listbox" style="height: 244px; overflow-y: auto;" id="allFields">
 									<aura:iteration var="field" items="{!v.fields}">
 										<aura:if isTrue="{!!field.isHidden}">
-											<li class="{!'slds-p-horizontal_small slds-p-vertical_x-small '+if(v.selectedFieldId==field.ID,'fieldSelected','')}"
-												id="{!field.ID}" onclick="{!c.selectField}">{!field.Label}
-												<lightning:buttonicon iconName="utility:clear" alternativeText="Remove"
-													size="medium" class="slds-float_right" value="{!field.ID}"
+                                            <!--Added slds-hyphenate by Lakshya on 20210525; 00029657-->
+                                            <!--Added <p> tag & text_width class by Lakshya on 20210602; 00029657-->
+											<li class="{!'slds-hyphenate slds-p-horizontal_small slds-p-vertical_x-small '+if(v.selectedFieldId==field.ID,'fieldSelected','')}"
+                                                id="{!field.ID}" onclick="{!c.selectField}"><p class="text_width">{!field.Label}</p>
+												<!--Added top_margin class by Lakshya on 20210602; 00029657-->
+                                                <lightning:buttonicon iconName="utility:clear" alternativeText="Remove"
+													size="medium" class="slds-float_right top_margin" value="{!field.ID}"
 													onclick="{! c.removeField }"
 													variant="{!if(v.selectedFieldId==field.ID,'bare-inverse','bare')}"
 													disabled="{!v.fields.length lt 2}" />

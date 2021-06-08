@@ -196,14 +196,22 @@
             var checkboxeslength = checkboxes.length;
             var targetstate = event.getSource().get("v.checked"); 
             
-            // Condition added by Sameer 
-            
-            for (var i = 0; i < checkboxeslength; i++) {
-                checkboxes[i].set("v.checked", targetstate);
-                if (targetstate && idlist.indexOf(checkboxes[i].get("v.value")) == -1) {
-                    idlist.push(checkboxes[i].get("v.value"));
+            //Moved existing code inside else condition & added code in if condition by Lakshya on 20210525; 00029629 
+            if(!Array.isArray(checkboxes)){
+                checkboxes.set("v.checked", targetstate);
+                if (targetstate && idlist.indexOf(checkboxes.get("v.value")) == -1) {
+                    idlist.push(checkboxes.get("v.value"));
                 }
             }
+            else{
+                for (var i = 0; i < checkboxeslength; i++) {
+                    checkboxes[i].set("v.checked", targetstate);
+                    if (targetstate && idlist.indexOf(checkboxes[i].get("v.value")) == -1) {
+                        idlist.push(checkboxes[i].get("v.value"));
+                    }
+                }    
+            }
+            
             if (!targetstate) {
                 idlist = [];
             }

@@ -95,3 +95,10 @@
     border-right-width: 0px;
 
 }
+/*Added top_margin & text_width by Lakshya on 20210602; 00029657*/
+.THIS .top_margin{
+    margin-top : -6.8%
+}
+.THIS .text_width{
+    max-width: 90%
+}

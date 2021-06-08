@@ -73,7 +73,7 @@
                                 var createRecordEvent = $A.get("e.force:createRecord");
                                 if(objectName == 'Task' && actBtnApiName != undefined){
 									$A.createComponent(
-										"pem_dev:MultipleAssociationPopup",
+										"navpeII:MultipleAssociationPopup",
 										{
 											"label":actBtnApiName.split('<objlbl>')[1],
 											"recordTypeId":(rtId!=undefined?rtId:'012000000000000AAA'),

@@ -165,9 +165,6 @@
         <members>Account.Sector__c</members>
         <members>Account.Status__c</members>
         <members>Account.Total_Commitments_USD__c</members>
-        <members>Account.Watchlist_Stage__c</members>
-        <members>Activity.Is_Touchpoint__c</members>
-        <members>Activity.Meeting_Type__c</members>
         <members>Activity.Region__c</members>
         <members>Activity.Sector__c</members>
         <members>Activity.Watchlist__c</members>
@@ -411,7 +408,6 @@
         <members>SDG__c</members>
         <members>Valuation__c</members>
         <members>sdg_Preferences__c</members>
-		<members>Due_Diligence_Partner__c-Due Diligence Partner Layout</members>
         <name>CustomObject</name>
     </types>
     <types>
@@ -447,7 +443,7 @@
     </types>
     <types>
         <members>Region</members>
-		<members>Industry</members>
+		<members>Sector</members>
         <name>GlobalValueSet</name>
     </types>
     <types>

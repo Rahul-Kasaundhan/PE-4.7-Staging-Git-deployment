@@ -8,7 +8,6 @@
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
-        <controllingField>Stage__c</controllingField>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
@@ -42,29 +41,5 @@
                 <label>Waiting to Scale</label>
             </value>
         </valueSetDefinition>
-        <valueSettings>
-            <controllingFieldValue>Parked</controllingFieldValue>
-            <valueName>Broken Deal</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Parked</controllingFieldValue>
-            <valueName>Financial Distress</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Parked</controllingFieldValue>
-            <valueName>Not Profitable Yet</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Parked</controllingFieldValue>
-            <valueName>Prove Business Model</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Parked</controllingFieldValue>
-            <valueName>Short-Term Issues</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Parked</controllingFieldValue>
-            <valueName>Waiting to Scale</valueName>
-        </valueSettings>
     </valueSet>
 </CustomField>

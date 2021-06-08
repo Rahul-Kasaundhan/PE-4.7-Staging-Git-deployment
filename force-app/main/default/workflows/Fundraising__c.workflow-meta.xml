@@ -15,8 +15,8 @@
             <name>age_calculation</name>
             <type>FieldUpdate</type>
         </actions>
-        <active>false</active>
-        <formula>OR(ISNEW() , ISCHANGED(Stage__c))</formula>
+        <active>true</active>
+        <formula>ISCHANGED(Stage__c )</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
 </Workflow>

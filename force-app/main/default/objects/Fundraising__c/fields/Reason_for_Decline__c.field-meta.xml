@@ -9,7 +9,6 @@
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
-        <controllingField>Stage__c</controllingField>
         <valueSetDefinition>
             <sorted>false</sorted>
             <value>
@@ -38,25 +37,5 @@
                 <label>Uninterested</label>
             </value>
         </valueSetDefinition>
-        <valueSettings>
-            <controllingFieldValue>Declined</controllingFieldValue>
-            <valueName>Lack of Capital</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined</controllingFieldValue>
-            <valueName>No Reason Given</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined</controllingFieldValue>
-            <valueName>Not ready-6 months</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined</controllingFieldValue>
-            <valueName>Portfolio Performance</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined</controllingFieldValue>
-            <valueName>Uninterested</valueName>
-        </valueSettings>
     </valueSet>
 </CustomField>

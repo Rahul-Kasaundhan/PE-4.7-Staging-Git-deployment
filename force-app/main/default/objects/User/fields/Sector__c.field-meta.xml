@@ -8,6 +8,6 @@
     <type>Picklist</type>
     <valueSet>
         <restricted>true</restricted>
-        <valueSetName>Industry</valueSetName>
+        <valueSetName>Sector</valueSetName>
     </valueSet>
 </CustomField>

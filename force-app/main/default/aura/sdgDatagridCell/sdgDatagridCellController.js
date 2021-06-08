@@ -15,7 +15,8 @@
                 var fieldstyle = field.FieldStyle;
                 var formattedValue = field.FormattedValue;
                 // Add Conditon for bug fixing(00028982)  in DarkMode for Einstein Code V1 By Rahulk
-				var css_des =  (component.get("v.currentTheme") == 'Dark') ? "cls_desDark":"cls_des"; 
+                // Added slds-var-m-bottom_x-small by Lakshya on 20210524; 00029625
+				var css_des = ((component.get("v.currentTheme") == 'Dark') ? "cls_desDark":"cls_des") + " slds-var-m-bottom_x-small"
                 if (!field) {
                     helper.CreateCmp("ui:outputText", { value: "no data" });
                 } else {

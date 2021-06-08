@@ -3,7 +3,7 @@
     <fullName>Enable_Manage_Field__c</fullName>
     <defaultValue>true</defaultValue>
     <externalId>false</externalId>
-    <label>Enable Manage Field</label>
+    <label>Enable Manage Fields</label>
     <trackTrending>false</trackTrending>
     <type>Checkbox</type>
 </CustomField>

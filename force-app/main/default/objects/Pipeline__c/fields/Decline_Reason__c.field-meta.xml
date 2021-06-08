@@ -8,7 +8,6 @@
     <trackTrending>false</trackTrending>
     <type>Picklist</type>
     <valueSet>
-        <controllingField>Stage__c</controllingField>
         <restricted>true</restricted>
         <valueSetDefinition>
             <sorted>false</sorted>
@@ -78,57 +77,5 @@
                 <label>Weak Investment Thesis</label>
             </value>
         </valueSetDefinition>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Audit / Financial Issues</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Business Uncertainty</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Company Too Small</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Lack of Audit</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Lack of Industry Fit</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Not a Good Fit</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Not Met Investment Criteria</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Operational Issues</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Outbid</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Pricing</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Structure</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Valuation Expectations</valueName>
-        </valueSettings>
-        <valueSettings>
-            <controllingFieldValue>Declined/Dead</controllingFieldValue>
-            <valueName>Weak Investment Thesis</valueName>
-        </valueSettings>
     </valueSet>
 </CustomField>

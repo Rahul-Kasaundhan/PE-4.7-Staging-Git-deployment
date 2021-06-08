@@ -214,17 +214,19 @@ public with sharing class sdgQueryEngine {
                 if (String.isNotBlank(myRequestField)) {
                     string currentUserId = String.escapeSingleQuotes(Userinfo.getUserId());
                     myRequestField = myRequestField.replaceAll('<<User.Id>>', currentUserId);
-                    UserWhereClauses.add(String.escapeSingleQuotes(myRequestField)); // added escapeSingleQuotes for security fix PEv4.7 9 April 2021
+                    //Removed String.escapeSingleQuotes() by Lakshya on 20210525; 00029662,00029665
+                    UserWhereClauses.add(myRequestField); // added escapeSingleQuotes for security fix PEv4.7 9 April 2021
                 }
-                
                 // Added My Teams's Records in v1.3 at 29-01-2020
                 if (String.isNotBlank(request.myTeamFilter)) {
                     if (newSDG.myTeamsRecords.startsWithIgnoreCase('Id IN (')) {
                         String myTeamsFilter = newSDG.myTeamsRecords;
-                        sdgDatabase.userIdsForMyTeam = (new Map<Id, User>((List<User>) Database.query(String.escapeSingleQuotes(request.myTeamFilter)))).keySet(); // added escapeSingleQuotes for security fix PEv4.7 9 April 2021
+                        //Removed String.escapeSingleQuotes() by Lakshya on 20210525; 00029661
+                        sdgDatabase.userIdsForMyTeam = (new Map<Id, User>((List<User>) Database.query(request.myTeamFilter))).keySet(); // added escapeSingleQuotes for security fix PEv4.7 9 April 2021
                         UserWhereClauses.add(myTeamsFilter.replaceAll(sdgController.myTeamFilterRegex, ' :userIdsForMyTeam'));
                     } else {
-                        UserWhereClauses.add(String.escapeSingleQuotes(request.myTeamFilter)); // added escapeSingleQuotes for security fix PEv4.7
+                        //Removed String.escapeSingleQuotes() by Lakshya on 20210525; 00029661
+                        UserWhereClauses.add(request.myTeamFilter); // added escapeSingleQuotes for security fix PEv4.7
                     }
                 }
                 

@@ -22,7 +22,7 @@
 }
 
 .THIS .cls_des {
-    max-height: 54px !important;
+    max-height: 50px !important;/*Modified by Lakshya from 54 -> 50px on 20210524; 00029625*/
     display: inline-flex;       /*    Issue-00029287, Updated css from display:block!important to display:inline-flex;  by Anirudh Raturi on 15-10-2020 */
     white-space: normal !important;
     position: relative !important;  
@@ -32,7 +32,7 @@
     content: "";
     position: absolute;
     top: 2.25rem;
-    bottom: 0;
+    bottom: -5px;/*Modified by Lakshya from 0 -> -5px on 20210524; 00029625*/
     right: 0;
     width: 25%;
     background: linear-gradient(to right, rgba(255,255,255,0.4) 0%,rgba(255,255,255,1) 69%);
@@ -180,7 +180,7 @@
 }
 /*Add clsdes class for Drak mode for bugfixing() in Einstein Code v1 */                                                            
 .THIS .cls_desDark {
-    max-height: 54px !important;
+    max-height: 49px !important;/*Modified by Lakshya from 54 -> 49px on 20210524; 00029625*/
     display: block !important;    
     white-space: normal !important;
     position: relative !important;  
@@ -190,7 +190,7 @@
     content: "";
     position: absolute;
     top: 2.25rem;
-    bottom: 0;
+    bottom: -6px;/*Modified by Lakshya from 0 -> -6px on 20210524; 00029625*/
     right: 0;
     width: 25%;
     background: linear-gradient(to right, rgba(22,50,92,0.4) 0%,rgba(22,50,92,1) 69%);

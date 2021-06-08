@@ -30,17 +30,31 @@
             //checkall
         var checkboxes = component.find("checkrow");
         var countFlag = 0;
-        for (var i = 0; i < checkboxes.length; i++) {
-            if(!checkboxes[i].get("v.checked")){
+        //Moved existing code inside else condition & added code in if condition by Lakshya on 20210525; 00029629
+        if (!Array.isArray(checkboxes)) {
+            if(!checkboxes.get("v.checked")){
                 component.find("checkall").set("v.checked", false);
-                break;
             }
             else{
                 countFlag++;
             }
+            if(countFlag == 1){
+                component.find("checkall").set("v.checked", true);
+            }
         }
-        if(countFlag == checkboxes.length){
-            component.find("checkall").set("v.checked", true);
+        else{
+            for (var i = 0; i < checkboxes.length; i++) {
+                if(!checkboxes[i].get("v.checked")){
+                    component.find("checkall").set("v.checked", false);
+                    break;
+                }
+                else{
+                    countFlag++;
+                }
+            }
+            if(countFlag == checkboxes.length){
+                component.find("checkall").set("v.checked", true);
+            }
         }
     },
 
@@ -690,7 +704,7 @@
                     var componentName;
                     if(payloadobj.ComponentName){
                         componentName = payloadobj.ComponentName;
-                        if(componentName.toLowerCase() == 'pem_dev:MultipleAssociationPopup'.toLowerCase() ){
+                        if(componentName.toLowerCase().includes('MultipleAssociationPopup'.toLowerCase())){ // added includes for bug - 	00029622,00029634 PEv4.7 25 May 2021
                            /* bug(00028181) fixed code  
                              if(!payloadobj["recordTypeId"]){
                                 payloadobj["recordTypeId"] = '012000000000000AAA';
