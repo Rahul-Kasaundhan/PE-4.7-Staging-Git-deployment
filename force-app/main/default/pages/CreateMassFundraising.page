@@ -1451,7 +1451,7 @@
                         <apex:outputPanel id="LndngBanner">
                         
                         <div class="slds-media__body">
-                          <p class="slds-page-header__title slds-truncate slds-align-middle" title="{!lstFundDetails.name}" > Create Bulk Fundraisings for {!JSENCODE(FundName)}</p> <!--changed title from "Create Fundraisings for" to "Create Bulk Fundraisings for" by Aditya PEv4.7 26 April 2021-->
+                          <p class="slds-page-header__title slds-truncate slds-align-middle" title="{!lstFundDetails.name}" > Create Fundraisings for {!JSENCODE(FundName)}</p>
                           <p class="slds-text-body--small" style="display:{!IF((lstFundDetails.Investment_Category__c == 'Co-investment'), 'block', 'none')};">Company : {!JSENCODE(portFolioName)}</p>
                         </div>
                        

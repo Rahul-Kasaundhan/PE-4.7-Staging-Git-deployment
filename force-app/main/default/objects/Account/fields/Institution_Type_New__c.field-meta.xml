@@ -30,14 +30,14 @@
                 <label>Bank</label>
             </value>
             <value>
-                <fullName>Boutique</fullName>
+                <fullName>Boutique M&amp;A</fullName>
                 <default>false</default>
-                <label>Boutique</label>
+                <label>Boutique M&amp;A</label>
             </value>
             <value>
-                <fullName>Bulge Bracket</fullName>
+                <fullName>Bulge Bracket M&amp;A</fullName>
                 <default>false</default>
-                <label>Bulge Bracket</label>
+                <label>Bulge Bracket M&amp;A</label>
             </value>
             <value>
                 <fullName>Business Broker</fullName>
@@ -50,11 +50,6 @@
                 <label>Buyout</label>
             </value>
             <value>
-                <fullName>Buy-side M&amp;A</fullName>
-                <default>false</default>
-                <label>Buy-side M&amp;A</label>
-            </value>
-            <value>
                 <fullName>Company</fullName>
                 <default>false</default>
                 <label>Company</label>
@@ -63,16 +58,6 @@
                 <fullName>Consultant</fullName>
                 <default>false</default>
                 <label>Consultant</label>
-            </value>
-            <value>
-                <fullName>Corporate M&amp;A</fullName>
-                <default>false</default>
-                <label>Corporate M&amp;A</label>
-            </value>
-            <value>
-                <fullName>Distressed</fullName>
-                <default>false</default>
-                <label>Distressed</label>
             </value>
             <value>
                 <fullName>Endowment</fullName>
@@ -95,11 +80,6 @@
                 <label>Fund of Funds</label>
             </value>
             <value>
-                <fullName>Growth</fullName>
-                <default>false</default>
-                <label>Growth</label>
-            </value>
-            <value>
                 <fullName>High Net Worth Individual</fullName>
                 <default>false</default>
                 <label>High Net Worth Individual</label>
@@ -113,21 +93,6 @@
                 <fullName>Law Firm</fullName>
                 <default>false</default>
                 <label>Law Firm</label>
-            </value>
-            <value>
-                <fullName>Lower Middle Market</fullName>
-                <default>false</default>
-                <label>Lower Middle Market</label>
-            </value>
-            <value>
-                <fullName>Mezzanine</fullName>
-                <default>false</default>
-                <label>Mezzanine</label>
-            </value>
-            <value>
-                <fullName>Middle Market</fullName>
-                <default>false</default>
-                <label>Middle Market</label>
             </value>
             <value>
                 <fullName>Other</fullName>
@@ -165,44 +130,19 @@
                 <label>Secondaries</label>
             </value>
             <value>
-                <fullName>Sell-side M&amp;A</fullName>
-                <default>false</default>
-                <label>Sell-side M&amp;A</label>
-            </value>
-            <value>
-                <fullName>Senior</fullName>
-                <default>false</default>
-                <label>Senior</label>
-            </value>
-            <value>
-                <fullName>Subordinate</fullName>
-                <default>false</default>
-                <label>Subordinate</label>
-            </value>
-            <value>
-                <fullName>SWF</fullName>
-                <default>false</default>
-                <label>SWF</label>
-            </value>
-            <value>
                 <fullName>Tax</fullName>
                 <default>false</default>
                 <label>Tax</label>
             </value>
             <value>
-                <fullName>Technology</fullName>
+                <fullName>Investment Bank</fullName>
                 <default>false</default>
-                <label>Technology</label>
+                <label>Investment Bank</label>
             </value>
             <value>
-                <fullName>Upper Middle Market</fullName>
+                <fullName>Lender</fullName>
                 <default>false</default>
-                <label>Upper Middle Market</label>
-            </value>
-            <value>
-                <fullName>Valuation</fullName>
-                <default>false</default>
-                <label>Valuation</label>
+                <label>Lender</label>
             </value>
         </valueSetDefinition>
     </valueSet>

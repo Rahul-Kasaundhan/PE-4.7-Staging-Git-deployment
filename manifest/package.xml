@@ -89,6 +89,10 @@
         <members>sdgVerificationTest</members>
         <members>testDisplayFieldSetCtrl</members>
         <members>testUpdateWatchlistFlagHelper</members>
+        <members>TaskTriggerHandler</members>
+		<members>Test_TaskTriggerHandler</members>
+		<members>EventTriggerHandler</members>
+		<members>Test_EventTriggerHandler</members>
         <name>ApexClass</name>
     </types>
     <types>
@@ -103,13 +107,13 @@
 		<members>Deal_Team_Status</members>
 		<members>Deal_Expert_Status</members>
 		<members>Attendee_Status</members>
-		<members>Due_Diligence_Status</members>
         <name>ApexPage</name>
     </types>
     <types>
         <members>trgSDG</members>
         <members>trgSDGField</members>
 		<members>updateWatchlistFlag_Task</members>
+		<members>eventTrigger</members>
         <name>ApexTrigger</name>
     </types>
     <types>
@@ -200,17 +204,6 @@
         <members>Deal_Team__c.User__c</members>
         <members>Deal_Team__c.alerts_desc_check__c</members>
         <members>Deal_Team__c.change_reg__c</members>
-        <members>Due_Diligence_Partner__c.Deal__c</members>
-        <members>Due_Diligence_Partner__c.Domain__c</members>
-        <members>Due_Diligence_Partner__c.Fees__c</members>
-        <members>Due_Diligence_Partner__c.Hired__c</members>
-        <members>Due_Diligence_Partner__c.Lead_Consultant__c</members>
-        <members>Due_Diligence_Partner__c.Next_Steps__c</members>
-        <members>Due_Diligence_Partner__c.Reason_Not_Hired__c</members>
-        <members>Due_Diligence_Partner__c.Role__c</members>
-        <members>Due_Diligence_Partner__c.Team_Size__c</members>
-        <members>Due_Diligence_Partner__c.Vendor_Main_Contact__c</members>
-        <members>Due_Diligence_Partner__c.Vendor__c</members>
         <members>Financing__c.Advisor__c</members>
         <members>Financing__c.Asset__c</members>
         <members>Financing__c.Date__c</members>
@@ -344,6 +337,8 @@
         <members>sdg_Preferences__c.Filters__c</members>
         <members>sdg_Preferences__c.User__c</members>
         <members>sdg_Preferences__c.sdgKey__c</members>
+        <members>Activity.Is_Touchpoint__c</members>
+		<members>Contact.Last_Touch_Point__c</members>
         <name>CustomField</name>
     </types>
     <types>
@@ -396,7 +391,6 @@
         <members>Attendee__c</members>
         <members>Deal_Expert__c</members>
         <members>Deal_Team__c</members>
-        <members>Due_Diligence_Partner__c</members>
         <members>Log_Time__c</members>
         <members>Marketing_Event__c</members>
         <members>Navigation__c</members>
@@ -413,7 +407,6 @@
     <types>
         <members>Navigation__c</members>
         <members>SDG__c</members>
-		<members>Due_Diligence_Partner__c</members>
         <members>Attendee__c</members>
         <members>Marketing_Event__c</members>
         <members>Deal_Expert__c</members>
@@ -438,8 +431,9 @@
     </types>
     <types>
         <members>Update_Account_when_convert_Watchlist_to_Under_Evaluation</members>
-        <members>Update_Highest_Stage_Reached_Field</members>
-        <name>Flow</name>
+		<members>Task_Type_Update</members>
+		<members>Event_Type_Update</members>
+		<name>Flow</name>
     </types>
     <types>
         <members>Region</members>

@@ -41,6 +41,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>EventTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>FileUploaderCtrl</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -81,6 +85,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>TaskTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>TestCommonLayoutWrapper</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -109,6 +117,10 @@
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
+        <apexClass>Test_EventTriggerHandler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>Test_FileUploaderCtrl</apexClass>
         <enabled>true</enabled>
     </classAccesses>
@@ -118,6 +130,10 @@
     </classAccesses>
     <classAccesses>
         <apexClass>Test_RelatedListController</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Test_TaskTriggerHandler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -468,6 +484,11 @@
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Contact.Last_Touch_Point__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Contact.Profile_Image__c</field>
         <readable>true</readable>
@@ -569,57 +590,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Deal__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Domain__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Fees__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Hired__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Lead_Consultant__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Next_Steps__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Reason_Not_Hired__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Role__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Team_Size__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Vendor_Main_Contact__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Due_Diligence_Partner__c.Vendor__c</field>
+        <field>Event.Is_Touchpoint__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -1273,6 +1244,11 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>false</editable>
+        <field>Task.Is_Touchpoint__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>true</editable>
         <field>Task.Region__c</field>
         <readable>true</readable>
@@ -1379,7 +1355,7 @@
     </layoutAssignments>
     <layoutAssignments>
         <layout>Marketing_Event__c-Marketing Event Layout</layout>
-        <recordType>Marketing_Event__c.Firm_Events</recordType>
+        <recordType>Marketing_Event__c.Firm_Event</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>Marketing_Event__c-Marketing Event Layout</layout>
@@ -1437,15 +1413,6 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>Deal_Team__c</object>
-        <viewAllRecords>true</viewAllRecords>
-    </objectPermissions>
-    <objectPermissions>
-        <allowCreate>true</allowCreate>
-        <allowDelete>true</allowDelete>
-        <allowEdit>true</allowEdit>
-        <allowRead>true</allowRead>
-        <modifyAllRecords>true</modifyAllRecords>
-        <object>Due_Diligence_Partner__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -1559,10 +1526,6 @@
         <enabled>true</enabled>
     </pageAccesses>
     <pageAccesses>
-        <apexPage>Due_Diligence_Status</apexPage>
-        <enabled>true</enabled>
-    </pageAccesses>
-    <pageAccesses>
         <apexPage>Log_Time_Status</apexPage>
         <enabled>true</enabled>
     </pageAccesses>
@@ -1588,7 +1551,7 @@
     </pageAccesses>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>Marketing_Event__c.Firm_Events</recordType>
+        <recordType>Marketing_Event__c.Firm_Event</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -1606,10 +1569,6 @@
     </tabVisibilities>
     <tabVisibilities>
         <tab>Deal_Team__c</tab>
-        <visibility>Hidden</visibility>
-    </tabVisibilities>
-    <tabVisibilities>
-        <tab>Due_Diligence_Partner__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>

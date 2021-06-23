@@ -65,8 +65,10 @@ public url for image
                                        FROM 	ContentVersion 
                                        WHERE 	Id=:versionId
                                        ORDER BY lastmodifieddate desc];
-        imageUrl = url.getSalesforceBaseUrl().toExternalForm()+ '/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINAL_Jpg&versionId='; 
-        imageUrl+=listCv[0].Id+'&operationContext=CHATTER&contentId='+listCv[0].ContentBodyId;
+        //imageUrl = url.getSalesforceBaseUrl().toExternalForm()+ '/sfc/servlet.shepherd/version/renditionDownload?rendition=ORIGINAL_Jpg&versionId='; 
+        //imageUrl+=listCv[0].Id+'&operationContext=CHATTER&contentId='+listCv[0].ContentBodyId;
+        //Modified imageURL for displaying file image in iPhone by RahulK on 20210608; 00029692
+        imageUrl = '/sfc/servlet.shepherd/version/download/'+listCv[0].Id+'?operationContext=S1';
         return imageUrl;
     }
     /*saveImageUrl:  This private method will save public url to current record and will delete existing doc if any.

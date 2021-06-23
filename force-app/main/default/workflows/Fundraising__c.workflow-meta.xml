@@ -16,7 +16,9 @@
             <type>FieldUpdate</type>
         </actions>
         <active>true</active>
-        <formula>ISCHANGED(Stage__c )</formula>
+        <formula>AND(OR(ISNEW() , ISCHANGED(Stage__c)),
+NOT(ISBLANK( TEXT(Stage__c)) )
+)</formula>
         <triggerType>onAllChanges</triggerType>
     </rules>
 </Workflow>
